@@ -10,7 +10,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * .433,
+      width: MediaQuery.of(context).size.width * .420,
       height: 40,
       decoration: BoxDecoration(
         color: isDisabled ? const Color(0xffbebebe) : Colors.black,
@@ -76,7 +76,7 @@ class CustomOutlinedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * .433,
+      width: MediaQuery.of(context).size.width * .420,
       height: 40,
       decoration: BoxDecoration(
         color: Colors.transparent,

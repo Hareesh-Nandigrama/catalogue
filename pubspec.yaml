@@ -45,6 +45,7 @@ dependencies:
 
 
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -73,6 +74,9 @@ flutter:
     - login_design_2.png
     - edit.png
     - add.png
+    - beach.jpeg
+    - idea.png
+
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,4 +1,4 @@
-import 'package:catalogue/screens/login/email_screen.dart';
+import 'package:catalogue/screens/login/otp_screen.dart';
 import 'package:catalogue/screens/login/template.dart';
 
 import 'package:catalogue/widgets/login/button.dart';
@@ -93,7 +93,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
               if (phoneNum.text.length == 10) {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) =>
-                        EmailScreen(phone: phoneNum.text.trim())));
+                        OTPScreen(phoneNumber: phoneNum.text)));
               } else {
                 disabled = true;
                 showDialog(

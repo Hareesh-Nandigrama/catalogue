@@ -8,8 +8,7 @@ import 'username_screen.dart';
 
 class OTPScreen extends StatefulWidget {
   final String phoneNumber;
-  final String email;
-  const OTPScreen({Key? key, required this.phoneNumber,required this.email}) : super(key: key);
+  const OTPScreen({Key? key, required this.phoneNumber}) : super(key: key);
 
   @override
   State<OTPScreen> createState() => _OTPScreenState();
@@ -48,7 +47,7 @@ class _OTPScreenState extends State<OTPScreen> {
                     ),
                   ),
                   TextSpan(
-                    text: '${widget.email} ',
+                    text: '${widget.phoneNumber} ',
                     style: const TextStyle(
                       fontSize: 13.5,
                       fontWeight: FontWeight.w500,

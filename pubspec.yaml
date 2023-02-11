@@ -42,6 +42,8 @@ dependencies:
   image_picker: ^0.8.6+1
   dotted_border: ^2.0.0+3
   carousel_slider: ^4.2.1
+  firebase_core: ^2.5.0
+  firebase_auth: ^4.2.6
 
 
 
@@ -76,6 +78,8 @@ flutter:
     - assets/add.png
     - assets/beach.jpeg
     - assets/idea.png
+    - assets/profile.png
+    - assets/outlet.png
 
     
 

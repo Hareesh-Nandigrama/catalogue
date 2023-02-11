@@ -35,7 +35,7 @@ class AdminCard extends StatelessWidget {
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(6), topRight: Radius.circular(6)),
                 child: Image.asset(
-                  'beach.jpeg',
+                  'assets/beach.jpeg',
                   fit: BoxFit.cover,
                 ),
               )),

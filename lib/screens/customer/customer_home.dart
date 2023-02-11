@@ -60,11 +60,11 @@ class _CustomerHomeState extends State<CustomerHome> {
               Text('No Outlets Available',style: GoogleFonts.abyssinicaSil(fontSize: 20),),
               Text(
                 'We couldn\'t find any shops nearby!',
-                style: GoogleFonts.abyssinicaSil(fontSize: 14,color: Color.fromRGBO(117, 117, 117, 1)),
+                style: GoogleFonts.abyssinicaSil(fontSize: 14,color: const Color.fromRGBO(117, 117, 117, 1)),
               ),
               const SizedBox(height: 24,),
-              CustomButton(isDisabled: false, buttonname: 'Try Again!'),
-              Spacer(),
+              const CustomButton(isDisabled: false, buttonname: 'Try Again!'),
+              const Spacer(),
             ],
           ),
         ),
@@ -80,12 +80,12 @@ class _CustomerHomeState extends State<CustomerHome> {
           fontWeight: FontWeight.w500,
           color: Colors.black,
         ),
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'Food'),
+        items:  [
+          BottomNavigationBarItem(icon: Image.asset('assets/Food.png'), label: 'Food'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.abc_outlined), label: 'Stationery'),
+              icon: Image.asset('assets/Stationary.png'), label: 'Stationery'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.abc_outlined), label: 'Others'),
+              icon: Image.asset('assets/Others.png'), label: 'Others'),
         ],
       ),
     );

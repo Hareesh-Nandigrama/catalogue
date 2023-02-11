@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:catalogue/screens/login/summary_screen.dart';
 import 'package:catalogue/screens/login/template.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:catalogue/widgets/login/image_card.dart';
@@ -140,7 +141,11 @@ class _AddPhotosState extends State<AddPhotos> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (BuildContext context)=>  const SummaryScreen(data: {}))
+                    );
+                  },
                   child:  CustomButton(
                     isDisabled: isDisabled,
                     buttonname: 'Next',

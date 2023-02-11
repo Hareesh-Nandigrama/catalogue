@@ -6,7 +6,6 @@ import '../login/template.dart';
 import 'package:flutter/cupertino.dart';
 import '../../widgets/login/button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 class AdminSplash extends StatefulWidget {
   const AdminSplash({super.key});
 
@@ -32,7 +31,7 @@ class _AdminHomeState extends State<AdminSplash> {
               style: GoogleFonts.abyssinicaSil(
                 fontSize: 36,
                 fontWeight: FontWeight.w400,
-                color: Color.fromRGBO(79, 79, 79, 1),
+                color: const Color.fromRGBO(79, 79, 79, 1),
               ),
             ),
             Text(

@@ -1,3 +1,4 @@
+import 'package:catalogue/screens/login/add_photos.dart';
 import 'package:catalogue/screens/login/template.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
@@ -199,7 +200,11 @@ class _TimingsScreenState extends State<TimingsScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context)=> const AddPhotos())
+                      );
+                    },
                     child: const CustomButton(
                       isDisabled: false,
                       buttonname: 'Next',

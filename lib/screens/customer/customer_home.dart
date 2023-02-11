@@ -2,6 +2,7 @@ import 'package:catalogue/widgets/customer/search_bar.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomerHome extends StatefulWidget {
   const CustomerHome({super.key});
@@ -13,12 +14,10 @@ class CustomerHome extends StatefulWidget {
 class _CustomerHomeState extends State<CustomerHome> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: Platform.isAndroid,
-      bottom: Platform.isAndroid,
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Center(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: SafeArea(
+        child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -52,25 +51,42 @@ class _CustomerHomeState extends State<CustomerHome> {
                   ],
                 ),
               ),
+              const Spacer(),
               Image.asset(
                 'assets/outlet.png',
                 height: 136,
                 width: 136,
               ),
-              CustomButton(isDisabled: false, buttonname: 'Try Again!')
+              Text('No Outlets Available',style: GoogleFonts.abyssinicaSil(fontSize: 20),),
+              Text(
+                'We couldn\'t find any shops nearby!',
+                style: GoogleFonts.abyssinicaSil(fontSize: 14,color: Color.fromRGBO(117, 117, 117, 1)),
+              ),
+              const SizedBox(height: 24,),
+              CustomButton(isDisabled: false, buttonname: 'Try Again!'),
+              Spacer(),
             ],
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.white,
-          unselectedLabelStyle: Google,
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'Food'),
-            BottomNavigationBarItem(icon: Icon(Icons.abc_outlined), label: 'Stationery'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.abc_outlined), label: 'Others'),
-          ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
+        currentIndex: 2,
+        unselectedLabelStyle: GoogleFonts.cabin(
+          fontWeight: FontWeight.w500,
+          color: const Color.fromRGBO(84, 84, 84, 1),
         ),
+        selectedLabelStyle: GoogleFonts.cabin(
+          fontWeight: FontWeight.w500,
+          color: Colors.black,
+        ),
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'Food'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.abc_outlined), label: 'Stationery'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.abc_outlined), label: 'Others'),
+        ],
       ),
     );
   }

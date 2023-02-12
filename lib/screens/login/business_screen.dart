@@ -2,15 +2,15 @@ import 'package:catalogue/screens/login/business_type_screen.dart';
 import 'package:catalogue/screens/login/template.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
-class BuisnessNameScreen extends StatefulWidget {
+class BusinessNameScreen extends StatefulWidget {
   final Map<String, dynamic> data;
-  const BuisnessNameScreen({Key? key, required this.data}) : super(key: key);
+  const BusinessNameScreen({Key? key, required this.data}) : super(key: key);
 
   @override
-  State<BuisnessNameScreen> createState() => _BuisnessNameScreenState();
+  State<BusinessNameScreen> createState() => _BuisnessNameScreenState();
 }
 
-class _BuisnessNameScreenState extends State<BuisnessNameScreen> {
+class _BuisnessNameScreenState extends State<BusinessNameScreen> {
   TextEditingController buisnessName = TextEditingController();
   @override
   Widget build(BuildContext context) {

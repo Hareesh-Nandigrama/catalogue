@@ -1,7 +1,7 @@
 import 'package:catalogue/widgets/customer/search_bar.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
+
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomerHome extends StatefulWidget {

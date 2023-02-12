@@ -2,16 +2,16 @@ import 'package:catalogue/screens/login/template.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
 
-import 'buisness_screen.dart';
-class UsernameSreen extends StatefulWidget {
-  final Map<String, dynamic> data;
-  const UsernameSreen({Key? key, required this.data}) : super(key: key);
+import 'business_screen.dart';
+class UsernameScreen extends StatefulWidget {
+
+  const UsernameScreen({Key? key, }) : super(key: key);
 
   @override
-  State<UsernameSreen> createState() => _UsernameSreenState();
+  State<UsernameScreen> createState() => _UsernameScreenState();
 }
 
-class _UsernameSreenState extends State<UsernameSreen> {
+class _UsernameScreenState extends State<UsernameScreen> {
   TextEditingController usersName = TextEditingController();
   bool disabled=true;
   @override
@@ -92,7 +92,7 @@ class _UsernameSreenState extends State<UsernameSreen> {
               GestureDetector(
                 onTap: (){
                   if(usersName.text.isNotEmpty){
-                    Map<String, dynamic> data = widget.data;
+                    Map<String, dynamic> data = {};
                     data['username'] = usersName.text;
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (BuildContext context)=> BuisnessNameScreen(

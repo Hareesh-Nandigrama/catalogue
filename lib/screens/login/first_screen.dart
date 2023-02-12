@@ -3,7 +3,6 @@ import 'package:catalogue/screens/login/template.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({Key? key}) : super(key: key);
@@ -13,21 +12,6 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreenState extends State<FirstScreen> {
-  var countrycode = '+91';
-  var phone = '77838389912';
-
-  Future<void> phoneNumber() async {
-    await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: '+91 7783839912',
-      verificationCompleted: (PhoneAuthCredential credential) {},
-      verificationFailed: (FirebaseAuthException e) {},
-      codeSent: (String verificationId, int? resendToken) {
-        print('sent otp successfully');
-      },
-      codeAutoRetrievalTimeout: (String verificationId) {},
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return LoginTemplate(
@@ -60,13 +44,15 @@ class _FirstScreenState extends State<FirstScreen> {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      const PhoneNumberScreen()));
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => const PhoneNumberScreen(isCustomer: false,),
+                ),
+              );
             },
             child: const CustomButton(
               isDisabled: false,
-              buttonname: 'Buisness',
+              buttonname: 'Business',
             ),
           ),
           const Padding(
@@ -78,10 +64,11 @@ class _FirstScreenState extends State<FirstScreen> {
           ),
           GestureDetector(
             onTap: () async {
-              await phoneNumber();
-              // Navigator.of(context).push(MaterialPageRoute(
-              //     builder: (BuildContext context) =>
-              //         const PhoneNumberScreen()));
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => const PhoneNumberScreen(isCustomer: true,),
+                ),
+              );
             },
             child: const CustomButton(
               isDisabled: false,

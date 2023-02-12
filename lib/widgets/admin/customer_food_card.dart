@@ -6,7 +6,7 @@ class Customercard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-          margin: const EdgeInsets.all(16),
+          margin: const EdgeInsets.symmetric(horizontal: 16),
             clipBehavior: Clip.antiAlias,
             decoration:  BoxDecoration(
               borderRadius: BorderRadius.circular(15),

@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../login/template.dart';
 import 'package:flutter/cupertino.dart';
 import '../../widgets/login/button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 class AdminSplash extends StatefulWidget {
   const AdminSplash({super.key});
 

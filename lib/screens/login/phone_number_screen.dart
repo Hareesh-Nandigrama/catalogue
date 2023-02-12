@@ -1,11 +1,13 @@
-import 'package:catalogue/screens/login/otp_screen.dart';
 import 'package:catalogue/screens/login/template.dart';
 
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
+import '../../controllers/otp_auth.dart';
 
 class PhoneNumberScreen extends StatefulWidget {
-  const PhoneNumberScreen({super.key});
+
+  final isCustomer;
+  const PhoneNumberScreen({super.key, required this.isCustomer});
 
   @override
   State<PhoneNumberScreen> createState() => _PhoneNumberScreenState();
@@ -46,7 +48,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
               keyboardType: TextInputType.phone,
               onChanged: (value) {
                 phoneNum.text = value;
-                if (phoneNum.text.length == 10) {
+                if (phoneNum.text.trim().length == 10) {
                   setState(() {
                     disabled = false;
                   });
@@ -89,42 +91,12 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
               isDisabled: disabled,
               buttonname: 'Next',
             ),
-            onTap: () {
-              if (phoneNum.text.length == 10) {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                        OTPScreen(phoneNumber: phoneNum.text)));
+            onTap: () async {
+              if (disabled) {
+                return;
               } else {
-                disabled = true;
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text(
-                        'Error',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 24,
-                            color: Colors.black),
-                      ),
-                      content: const Text('Enter a Valid phone no.'),
-                      actions: <Widget>[
-                        TextButton(
-                          child: const Text(
-                            'OK',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w300,
-                                fontSize: 22,
-                                color: Colors.black),
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
-                    );
-                  },
-                );
+                FocusManager.instance.primaryFocus?.unfocus();
+                await phoneNumber(phoneNum.text.trim(), widget.isCustomer);
               }
             },
           ),

@@ -84,8 +84,8 @@ flutter:
     - assets/Food.png
     - assets/Others.png
     - assets/Stationary.png
-
-    
+    - assets/Non-Veg.png
+    - assets/Veg.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

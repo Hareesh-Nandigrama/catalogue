@@ -110,7 +110,7 @@ class AdminCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    EditButton(),
+                    const EditButton(),
                   ],
                 ),
               ],

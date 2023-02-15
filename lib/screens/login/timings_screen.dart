@@ -114,7 +114,7 @@ class _TimingsScreenState extends State<TimingsScreen> {
                       decoration: InputDecoration(
                         suffixIcon: GestureDetector(
                           child: const Icon(
-                            Icons.access_time_filled
+                              Icons.access_time_filled
                           ),
                         ),
                         hintText: 'Opens at',

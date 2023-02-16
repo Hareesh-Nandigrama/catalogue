@@ -1,4 +1,5 @@
 import 'package:catalogue/screens/login/template.dart';
+import 'package:catalogue/widgets/common/custom_progress.dart';
 
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
@@ -109,21 +110,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
           ),
           Visibility(
             visible: isLoading,
-            child: Container(
-              color: Color.fromRGBO(0, 0, 0, 0.8),
-              child: Center(
-                
-                child: SizedBox(
-                  width: 100,
-                  child: const LinearProgressIndicator(
-                    backgroundColor: Colors.white,
-                    color: Colors.black,
-                    
-                    
-                  ),
-                ),
-              ),
-            ),
+            child: const CustomProgress()
           )
         ],
       ),

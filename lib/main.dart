@@ -1,4 +1,3 @@
-import 'package:catalogue/screens/login/add_photos.dart';
 import 'package:catalogue/screens/login/first_screen.dart';
 import 'package:catalogue/screens/login/username_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -35,9 +34,9 @@ class MyApp extends StatelessWidget {
           builder: (context, snapshot) {
             return snapshot.hasData
                 ? (snapshot.data ?? false)
-                    ? const UsernameScreen() 
+                    ? const UsernameScreen()
                     : const FirstScreen()
-                : Container();
+                :  Container();
           }),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../login/button.dart';
+import '../../widgets/login/button.dart';
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 

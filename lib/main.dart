@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       home: FutureBuilder<bool>(
           future: getVerifiedData(),
           builder: (context, snapshot) {
-            return snapshot.hasData
+            return snapshot.hasData 
                 ? (snapshot.data ?? false)
                     ? const UsernameScreen()
                     : const FirstScreen()

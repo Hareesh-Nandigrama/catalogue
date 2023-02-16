@@ -53,12 +53,18 @@ class _AdminOrderStatusState extends State<AdminOrderStatus> with TickerProvider
                           width: 14,
                         ),
                         CircleAvatar(
-                          radius: 25,
-                          backgroundColor: const Color.fromRGBO(226, 226, 226, 1),
-                          child: Image.asset(
-                            'assets/profile.png',
-                            height: 18,
-                            width: 18,
+                          radius: 24,
+                          backgroundColor:  Colors.black,
+                          child: CircleAvatar(
+                            radius: 22,
+                            backgroundColor:  Colors.white,
+
+
+                            child: Image.asset(
+                              'assets/profile.png',
+                              height: 18,
+                              width: 18,
+                            ),
                           ),
                           // backgroundImage: AssetImage('assets/profile.png'),
                         )

@@ -15,7 +15,7 @@ class EditButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset('assets/edit.png',height: 24,width: 24,),
-          Text(
+          const Text(
             'Edit',
             style: TextStyle(color: Colors.white),
           )

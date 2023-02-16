@@ -66,24 +66,7 @@ class Customercard extends StatelessWidget {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 17,top: 2),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
 
-                      Icon(Icons.circle,
-                        color: Colors.green,
-                        size: 8,
-                      ),
-                      Text('  Accepting orders',
-                        style: TextStyle(
-                            fontSize: 10
-                        ),
-                      ),
-                    ],
-                  ),
-                )
               ],
             )
         ),

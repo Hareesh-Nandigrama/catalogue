@@ -1,7 +1,5 @@
 import 'package:catalogue/widgets/admin/edit_button.dart';
 import 'package:flutter/material.dart';
-
-
 class AdminCard extends StatelessWidget {
   const AdminCard({super.key});
 
@@ -45,7 +43,7 @@ class AdminCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Hello, Roasted Pot',
                   style: TextStyle(
                     fontSize: 28,
@@ -64,11 +62,11 @@ class AdminCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         RichText(
-                          text: TextSpan(children: [
+                          text: const TextSpan(children: [
                             TextSpan(
                               text: 'Location:',
                               style: TextStyle(
-                                  color: const Color.fromRGBO(84, 84, 84, 1),
+                                  color: Color.fromRGBO(84, 84, 84, 1),
                                   height: 1.6),
                             ),
                             TextSpan(
@@ -79,11 +77,11 @@ class AdminCard extends StatelessWidget {
                           ]),
                         ),
                         RichText(
-                          text: TextSpan(children: [
+                          text: const TextSpan(children: [
                             TextSpan(
                               text: 'MoneyMaker:',
                               style: TextStyle(
-                                  color: const Color.fromRGBO(84, 84, 84, 1),
+                                  color: Color.fromRGBO(84, 84, 84, 1),
                                   height: 1.6),
                             ),
                             TextSpan(
@@ -94,11 +92,11 @@ class AdminCard extends StatelessWidget {
                           ]),
                         ),
                         RichText(
-                          text: TextSpan(children: [
+                          text: const TextSpan(children: [
                             TextSpan(
                               text: 'Contact No.:',
                               style: TextStyle(
-                                  color: const Color.fromRGBO(84, 84, 84, 1),
+                                  color: Color.fromRGBO(84, 84, 84, 1),
                                   height: 1.6),
                             ),
                             TextSpan(

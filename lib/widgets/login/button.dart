@@ -98,3 +98,74 @@ class CustomOutlinedButton extends StatelessWidget {
     );
   }
 }
+class EditProfileButton extends StatelessWidget {
+  final String buttonname;
+  const EditProfileButton(
+      {Key? key,  required this.buttonname})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width ,
+      height: 40,
+      decoration: BoxDecoration(
+        color:  Colors.black,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.edit,color: Colors.white,size: 16,),
+            Text(
+              buttonname,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+class LogoutOutlinedButton extends StatelessWidget {
+
+  final String buttonname;
+
+  const LogoutOutlinedButton({super.key, required this.buttonname});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width ,
+      height: 40,
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        border: Border.all(color: Colors.black),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.logout,size: 16,color: Colors.black,),
+            Text(
+              buttonname,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

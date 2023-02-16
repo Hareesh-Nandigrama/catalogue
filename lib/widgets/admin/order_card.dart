@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import '../login/button.dart';
-void main(){
-  runApp(MaterialApp(
-    home: Scaffold(
-      body: OrderCard(),
-    ),
-  ));
-}
-class OrderCard extends StatelessWidget {
-  const OrderCard({Key? key}) : super(key: key);
+class OrderReadyCard extends StatelessWidget {
+  const OrderReadyCard({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 17),
-      height: 250,
+      height: 266,
       width: double.infinity,
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         color: Colors.white,
         border: Border.all(
@@ -29,7 +23,7 @@ class OrderCard extends StatelessWidget {
             padding: const EdgeInsets.only(top: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children:  [
+              children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 8),
                   child: Row(
@@ -42,7 +36,7 @@ class OrderCard extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 8),
                   child: Row(
                     children: const [
-                      Text('18th Feb  '),
+                      Text('18th Feb 2023  | '),
                       Text('7:23PM'),
                       Icon(Icons.more_vert_rounded),
                     ],
@@ -56,13 +50,28 @@ class OrderCard extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children:  [
+              children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 8),
                   child: Row(
-                    children: const [
-                      Icon(Icons.account_circle_rounded),
-                      Padding(
+                    children: [
+                      CircleAvatar(
+                        radius: 13,
+                        backgroundColor: Colors.black,
+                        child: CircleAvatar(
+                          radius: 11,
+                          backgroundColor: Colors.white,
+
+
+                          child: Image.asset(
+                            'assets/profile.png',
+                            height: 14,
+                            width: 18,
+                          ),
+                        ),
+                        // backgroundImage: AssetImage('assets/profile.png'),
+                      ),
+                      const Padding(
                         padding: EdgeInsets.only(left: 4),
                         child: Text('Chinmay Zinjal'),
                       ),
@@ -82,22 +91,22 @@ class OrderCard extends StatelessWidget {
             ),
           ),
           const Padding(
-            padding:  EdgeInsets.only(left: 8,right: 8),
-            child:  Divider( color: Colors.grey,),
+            padding: EdgeInsets.only(left: 8, right: 8),
+            child: Divider(color: Colors.grey,),
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children:  [
+              children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 8),
                   child: Row(
                     children: const [
-                      ImageIcon(AssetImage('assets/Veg.png')),
+                      Image(image: AssetImage('assets/Veg.png'), height: 22,),
                       Padding(
                         padding: EdgeInsets.only(left: 4),
-                        child: Text('Paneer Tikka X1'),
+                        child: Text('Paneer Tikka x1'),
                       ),
                     ],
                   ),
@@ -106,7 +115,7 @@ class OrderCard extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 8),
                   child: Row(
                     children: const [
-                      Icon(Icons.currency_rupee,size: 14,),
+                      Icon(Icons.currency_rupee, size: 14,),
                       Text('170'),
                     ],
                   ),
@@ -119,15 +128,15 @@ class OrderCard extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children:  [
+              children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 8),
                   child: Row(
                     children: const [
-                      ImageIcon(AssetImage('assets/Veg.png')),
+                      Image(image: AssetImage('assets/Veg.png'), height: 22,),
                       Padding(
                         padding: EdgeInsets.only(left: 4),
-                        child: Text('Tandoori Roti X2'),
+                        child: Text('Tandoori Roti x2'),
                       ),
                     ],
                   ),
@@ -136,7 +145,7 @@ class OrderCard extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 8),
                   child: Row(
                     children: const [
-                      Icon(Icons.currency_rupee,size: 14,),
+                      Icon(Icons.currency_rupee, size: 14,),
                       Text('80'),
                     ],
                   ),
@@ -146,14 +155,14 @@ class OrderCard extends StatelessWidget {
             ),
           ),
           const Padding(
-            padding:  EdgeInsets.only(left: 8,right: 8),
-            child:  Divider( color: Colors.grey,),
+            padding: EdgeInsets.only(left: 8, right: 8),
+            child: Divider(color: Colors.grey,),
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children:  [
+              children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 8),
                   child: Row(
@@ -169,7 +178,7 @@ class OrderCard extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 8),
                   child: Row(
                     children: const [
-                      Icon(Icons.currency_rupee,size: 14,),
+                      Icon(Icons.currency_rupee, size: 14,),
                       Text('250'),
                     ],
                   ),
@@ -178,13 +187,13 @@ class OrderCard extends StatelessWidget {
             ),
           ),
           const Padding(
-            padding:  EdgeInsets.only(left: 8,right: 8),
-            child:  Divider( color: Colors.grey,),
+            padding: EdgeInsets.only(left: 8, right: 8),
+            child: Divider(color: Colors.grey,),
           ),
           Row(
-            children: const [
-              CustomButton(isDisabled: false, buttonname: 'Decline'),
-              CustomButton(isDisabled: false, buttonname: 'Accept'),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:  const [
+              CustomButton(isDisabled: false, buttonname: 'Order Ready'),
             ],
           )
         ],

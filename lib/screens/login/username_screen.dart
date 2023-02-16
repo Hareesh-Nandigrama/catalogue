@@ -98,7 +98,6 @@ class _UsernameScreenState extends State<UsernameScreen> {
 
               Map<String, dynamic> data = {};
               data['username'] = usersName.text;
-              data['phone'] = prefs.getString('phone');
 
               if (!mounted) return;
 

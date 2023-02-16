@@ -14,7 +14,6 @@ class TimingsScreen extends StatefulWidget {
 class _TimingsScreenState extends State<TimingsScreen> {
   TextEditingController opensAt = TextEditingController();
   TextEditingController closesAt = TextEditingController();
-  TextEditingController location = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +49,6 @@ class _TimingsScreenState extends State<TimingsScreen> {
               child: TextFormField(
                 cursorColor: Colors.black,
                 keyboardType: TextInputType.name,
-                controller: location,
                 onTap: () {},
                 onChanged: (value) {
 
@@ -203,12 +201,8 @@ class _TimingsScreenState extends State<TimingsScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Map<String,dynamic> data = widget.data;
-                      data['location'] = location.text;
                       Navigator.of(context).push(
-                          MaterialPageRoute(builder: (BuildContext context)=> AddPhotos(
-                            data: data
-                          ))
+                          MaterialPageRoute(builder: (BuildContext context)=> const AddPhotos())
                       );
                     },
                     child: const CustomButton(

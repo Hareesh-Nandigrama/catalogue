@@ -1,4 +1,3 @@
-import 'package:catalogue/screens/admin/admin_order_status_page.dart';
 import 'package:catalogue/screens/login/template.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
@@ -54,8 +53,8 @@ class _SummaryScreenState extends State<SummaryScreen> {
                         children: [
                           Row(
                             children: [
-                              Text(
-                                'Hello, '+widget.data['buisnessName'],
+                              const Text(
+                                'Hello, Roasted Pot',
                                 style: TextStyle(
                                     fontSize: 28,
                                     fontWeight: FontWeight.w600,
@@ -98,7 +97,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                             ],
                           ),
                           RichText(
-                            text: TextSpan(
+                            text: const TextSpan(
                               children: [
                                 TextSpan(
                                   text: 'Location:',
@@ -113,7 +112,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black),
-                                  text: '   '+widget.data['location']+' \n',
+                                  text: '   Khokha \n',
                                 ),
                                 TextSpan(
                                   text: 'Moneymaker:',
@@ -128,7 +127,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black),
-                                  text: '  '+widget.data['username']+'\n',
+                                  text: '  Chinmay\n',
                                 ),
                                 TextSpan(
                                   text: 'Contact No:',
@@ -143,7 +142,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black),
-                                  text: '  '+widget.data['phone'],
+                                  text: '  1234567890',
                                 ),
                               ],
                             ),
@@ -161,7 +160,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => AdminOrderStatus()));
+                        Navigator.of(context).pop();
                       },
                       child: const CustomButton(
                         isDisabled: true,

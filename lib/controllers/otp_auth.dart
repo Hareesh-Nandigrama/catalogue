@@ -21,7 +21,6 @@ Future<void> showSnackBar(String message) async {
 }
 
 Future<void> phoneNumber(String phoneNumber,bool isCustomer) async {
-  print('iscustomer');
   FirebaseAuth auth = FirebaseAuth.instance;
 
   try {

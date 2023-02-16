@@ -1,6 +1,5 @@
 import 'package:catalogue/widgets/customer/search_bar.dart';
 import 'package:catalogue/widgets/login/button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -39,20 +38,15 @@ class _CustomerHomeState extends State<CustomerHome> {
                     const SizedBox(
                       width: 14,
                     ),
-                    GestureDetector(
-                      onTap: (){
-                        FirebaseAuth.instance.signOut();
-                      },
-                      child: CircleAvatar(
-                        radius: 25,
-                        backgroundColor: const Color.fromRGBO(226, 226, 226, 1),
-                        child: Image.asset(
-                          'assets/profile.png',
-                          height: 25,
-                          width: 25,
-                        ),
-                        // backgroundImage: AssetImage('assets/profile.png'),
+                    CircleAvatar(
+                      radius: 25,
+                      backgroundColor: const Color.fromRGBO(226, 226, 226, 1),
+                      child: Image.asset(
+                        'assets/profile.png',
+                        height: 25,
+                        width: 25,
                       ),
+                      // backgroundImage: AssetImage('assets/profile.png'),
                     )
                   ],
                 ),

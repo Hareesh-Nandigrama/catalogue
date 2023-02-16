@@ -1,6 +1,5 @@
 import 'package:catalogue/widgets/admin/admin_card.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../login/template.dart';
 import 'package:flutter/cupertino.dart';
 import '../../widgets/login/button.dart';
@@ -26,7 +25,7 @@ class _AdminHomeState extends State<AdminSplash> {
           children: [
             Text(
               'Hello!',
-              style: GoogleFonts.abyssinicaSil(
+              style: TextStyle(
                 fontSize: 36,
                 fontWeight: FontWeight.w400,
                 color: const Color.fromRGBO(79, 79, 79, 1),
@@ -34,7 +33,7 @@ class _AdminHomeState extends State<AdminSplash> {
             ),
             Text(
               'Roasted Pot',
-              style: GoogleFonts.abyssinicaSil(
+              style: TextStyle(
                 height: 1,
                 fontSize: 41,
                 fontWeight: FontWeight.w400,
@@ -50,7 +49,7 @@ class _AdminHomeState extends State<AdminSplash> {
                   Text(
                     'Are you open right \nnow?',
                     maxLines: 2,
-                    style: GoogleFonts.abyssinicaSil(
+                    style: TextStyle(
                       height: 1,
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
@@ -95,7 +94,7 @@ class _AdminHomeState extends State<AdminSplash> {
                   Text(
                     'Adding menu will attract more customers',
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.abyssinicaSil(
+                    style: TextStyle(
                         fontSize: 14,
                         color: const Color.fromRGBO(117, 117, 117, 1)),
                   ),
@@ -116,7 +115,7 @@ class _AdminHomeState extends State<AdminSplash> {
                 Text(
                   'Tip: More customers means more money!',
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.abyssinicaSil(
+                  style: TextStyle(
                     color: const Color.fromRGBO(117, 117, 117, 1),
                     fontSize: 16,
                   ),

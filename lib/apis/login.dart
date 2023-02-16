@@ -30,13 +30,21 @@ Future<void> createShopkeeper(
     "uid": uid
   });
 
-  final response = await http.post(
-    Uri.parse('${baseUrl}api/shopkeeper'),
-    body: body,
-    headers: {
-      'content-type': 'application/json'
-    }
-  );
+  final response = await http.post(Uri.parse('${baseUrl}api/shopkeeper'),
+      body: body, headers: {'content-type': 'application/json'});
+
+  print(response.body);
+}
+
+Future<void> createCustomer(String phoneNumber, String name, String uid) async {
+  final body = jsonEncode({
+    "phoneNumber": phoneNumber,
+    "name": name,
+    "uid": uid,
+  });
+
+  final response = await http.post(Uri.parse('${baseUrl}api/customer'),
+      body: body, headers: {'content-type': 'application/json'});
 
   print(response.body);
 }

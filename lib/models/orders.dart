@@ -4,7 +4,7 @@ class Order {
   final String customerId;
   final String shopkeeperId;
   final String description;
-  final List<item> items;
+  final List<Item> items;
 
   Order({
     required this.customerId,
@@ -34,7 +34,7 @@ class Order {
       shopkeeperId: data['shopkeeperId'],
     );
 
-    data['items'].forEach((e) => {order.items.add(item.fromJson(e))});
+    data['items'].forEach((e) => {order.items.add(Item.fromJson(e))});
 
     return order;
   }

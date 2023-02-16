@@ -2,7 +2,7 @@ import 'package:catalogue/widgets/customer/search_bar.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
 
-import 'package:google_fonts/google_fonts.dart';
+
 
 class CustomerHome extends StatefulWidget {
   const CustomerHome({super.key});
@@ -57,10 +57,10 @@ class _CustomerHomeState extends State<CustomerHome> {
                 height: 136,
                 width: 136,
               ),
-              Text('No Outlets Available',style: GoogleFonts.abyssinicaSil(fontSize: 20),),
+              Text('No Outlets Available',style: TextStyle(fontSize: 20),),
               Text(
                 'We couldn\'t find any shops nearby!',
-                style: GoogleFonts.abyssinicaSil(fontSize: 14,color: const Color.fromRGBO(117, 117, 117, 1)),
+                style: TextStyle(fontSize: 14,color: const Color.fromRGBO(117, 117, 117, 1)),
               ),
               const SizedBox(height: 24,),
               const CustomButton(isDisabled: false, buttonname: 'Try Again!'),
@@ -72,11 +72,11 @@ class _CustomerHomeState extends State<CustomerHome> {
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         currentIndex: 2,
-        unselectedLabelStyle: GoogleFonts.cabin(
+        unselectedLabelStyle: TextStyle(
           fontWeight: FontWeight.w500,
           color: const Color.fromRGBO(84, 84, 84, 1),
         ),
-        selectedLabelStyle: GoogleFonts.cabin(
+        selectedLabelStyle: TextStyle(
           fontWeight: FontWeight.w500,
           color: Colors.black,
         ),

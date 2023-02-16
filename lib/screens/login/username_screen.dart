@@ -101,6 +101,8 @@ class _UsernameScreenState extends State<UsernameScreen> {
 
               if (!mounted) return;
 
+              
+
               //TODO: PUSH VERIFIED CUSTOMER TO BACKEND
 
               if (isCustomer) {

@@ -13,12 +13,12 @@ class OTPScreen extends StatefulWidget {
   final String phoneNumber;
   final String verificationId;
   final bool isCustomer;
-  const OTPScreen(
-      {Key? key,
-      required this.phoneNumber,
-      required this.verificationId,
-      required this.isCustomer})
-      : super(key: key);
+  const OTPScreen({
+    Key? key,
+    required this.phoneNumber,
+    required this.verificationId,
+    required this.isCustomer,
+  }) : super(key: key);
 
   @override
   State<OTPScreen> createState() => _OTPScreenState();
@@ -33,30 +33,13 @@ class _OTPScreenState extends State<OTPScreen> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // const Text(
-            //   'Verify your Phone Number',
-            //   style: TextStyle(
-            //     fontSize: 32,
-            //     fontWeight: FontWeight.w700,
-            //     color: Colors.black,
-            //   ),
-            // ),
-            RichText(
-              textAlign: TextAlign.center,
-              text: const TextSpan(
-                children: [
-                  TextSpan(
-                    text: 'Verify your Phone Number',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black,
-                    ),
-                  ),
-
-                ],
+            const Text(
+              'Verify your Phone Number',
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.w700,
+                color: Colors.black,
               ),
             ),
             const SizedBox(
@@ -173,28 +156,28 @@ class _OTPScreenState extends State<OTPScreen> {
                       final auth = FirebaseAuth.instance;
                       PhoneAuthCredential credential =
                           PhoneAuthProvider.credential(
-                              verificationId: widget.verificationId,
-                              smsCode: otp);
-                      await auth.signInWithCredential(credential);
+                        verificationId: widget.verificationId,
+                        smsCode: otp,
+                      );
+                      final response =
+                          await auth.signInWithCredential(credential);
                       final prefs = await SharedPreferences.getInstance();
                       await prefs.setString('phone', widget.phoneNumber);
+                      await prefs.setString('uid', response.user!.uid);
                       await prefs.setBool('isCustomer', widget.isCustomer);
+                      await prefs.setBool('isVerified', true);
                       if (!mounted) return;
                       showSnackBar('Phone No. Successfully verified');
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const UsernameScreen()),
+                          builder: (BuildContext context) =>
+                              const UsernameScreen(),
+                        ),
                       );
                     } on FirebaseAuthException catch (_) {
                       showSnackBar('Entered OTP does not match');
                     }
                   }
-
-                  // Navigator.of(context).push(MaterialPageRoute(
-                  //     builder: (BuildContext context) => UsernameSreen(data: {
-                  //           'phone': widget.phoneNumber,
-                  //         })));
                 },
                 child: CustomButton(
                   isDisabled: isDisabled,

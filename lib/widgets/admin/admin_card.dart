@@ -1,6 +1,6 @@
 import 'package:catalogue/widgets/admin/edit_button.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class AdminCard extends StatelessWidget {
   const AdminCard({super.key});
@@ -47,7 +47,7 @@ class AdminCard extends StatelessWidget {
               children: [
                 Text(
                   'Hello, Roasted Pot',
-                  style: GoogleFonts.abyssinicaSil(
+                  style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.w400,
                     color: Colors.black,
@@ -67,13 +67,13 @@ class AdminCard extends StatelessWidget {
                           text: TextSpan(children: [
                             TextSpan(
                               text: 'Location:',
-                              style: GoogleFonts.abyssinicaSil(
+                              style: TextStyle(
                                   color: const Color.fromRGBO(84, 84, 84, 1),
                                   height: 1.6),
                             ),
                             TextSpan(
                               text: '     Khokha',
-                              style: GoogleFonts.abyssinicaSil(
+                              style: TextStyle(
                                   color: Colors.black, height: 1.6),
                             ),
                           ]),
@@ -82,13 +82,13 @@ class AdminCard extends StatelessWidget {
                           text: TextSpan(children: [
                             TextSpan(
                               text: 'MoneyMaker:',
-                              style: GoogleFonts.abyssinicaSil(
+                              style: TextStyle(
                                   color: const Color.fromRGBO(84, 84, 84, 1),
                                   height: 1.6),
                             ),
                             TextSpan(
                               text: '   Chinmay',
-                              style: GoogleFonts.abyssinicaSil(
+                              style: TextStyle(
                                   color: Colors.black, height: 1.6),
                             ),
                           ]),
@@ -97,13 +97,13 @@ class AdminCard extends StatelessWidget {
                           text: TextSpan(children: [
                             TextSpan(
                               text: 'Contact No.:',
-                              style: GoogleFonts.abyssinicaSil(
+                              style: TextStyle(
                                   color: const Color.fromRGBO(84, 84, 84, 1),
                                   height: 1.6),
                             ),
                             TextSpan(
                               text: '  89383839893',
-                              style: GoogleFonts.abyssinicaSil(
+                              style: TextStyle(
                                   color: Colors.black, height: 1.6),
                             ),
                           ]),

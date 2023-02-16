@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class EditButton extends StatelessWidget {
   const EditButton({super.key});
@@ -17,7 +17,7 @@ class EditButton extends StatelessWidget {
           Image.asset('assets/edit.png',height: 24,width: 24,),
           Text(
             'Edit',
-            style: GoogleFonts.abyssinicaSil(color: Colors.white),
+            style: TextStyle(color: Colors.white),
           )
         ],
       ),

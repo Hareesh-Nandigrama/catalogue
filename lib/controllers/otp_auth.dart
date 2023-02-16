@@ -20,14 +20,13 @@ Future<void> showSnackBar(String message) async {
   ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(snackbar);
 }
 
-Future<void> phoneNumber(String phoneNumber,bool isCustomer) async {
-  FirebaseAuth auth = FirebaseAuth.instance;
-
+Future<void> phoneNumber(String phoneNumber, bool isCustomer) async {
+  
   try {
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: '+91 $phoneNumber',
       verificationCompleted: (PhoneAuthCredential credential) async {},
-      verificationFailed: (FirebaseAuthException e) async{
+      verificationFailed: (FirebaseAuthException e) async {
         if (e.code == 'invalid-phone-number') {
           await showSnackBar('The provided phone number is not valid.');
         }
@@ -36,22 +35,23 @@ Future<void> phoneNumber(String phoneNumber,bool isCustomer) async {
         await showSnackBar('Sent OTP Successfully');
 
         Future.delayed(
-            const Duration(microseconds: 8000),
-            () => {
-                  Navigator.of(navigatorKey.currentContext!).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => OTPScreen(
-                        phoneNumber: phoneNumber,
-                        verificationId: verificationId,
-                        isCustomer: isCustomer,
-                      ),
-                    ),
-                  )
-                });
+          const Duration(microseconds: 8000),
+          () => {
+            Navigator.of(navigatorKey.currentContext!).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) => OTPScreen(
+                  phoneNumber: phoneNumber,
+                  verificationId: verificationId,
+                  isCustomer: isCustomer,
+                ),
+              ),
+            )
+          },
+        );
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
-  } on FirebaseAuthException catch (e)  {
+  } on FirebaseAuthException catch (e) {
     await showSnackBar(e.message.toString());
   }
 }

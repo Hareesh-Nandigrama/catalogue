@@ -1,7 +1,7 @@
-class item {
+class Item {
   String name;
   int qty;
-  item({
+  Item({
     required this.name,
     required this.qty,
   });
@@ -10,8 +10,8 @@ class item {
     return {'name': name, 'qty': qty};
   }
 
-  static item fromJson(Map<String, dynamic> data) {
-    item newItem = item(name: data['item'], qty: data['qty']);
+  static Item fromJson(Map<String, dynamic> data) {
+    Item newItem = Item(name: data['item'], qty: data['qty']);
    
     return newItem;
   }

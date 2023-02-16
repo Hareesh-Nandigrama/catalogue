@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 void main(){
   runApp(const AdminOrderStatus());
 }
@@ -105,10 +105,10 @@ class _AdminOrderStatusState extends State<AdminOrderStatus> with TickerProvider
                 height: 136,
                 width: 136,
               ),
-              Text('No Ongoing Orders',style: GoogleFonts.abyssinicaSil(fontSize: 20,fontWeight: FontWeight.w600),),
-              Text(
+             const  Text('No Ongoing Orders',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),),
+              const Text(
                 'Hold Still a Customer will soon order from your\n                   restaurant',
-                style: GoogleFonts.abyssinicaSil(fontSize: 14,color: const Color.fromRGBO(117, 117, 117, 1)),
+                style: TextStyle(fontSize: 14,color:  Color.fromRGBO(117, 117, 117, 1)),
               ),
               const SizedBox(height: 24,),
               const Spacer(),
@@ -119,11 +119,11 @@ class _AdminOrderStatusState extends State<AdminOrderStatus> with TickerProvider
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         currentIndex: 2,
-        unselectedLabelStyle: GoogleFonts.cabin(
+        unselectedLabelStyle: TextStyle(
           fontWeight: FontWeight.w500,
           color: const Color.fromRGBO(84, 84, 84, 1),
         ),
-        selectedLabelStyle: GoogleFonts.cabin(
+        selectedLabelStyle: TextStyle(
           fontWeight: FontWeight.w500,
           color: Colors.black,
         ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class CustomButton extends StatelessWidget {
   final bool isDisabled;
@@ -21,7 +21,7 @@ class CustomButton extends StatelessWidget {
         child: Text(
           buttonname,
           textAlign: TextAlign.center,
-          style: GoogleFonts.abyssinicaSil(
+          style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w500,
             color: isDisabled ? const Color(0xfffcfcfc) : Colors.white,

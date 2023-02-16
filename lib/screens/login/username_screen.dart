@@ -112,10 +112,11 @@ class _UsernameScreenState extends State<UsernameScreen> {
 
                   if (!mounted) return;
 
-                  //TODO: PUSH VERIFIED CUSTOMER TO BACKEND
+       
 
                   if (isCustomer) {
                     try {
+                    FocusManager.instance.primaryFocus?.unfocus();
                       await createCustomer(phoneNumber, usersName.text, uid);
                       showSnackBar('Your Acoount is successfully created');
                     } catch (e) {}

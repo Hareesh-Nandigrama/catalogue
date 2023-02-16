@@ -104,10 +104,10 @@ flutter:
   fonts:
     - family: UberMove
       fonts:
-        - asset: fonts/UberMove-Bold.ttf
-        - asset: fonts/UberMove-Light.ttf
-        - asset: fonts/UberMove-Regular.ttf
-        - asset: fonts/UberMove-Regular.ttf
+        - asset: fonts/UberMoveTextBold.otf
+        - asset: fonts/UberMoveTextLight.otf
+        - asset: fonts/UberMoveTextRegular.otf
+        - asset: fonts/UberMoveTextMedium.otf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

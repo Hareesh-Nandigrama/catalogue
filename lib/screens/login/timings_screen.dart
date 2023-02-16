@@ -14,52 +14,48 @@ class TimingsScreen extends StatefulWidget {
 class _TimingsScreenState extends State<TimingsScreen> {
   TextEditingController opensAt = TextEditingController();
   TextEditingController closesAt = TextEditingController();
+  TextEditingController location = TextEditingController();
+
+  void _presentDatePicker() {}
 
   @override
   Widget build(BuildContext context) {
     return LoginTemplate(
-        body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              widget.data['buisnessName'],
-              style: const TextStyle(
-                fontSize: 44,
-                fontWeight: FontWeight.w500,
-                color: Colors.black,
+      body: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                widget.data['businessName'],
+                style: const TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                ),
               ),
-            ),
-            const Text(
-              'at',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.w500,
-                color: Colors.black,
+              const Text(
+                'at',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
+              const SizedBox(
+                height: 12,
               ),
-              child: TextFormField(
+              TextFormField(
+                controller: location,
                 cursorColor: Colors.black,
                 keyboardType: TextInputType.name,
-                onTap: () {},
-                onChanged: (value) {
-
-                },
                 decoration: InputDecoration(
-                  // suffixIcon: const ImageIcon(
-                  //     AssetImage('assets/tick_mark.png',),
-                  // ),
                   hintText: 'Location',
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                   hintStyle: const TextStyle(
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                     color: Color.fromRGBO(175, 175, 175, 1),
                   ),
                   border: OutlineInputBorder(
@@ -75,134 +71,113 @@ class _TimingsScreenState extends State<TimingsScreen> {
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            const Text(
-              'is usually open from',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.w500,
-                color: Colors.black,
+              const SizedBox(
+                height: 12,
               ),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(
-                  height: 45,
-                  width: MediaQuery.of(context).size.width/2.4,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 16,
-                      right: 16,
-                    ),
+              const Text(
+                'is usually open from',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                ),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
                     child: TextField(
+                      enabled: false,
                       controller: opensAt,
-                      onTap: () async {
-                        TimeOfDay? time =TimeOfDay.now();
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        time = await showTimePicker(context: context, initialTime: TimeOfDay.now());
-                        if(!mounted) return;
-                        opensAt.text=time!.format(context);
-                      },
-
-                      decoration: InputDecoration(
-                        suffixIcon: GestureDetector(
-                          child: const Icon(
-                              Icons.access_time_filled
-                          ),
-                        ),
-                        hintText: 'Opens at',
-                        hintStyle: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Color.fromRGBO(175, 175, 175, 1),
-                        ),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                            borderSide: const BorderSide(
-                              color: Color.fromRGBO(175, 175, 175, 1),
-                            )),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color.fromRGBO(175, 175, 175, 1),
-                          ),
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
+                      decoration: const InputDecoration(
+                          disabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(4))),
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                          labelText: 'Open At',
+                          filled: true,
+                          fillColor: Color.fromRGBO(234, 234, 234, 1)),
                     ),
                   ),
-                ),
-                const Text('-',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 32),),
-                SizedBox(
-                  height: 45,
-                  width: MediaQuery.of(context).size.width/2.4,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16,),
-                    child: TextFormField(
+                  const Text(
+                    '  -  ',
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 32),
+                  ),
+                  Expanded(
+                    child: TextField(
                       controller: closesAt,
                       onTap: () async {
-                        TimeOfDay? time =TimeOfDay.now();
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        time = await showTimePicker(context: context, initialTime: TimeOfDay.now());
-                        if(!mounted) return;
-                        closesAt.text=time!.format(context);
+                        print('object');
+                        await showTimePicker(
+                    
+                          builder: (context, child) {
+                            return Theme(
+                              data: ThemeData.dark().copyWith(
+                                colorScheme: ColorScheme.light(
+                                  primary: Colors.black,
+                                  onPrimary: Colors.transparent,
+                        
+                          
+                                  
+                                ),
+                                
+                                
+                                dialogBackgroundColor: Colors.white,
+                              ),
+                              child: child!,
+                            );
+                          },
+                          
+                          context: context, initialTime: TimeOfDay.now(),
+                        
+                        );
                       },
-                      decoration: InputDecoration(
-                        suffixIcon: const Icon(
-                            Icons.access_time_filled
-                        ),
-                        // suffixIcon: const ImageIcon(
-                        //     AssetImage('assets/tick_mark.png',),
-                        // ),
-                        hintText: 'Closes at',
-                        hintStyle: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Color.fromRGBO(175, 175, 175, 1),
-                        ),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                            borderSide: const BorderSide(
-                              color: Color.fromRGBO(175, 175, 175, 1),
-                            )),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color.fromRGBO(175, 175, 175, 1),
+                      decoration: const InputDecoration(
+                          disabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(4),
+                            ),
                           ),
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                          labelText: 'Closes At',
+                          filled: true,
+                          fillColor: Color.fromRGBO(234, 234, 234, 1)),
                     ),
                   ),
-                ),
-              ],
-            ),
-
-            const SizedBox(
-              height: 24,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
+                ],
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).pop();
                     },
-                    child: const CustomButton(
-                      isDisabled: false,
+                    child: const CustomOutlinedButton(
                       buttonname: 'Previous',
                     ),
                   ),
                   GestureDetector(
                     onTap: () {
+                      widget.data['location'] = location.text;
+                      widget.data['opens'] = opensAt.text;
+                      widget.data['closes'] = closesAt.text;
                       Navigator.of(context).push(
-                          MaterialPageRoute(builder: (BuildContext context)=> const AddPhotos())
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => AddPhotos(
+                            data: widget.data,
+                          ),
+                        ),
                       );
                     },
                     child: const CustomButton(
@@ -212,8 +187,8 @@ class _TimingsScreenState extends State<TimingsScreen> {
                   ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

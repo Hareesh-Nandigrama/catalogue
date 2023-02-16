@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:catalogue/screens/login/summary_screen.dart';
+import 'package:catalogue/apis/images.dart';
+import 'package:catalogue/screens/admin/admin_splash.dart';
 import 'package:catalogue/screens/login/template.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:catalogue/widgets/login/image_card.dart';
@@ -9,7 +10,9 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddPhotos extends StatefulWidget {
-  const AddPhotos({super.key});
+  final data;
+
+  const AddPhotos({super.key, required this.data});
 
   @override
   State<AddPhotos> createState() => _AddPhotosState();
@@ -141,12 +144,38 @@ class _AddPhotosState extends State<AddPhotos> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    if (isDisabled) return;
+
+                    List<String> photos = [];
+
+                    if (_image1 != null) {
+                      final photo = await uploadImage(_image1!);
+                      photos.add(photo);
+                    }
+                    if (_image2 != null) {
+                      final photo = await uploadImage(_image2!);
+                      photos.add(photo);
+                    }
+                    if (_image3 != null) {
+                      final photo = await uploadImage(_image3!);
+                      photos.add(photo);
+                    }
+                    if (_image4 != null) {
+                      final photo = await uploadImage(_image4!);
+                      photos.add(photo);
+                    }
+
+                    widget.data['photos'] = photos;
+
+                    if (!mounted) return;
                     Navigator.of(context).push(
-                        MaterialPageRoute(builder: (BuildContext context)=>  const SummaryScreen(data: {}))
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>  AdminSplash(data:widget.data),
+                      ),
                     );
                   },
-                  child:  CustomButton(
+                  child: CustomButton(
                     isDisabled: isDisabled,
                     buttonname: 'Next',
                   ),

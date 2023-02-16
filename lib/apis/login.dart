@@ -1,37 +1,37 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
-const baseUrl = 'https://odd-plum-clam-cuff.cyclic.app/';
+const baseUrl = 'https://kamengkriti.onrender.com/';
 
 Future<void> createShopkeeper(
     String phoneNumber,
-    String email,
     String name,
     String businessName,
     String businessType,
     String location,
-    int closeTime,
-    int openTime,
+    String closeTime,
+    String openTime,
     List<String> photos,
-    String description,
     String uid) async {
   final body = jsonEncode({
     "phoneNumber": phoneNumber,
-    "email": email,
     "name": name,
     "businessName": businessName,
-    "businessType": businessType,
+    "businessType": 'stationary',
     "location": location,
     "openTime": openTime,
     "closeTime": closeTime,
     "photos": photos,
-    "description": description,
     "uid": uid
   });
 
   final response = await http.post(Uri.parse('${baseUrl}api/shopkeeper'),
       body: body, headers: {'content-type': 'application/json'});
+  final prefs = await SharedPreferences.getInstance();
+
+  await prefs.setString('access_token', uid);
 
   print(response.body);
 }
@@ -45,6 +45,9 @@ Future<void> createCustomer(String phoneNumber, String name, String uid) async {
 
   final response = await http.post(Uri.parse('${baseUrl}api/customer'),
       body: body, headers: {'content-type': 'application/json'});
+
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setString('access_token', uid);
 
   print(response.body);
 }

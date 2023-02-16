@@ -1,10 +1,15 @@
+import 'package:catalogue/apis/login.dart';
 import 'package:catalogue/widgets/admin/admin_card.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../login/template.dart';
 import 'package:flutter/cupertino.dart';
 import '../../widgets/login/button.dart';
+
 class AdminSplash extends StatefulWidget {
-  const AdminSplash({super.key});
+  final data;
+
+  const AdminSplash({super.key, required this.data});
 
   @override
   State<AdminSplash> createState() => _AdminHomeState();
@@ -12,7 +17,6 @@ class AdminSplash extends StatefulWidget {
 
 class _AdminHomeState extends State<AdminSplash> {
   bool _switchState = false;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +82,27 @@ class _AdminHomeState extends State<AdminSplash> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () async {
+                    print(widget.data);
+
+                    final prefs = await SharedPreferences.getInstance();
+
+                    final phone = prefs.getString('phone') ?? '';
+                    final uid = prefs.getString('uid') ?? '';
+                    final data = widget.data;
+
+                    createShopkeeper(
+                        phone,
+                        data['username'],
+                        data['businessName'],
+                        data['type'],
+                        data['location'],
+                        data['closes'],
+                        data['opens'],
+                        data['photos'],
+                        uid,
+                        );
+                  },
                   child: const CustomButton(
                     isDisabled: false,
                     buttonname: 'Add Menu',

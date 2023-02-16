@@ -7,10 +7,10 @@ class BusinessTypeScreen extends StatefulWidget {
   const BusinessTypeScreen({Key? key, required this.data}) : super(key: key);
 
   @override
-  State<BusinessTypeScreen> createState() => _BuisnessTypeScreenState();
+  State<BusinessTypeScreen> createState() => _BusinessTypeScreenState();
 }
 
-class _BuisnessTypeScreenState extends State<BusinessTypeScreen> {
+class _BusinessTypeScreenState extends State<BusinessTypeScreen> {
   String type = 'Food Outlet';
   setType(String x){
     setState(() {
@@ -26,7 +26,7 @@ class _BuisnessTypeScreenState extends State<BusinessTypeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children:  [
                 Text(
-                  widget.data['buisnessName'],
+                  widget.data['businessName'],
                   style: const TextStyle(
                     fontSize: 44,
                     fontWeight: FontWeight.w500,
@@ -116,8 +116,6 @@ class _BuisnessTypeScreenState extends State<BusinessTypeScreen> {
                   ),
 
                 ),
-
-
               ],
             ),
           ),

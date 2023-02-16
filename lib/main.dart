@@ -1,5 +1,6 @@
-import 'package:catalogue/screens/login/add_photos.dart';
+import 'package:catalogue/screens/customer/customer_home.dart';
 import 'package:catalogue/screens/login/first_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,32 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.grey,
         fontFamily: 'UberMove',
       ),
-      home: const FirstScreen(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if(snapshot.connectionState == ConnectionState.active)
+          {
+            if(snapshot.hasData)
+            {
+              return CustomerHome();
+            }
+            else if(snapshot.hasError)
+            {
+              return Center(
+                child: Text('${snapshot.error}'),
+              );
+            }
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator( color: Colors.grey,),
+            );
+          }
+
+          return const AuthStart();
+        },
+      ),
     );
   }
 }

@@ -4,14 +4,14 @@ import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
 
 
-class FirstScreen extends StatefulWidget {
-  const FirstScreen({Key? key}) : super(key: key);
+class AuthStart extends StatefulWidget {
+  const AuthStart({Key? key}) : super(key: key);
 
   @override
-  State<FirstScreen> createState() => _FirstScreenState();
+  State<AuthStart> createState() => _AuthStartState();
 }
 
-class _FirstScreenState extends State<FirstScreen> {
+class _AuthStartState extends State<AuthStart> {
   @override
   Widget build(BuildContext context) {
     return LoginTemplate(

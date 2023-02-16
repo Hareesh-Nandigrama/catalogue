@@ -33,13 +33,30 @@ class _OTPScreenState extends State<OTPScreen> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              'Verify your Phone Number',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.w700,
-                color: Colors.black,
+            // const Text(
+            //   'Verify your Phone Number',
+            //   style: TextStyle(
+            //     fontSize: 32,
+            //     fontWeight: FontWeight.w700,
+            //     color: Colors.black,
+            //   ),
+            // ),
+            RichText(
+              textAlign: TextAlign.center,
+              text: const TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Verify your Phone Number',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black,
+                    ),
+                  ),
+
+                ],
               ),
             ),
             const SizedBox(

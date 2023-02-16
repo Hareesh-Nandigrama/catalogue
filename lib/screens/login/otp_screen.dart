@@ -181,11 +181,20 @@ class _OTPScreenState extends State<OTPScreen> {
                       await prefs.setBool('isCustomer', widget.isCustomer);
                       if (!mounted) return;
                       showSnackBar('Phone No. Successfully verified');
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
+                      //Check if account already exists
+                      if(false)
+                        {
+
+                        }
+                      else
+                        {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
                                 const UsernameScreen()),
-                      );
+                          );
+                        }
+
                     } on FirebaseAuthException catch (_) {
                       showSnackBar('Entered OTP does not match');
                     }

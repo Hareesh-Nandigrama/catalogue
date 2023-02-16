@@ -9,7 +9,8 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddPhotos extends StatefulWidget {
-  const AddPhotos({super.key});
+  final Map<String,dynamic> data;
+  const AddPhotos({super.key, required this.data});
 
   @override
   State<AddPhotos> createState() => _AddPhotosState();
@@ -142,8 +143,9 @@ class _AddPhotosState extends State<AddPhotos> {
                 ),
                 GestureDetector(
                   onTap: () {
+                    Map<String, dynamic> data = widget.data;
                     Navigator.of(context).push(
-                        MaterialPageRoute(builder: (BuildContext context)=>  const SummaryScreen(data: {}))
+                        MaterialPageRoute(builder: (BuildContext context)=> SummaryScreen(data: data))
                     );
                   },
                   child:  CustomButton(

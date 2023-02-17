@@ -35,7 +35,7 @@ class CustomerCard extends StatelessWidget {
                     children: [
                       ClipRRect(
                         child: Image.network(
-                          'https://th.bing.com/th/id/OIP.Wp6XgnYRrIXB2P0mSTBhBAHaEo?pid=ImgDet&rs=1',
+                          body['photos'][0],
                           fit: BoxFit.cover,
                           height: 192,
                           width: double.infinity,

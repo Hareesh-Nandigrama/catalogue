@@ -2,6 +2,7 @@ import 'package:catalogue/screens/login/add_photos.dart';
 import 'package:catalogue/screens/login/template.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
+import 'package:day_night_time_picker/day_night_time_picker.dart';
 
 class TimingsScreen extends StatefulWidget {
   final Map<String, dynamic> data;
@@ -12,11 +13,22 @@ class TimingsScreen extends StatefulWidget {
 }
 
 class _TimingsScreenState extends State<TimingsScreen> {
-  TextEditingController opensAt = TextEditingController();
-  TextEditingController closesAt = TextEditingController();
-  TextEditingController location = TextEditingController();
-
-  void _presentDatePicker() {}
+  String closesAt = 'Closes At';
+  String opensAt = 'Opens At';
+  String dropdownvalue = 'None';
+  bool isDisabled = true;
+  var items = [
+    'None',
+    'Khokha',
+    'Core 1',
+    'Core 2',
+    'Core 3',
+    'Core 4',
+    'Core 5',
+    'Manas',
+    'Brahmaputra',
+    'Kameng'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -46,29 +58,73 @@ class _TimingsScreenState extends State<TimingsScreen> {
               const SizedBox(
                 height: 12,
               ),
-              TextFormField(
-                controller: location,
-                cursorColor: Colors.black,
-                keyboardType: TextInputType.name,
-                decoration: InputDecoration(
-                  hintText: 'Location',
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                  hintStyle: const TextStyle(
-                    fontWeight: FontWeight.w400,
-                    color: Color.fromRGBO(175, 175, 175, 1),
-                  ),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4),
-                      borderSide: const BorderSide(
-                        color: Color.fromRGBO(175, 175, 175, 1),
-                      )),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: Color.fromRGBO(175, 175, 175, 1),
+              Container(
+                height: 51,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  color: Colors.white,
+                  border: Border.all(
+                      color: const Color.fromRGBO(175, 175, 175, 1), width: 1),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          child: Icon(Icons.location_on_outlined),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 14),
+                          child: DropdownButton(
+                            // Initial Value
+                            value: dropdownvalue,
+
+                            // Down Arrow Icon
+                            icon: const Icon(Icons.keyboard_arrow_down),
+
+                            // Array list of items
+                            items: items.map((String items) {
+                              return DropdownMenuItem(
+                                value: items,
+                                child: Text(
+                                  items,
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              );
+                            }).toList(),
+                            // After selecting the desired option,it will
+                            // change button value to selected value
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                dropdownvalue = newValue!;
+                              });
+                              if (opensAt != 'Opens At' &&
+                                  closesAt != 'Closes At' &&
+                                  dropdownvalue != 'None') {
+                                setState(() {
+                                  isDisabled = false;
+                                });
+                              } else {
+                                isDisabled = true;
+                              }
+                            },
+                          ),
+                        ),
+                      ],
                     ),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
+                    const Text(
+                      'Outlet Location   ',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Color.fromRGBO(175, 175, 175, 1),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(
@@ -89,19 +145,55 @@ class _TimingsScreenState extends State<TimingsScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
-                    child: TextField(
-                      enabled: false,
-                      controller: opensAt,
-                      decoration: const InputDecoration(
-                          disabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4))),
-                          contentPadding:
-                              EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-                          labelText: 'Open At',
-                          filled: true,
-                          fillColor: Color.fromRGBO(234, 234, 234, 1)),
+                    flex: 1,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          showPicker(
+                            accentColor: Colors.black,
+                            unselectedColor: const Color.fromRGBO(0, 0, 0, 0.5),
+                            barrierColor: Color.fromRGBO(0, 0, 0, 0.4),
+                            context: context,
+                            value: TimeOfDay.now(),
+                            onChange: (value) {
+                              setState(() {
+                                opensAt = value.format(context);
+                              });
+
+                              if (opensAt != 'Opens At' &&
+                                  closesAt != 'Closes At' &&
+                                  dropdownvalue != 'None') {
+                                setState(() {
+                                  isDisabled = false;
+                                });
+                              } else {
+                                isDisabled = true;
+                              }
+                            },
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(234, 234, 234, 1),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              opensAt,
+                              style: TextStyle(
+                                  color: Color.fromRGBO(100, 100, 100, 1)),
+                            ),
+                            Icon(
+                              Icons.access_time_filled,
+                              color: Color.fromRGBO(100, 100, 100, 1),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                   const Text(
@@ -109,46 +201,56 @@ class _TimingsScreenState extends State<TimingsScreen> {
                     style: TextStyle(fontWeight: FontWeight.w400, fontSize: 32),
                   ),
                   Expanded(
-                    child: TextField(
-                      controller: closesAt,
-                      onTap: () async {
-                        print('object');
-                        await showTimePicker(
-                    
-                          builder: (context, child) {
-                            return Theme(
-                              data: ThemeData.dark().copyWith(
-                                colorScheme: ColorScheme.light(
-                                  primary: Colors.black,
-                                  onPrimary: Colors.transparent,
-                        
-                          
-                                  
-                                ),
-                                
-                                
-                                dialogBackgroundColor: Colors.white,
-                              ),
-                              child: child!,
-                            );
-                          },
-                          
-                          context: context, initialTime: TimeOfDay.now(),
-                        
+                    flex: 1,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          showPicker(
+                            accentColor: Colors.black,
+                            unselectedColor: const Color.fromRGBO(0, 0, 0, 0.5),
+                            barrierColor: Color.fromRGBO(0, 0, 0, 0.4),
+                            context: context,
+                            value: TimeOfDay.now(),
+                            onChange: (value) {
+                              setState(() {
+                                closesAt = value.format(context);
+                              });
+
+                              if (opensAt != 'Opens At' &&
+                                  closesAt != 'Closes At' &&
+                                  dropdownvalue != 'None') {
+                                setState(() {
+                                  isDisabled = false;
+                                });
+                              } else {
+                                isDisabled = true;
+                              }
+                            },
+                          ),
                         );
                       },
-                      decoration: const InputDecoration(
-                          disabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(4),
+                      child: Container(
+                        height: 50,
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(234, 234, 234, 1),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              closesAt,
+                              style: const TextStyle(
+                                  color: Color.fromRGBO(100, 100, 100, 1)),
                             ),
-                          ),
-                          contentPadding:
-                              EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-                          labelText: 'Closes At',
-                          filled: true,
-                          fillColor: Color.fromRGBO(234, 234, 234, 1)),
+                            const Icon(
+                              Icons.access_time_filled,
+                              color: Color.fromRGBO(100, 100, 100, 1),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -169,9 +271,10 @@ class _TimingsScreenState extends State<TimingsScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      widget.data['location'] = location.text;
-                      widget.data['opens'] = opensAt.text;
-                      widget.data['closes'] = closesAt.text;
+                      if (isDisabled) return;
+                      widget.data['location'] = dropdownvalue;
+                      widget.data['opens'] = opensAt;
+                      widget.data['closes'] = closesAt;
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (BuildContext context) => AddPhotos(
@@ -180,8 +283,8 @@ class _TimingsScreenState extends State<TimingsScreen> {
                         ),
                       );
                     },
-                    child: const CustomButton(
-                      isDisabled: false,
+                    child: CustomButton(
+                      isDisabled: isDisabled,
                       buttonname: 'Next',
                     ),
                   ),

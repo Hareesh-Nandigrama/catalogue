@@ -1,12 +1,12 @@
 import 'package:catalogue/screens/admin/admin_home.dart';
-import 'package:catalogue/screens/admin/admin_insights.dart';
 import 'package:catalogue/screens/customer/customer_home.dart';
 import 'package:catalogue/screens/login/first_screen.dart';
+import 'package:catalogue/screens/login/timings_screen.dart';
 import 'package:catalogue/screens/login/username_screen.dart';
-import 'package:catalogue/widgets/admin/menu_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,7 +45,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.grey,
         fontFamily: 'UberMove',
       ),
-      home: MenuPage(),
+      home: TimingsScreen(data: {'businessName':'Hello'}),
+
       // home: FutureBuilder<String>(
       //     future: getVerifiedData(),
       //     builder: (context, snapshot) {

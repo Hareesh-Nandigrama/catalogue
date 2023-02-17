@@ -46,6 +46,7 @@ dependencies:
   firebase_auth: ^4.2.6
   shared_preferences: ^2.0.17
   flutter_switch: ^0.3.2
+  day_night_time_picker: ^1.1.5
 
 
 

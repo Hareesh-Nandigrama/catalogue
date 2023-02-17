@@ -2,7 +2,7 @@ import 'package:catalogue/apis/login.dart';
 import 'package:catalogue/controllers/otp_auth.dart';
 import 'package:catalogue/screens/admin/admin_home.dart';
 import 'package:catalogue/widgets/admin/admin_card.dart';
-import 'package:catalogue/widgets/admin/menu_screen.dart';
+import 'package:catalogue/widgets/admin/menu_page.dart';
 import 'package:catalogue/widgets/common/custom_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';

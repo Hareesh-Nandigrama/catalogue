@@ -45,21 +45,21 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.grey,
         fontFamily: 'UberMove',
       ),
-      home: TimingsScreen(data: {'businessName':'Hello'}),
+      //home: TimingsScreen(data: {'businessName':'Hello'}),
 
-      // home: FutureBuilder<String>(
-      //     future: getVerifiedData(),
-      //     builder: (context, snapshot) {
-      //       return snapshot.hasData
-      //           ? snapshot.data == 'first'
-      //               ? const FirstScreen()
-      //               : (snapshot.data == 'name'
-      //                   ? const UsernameScreen()
-      //                   : (snapshot.data == 'customer'
-      //                       ? const CustomerHome()
-      //                       : const AdminHome()))
-      //           : Container();
-      //     }),
+      home: FutureBuilder<String>(
+          future: getVerifiedData(),
+          builder: (context, snapshot) {
+            return snapshot.hasData
+                ? snapshot.data == 'first'
+                    ? const FirstScreen()
+                    : (snapshot.data == 'name'
+                        ? const UsernameScreen()
+                        : (snapshot.data == 'customer'
+                            ? const CustomerHome()
+                            : const AdminHome()))
+                : Container();
+          }),
     );
   }
 }

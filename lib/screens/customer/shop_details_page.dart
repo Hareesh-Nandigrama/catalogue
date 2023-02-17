@@ -13,9 +13,56 @@ class ShopDetailsPage extends StatefulWidget {
 }
 
 class _ShopDetailsPageState extends State<ShopDetailsPage> {
+
+  int _selectedPageIndex = 0;
+  void _selectPage(int index) {
+    setState(() {
+      _selectedPageIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _selectPage,
+        backgroundColor: Colors.white,
+        currentIndex: _selectedPageIndex,
+        unselectedLabelStyle: const TextStyle(
+          fontWeight: FontWeight.w500,
+          color: Color.fromRGBO(84, 84, 84, 1),
+        ),
+        selectedLabelStyle: const TextStyle(
+          fontWeight: FontWeight.w500,
+          color: Colors.black,
+        ),
+        items: [
+          BottomNavigationBarItem(
+              activeIcon: Image.asset(
+                'assets/food_selected.png',
+                width: 24,
+                height: 24,
+              ),
+              icon: Image.asset(
+                'assets/food.png',
+                width: 24,
+                height: 24,
+              ),
+              label: 'Menu'),
+          BottomNavigationBarItem(
+              activeIcon: Image.asset(
+                'assets/stationery_selected.png',
+                width: 24,
+                height: 24,
+              ),
+              icon: Image.asset(
+                'assets/stationery.png',
+                width: 24,
+                height: 24,
+              ),
+              label: 'Cart'),
+        ],
+      ),
       appBar: AppBar(
         actions: [
           IconButton(onPressed: (){
@@ -23,7 +70,7 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
           }, icon: const Icon(Icons.clear))
         ],
       ),
-      body: Column(
+      body: _selectedPageIndex == 0 ?Column(
         children: [
               FutureBuilder<List<Menu>>(
                   future: getMenu(widget.data['_id']),
@@ -60,6 +107,8 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
                     return const CircularProgressIndicator();
                   })
                   ],
+      ):Column(
+
       ),
     );
   }

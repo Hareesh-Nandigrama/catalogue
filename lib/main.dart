@@ -1,7 +1,5 @@
 import 'package:catalogue/screens/admin/admin_home.dart';
-import 'package:catalogue/screens/admin/admin_splash.dart';
 import 'package:catalogue/screens/customer/customer_home.dart';
-import 'package:catalogue/screens/login/add_photos.dart';
 import 'package:catalogue/screens/login/first_screen.dart';
 import 'package:catalogue/screens/login/username_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -19,14 +17,14 @@ final navigatorKey = GlobalKey<NavigatorState>();
 Future<String> getVerifiedData() async {
   String screen = 'first';
   final prefs = await SharedPreferences.getInstance();
-  if (prefs.getBool('isVerified') ?? false) {
-    screen = 'name';
-  } else if (prefs.getString('access_token') != null) {
+  if (prefs.getString('access_token') != null) {
     screen = 'admin';
 
     if (prefs.getBool('isCustomer') ?? false) {
       screen = 'customer';
     }
+  } else if (prefs.getBool('isVerified') ?? false) {
+    screen = 'name';
   }
 
   return screen;

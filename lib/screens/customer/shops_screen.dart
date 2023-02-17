@@ -1,4 +1,4 @@
-import 'package:catalogue/models/shopkeeper.dart';
+import 'package:catalogue/widgets/customer/customer_card.dart';
 import 'package:flutter/material.dart';
 
 import '../../apis/seller.dart';
@@ -16,7 +16,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        FutureBuilder<List<Shopkeeper>>(
+        FutureBuilder<List<dynamic>>(
             future: getShops(),
             builder: (context, snapshot) {
               if (snapshot.connectionState != ConnectionState.done) {
@@ -32,24 +32,22 @@ class _ShopsScreenState extends State<ShopsScreen> {
                       }),
                 );
               } else if (snapshot.hasData) {
-                return Container();
-                // List<KritiEventModel> allKritiResults = snapshot.data!;
-                // return Observer(builder: (context) {
-                //   List<KritiEventModel> filteredEventSchedules = kritiFilterSchedule(input: allKritiResults, cup: kritiStore.selectedCup, club: kritiStore.selectedClub);
-                //   return Expanded(
-                //       child: filteredEventSchedules.isNotEmpty
-                //           ? ListView.builder(
-                //           itemCount: filteredEventSchedules.length,
-                //           itemBuilder: (context, index) {
-                //             return KritiResultCard(
-                //                 eventModel:
-                //                 filteredEventSchedules[index]);
-                //           })
-                //           : Center(
-                //         child:
-                //         Text("No Result found"),
-                //       ));
-                // });
+                List<dynamic> allShops = snapshot.data!;
+
+
+                  return Expanded(
+                      child: allShops.isNotEmpty
+                          ? ListView.builder(
+                          itemCount: allShops.length,
+                          itemBuilder: (context, index) {
+                            return CustomerCard(
+                                body:
+                                allShops[index]);
+                          })
+                          : Center(
+                        child:
+                        Text("No Result found"),
+                      ));
               }
               return CircularProgressIndicator();
             })
@@ -57,3 +55,4 @@ class _ShopsScreenState extends State<ShopsScreen> {
     );
   }
 }
+

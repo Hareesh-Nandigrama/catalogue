@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 class CustomerCard extends StatelessWidget {
-  const CustomerCard({Key? key}) : super(key: key);
+  final body;
+  const CustomerCard({Key? key, this.body}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
+    return Container(
           margin: const EdgeInsets.symmetric(horizontal: 16),
             clipBehavior: Clip.antiAlias,
             decoration:  BoxDecoration(
@@ -35,16 +35,16 @@ class CustomerCard extends StatelessWidget {
                         ),
 
                       ),
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.only(left: 17,bottom: 12),
-                        child: Text('Roasted Pot',style: TextStyle(
+                        child: Text(body['businessName'],style: TextStyle(
                             fontSize: 24,
                             color: Colors.white
                         ),),
                       ),
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.only(left: 17,top: 12),
-                        child: Text('Description of Roasted Pot',style: TextStyle(
+                        child: Text(body['businessName'],style: TextStyle(
                             fontSize: 12,
                             color: Colors.white
                         ),),
@@ -69,7 +69,6 @@ class CustomerCard extends StatelessWidget {
 
               ],
             )
-        ),
-      );
+        );
   }
 }

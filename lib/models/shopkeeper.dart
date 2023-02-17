@@ -14,20 +14,20 @@ class Shopkeeper {
   final String uid;
   final bool opeStatus;
 
-  Shopkeeper({
-    required this.name,
-    required this.phoneNumber,
-    required this.businessName,
-    required this.businessType,
-    required this.closeTime,
-    required this.description,
-    required this.email,
-    required this.location,
-    required this.openTime,
-    required this.photos,
-    required this.uid,
-    required this.opeStatus
-  });
+  Shopkeeper(
+      {required this.name,
+      required this.phoneNumber,
+      required this.businessName,
+      required this.businessType,
+      required this.closeTime,
+      required this.description,
+      required this.email,
+      required this.location,
+      required this.openTime,
+      required this.photos,
+      required this.uid,
+      required this.opeStatus});
+
 
   Map<String, dynamic> toJson() {
     return {

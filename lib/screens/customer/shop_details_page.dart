@@ -2,6 +2,7 @@ import 'package:catalogue/models/menu.dart';
 import 'package:flutter/material.dart';
 
 import '../../apis/seller.dart';
+import '../../widgets/common/shimmer.dart';
 
 class ShopDetailsPage extends StatefulWidget {
   final data;
@@ -19,7 +20,7 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
         actions: [
           IconButton(onPressed: (){
             Navigator.of(context).pop();
-          }, icon: Icon(Icons.clear))
+          }, icon: const Icon(Icons.clear))
         ],
       ),
       body: Column(
@@ -30,12 +31,15 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
                     if (snapshot.connectionState != ConnectionState.done) {
                       return Expanded(
                         child: ListView.builder(
-                            itemCount: 3,
+                            itemCount: 10,
                             itemBuilder: (context, index) {
                               return Container(
-                                  height: 200,
-                                  padding: const EdgeInsets.symmetric(vertical: 8),
-                                  child: CircularProgressIndicator()
+                                height: 100,
+                                padding: const EdgeInsets.symmetric(vertical: 8),
+                                child: ShowShimmer(
+                                  height: 100,
+                                  width: MediaQuery.of(context).size.width,
+                                ),
                               );
                             }),
                       );
@@ -46,14 +50,14 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
                               ? ListView.builder(
                               itemCount: allShops.length,
                               itemBuilder: (context, index) {
-                                return Text('hello');
+                                return const Text('hello');
                               })
-                              : Center(
+                              : const Center(
                             child:
                             Text("No Result found"),
                           ));
                     }
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   })
                   ],
       ),

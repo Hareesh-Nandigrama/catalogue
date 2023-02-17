@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:catalogue/models/menu.dart';
-import 'package:catalogue/models/shopkeeper.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';

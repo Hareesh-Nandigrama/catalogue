@@ -1,3 +1,4 @@
+import 'package:catalogue/screens/admin/admin_home.dart';
 import 'package:catalogue/screens/admin/admin_splash.dart';
 import 'package:catalogue/screens/customer/customer_home.dart';
 import 'package:catalogue/screens/login/add_photos.dart';
@@ -40,10 +41,11 @@ class MyApp extends StatelessWidget {
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primaryColor: Colors.black,
         primarySwatch: Colors.grey,
         fontFamily: 'UberMove',
       ),
-      home: CustomerHome(),
+      home: AdminHome(),
 
 
       // home: FutureBuilder<String>(
@@ -57,7 +59,7 @@ class MyApp extends StatelessWidget {
       //                   : snapshot.data == 'customer'
       //                       ? const CustomerHome()
       //                       // TODO: change this 
-      //                       :  Container()
+      //                       :  AdminHome()
       //           : Container();
       //     }),
     );

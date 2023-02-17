@@ -51,10 +51,11 @@ class CustomerCard extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 17,top: 12),
-                        child: Text(body['description']!,style: const TextStyle(
+                        child: body['description'] != null ? Text(body['description'],style: const TextStyle(
                             fontSize: 12,
                             color: Colors.white
-                        ),),
+                        ),) : Container()
+                        ,
                       )
                     ]
                 ),

@@ -21,6 +21,11 @@ class _CustomerHomeState extends State<CustomerHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+
+        ]
+      ),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: ShopsScreen(

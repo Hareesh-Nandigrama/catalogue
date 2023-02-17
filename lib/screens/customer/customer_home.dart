@@ -1,7 +1,10 @@
 import 'package:catalogue/screens/customer/shops_screen.dart';
+import 'package:catalogue/screens/login/first_screen.dart';
 import 'package:catalogue/widgets/customer/search_bar.dart';
 import 'package:catalogue/widgets/login/button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomerHome extends StatefulWidget {
   const CustomerHome({super.key});
@@ -28,8 +31,11 @@ class _CustomerHomeState extends State<CustomerHome> {
         leading: Container(),
         actions: [
           GestureDetector(
-            onTap: (){
-
+            onTap: () async {
+              FirebaseAuth.instance.signOut();
+              final pref = await SharedPreferences.getInstance();
+              pref.clear();
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => FirstScreen()));
             },
             child: CircleAvatar(
               radius: 24,

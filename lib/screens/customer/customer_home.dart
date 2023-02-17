@@ -1,3 +1,7 @@
+import 'package:catalogue/screens/admin/admin_home.dart';
+import 'package:catalogue/screens/admin/profile_page.dart';
+import 'package:catalogue/screens/login/first_screen.dart';
+import 'package:catalogue/widgets/admin/menu_card.dart';
 import 'package:catalogue/widgets/customer/search_bar.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
@@ -10,13 +14,77 @@ class CustomerHome extends StatefulWidget {
 }
 
 class _CustomerHomeState extends State<CustomerHome> {
+  List<Widget> _pages = [
+    FirstScreen(),
+    AdminHome(),
+    ProfilePage(),
+  ];
+  int _selectedPageIndex = 0;
+  void _selectPage(int index) {
+    setState(() {
+      _selectedPageIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      
       body: SafeArea(
         child: Center(
-          child: Column(
+          child:  MenuCard()
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _selectPage,
+        
+        backgroundColor: Colors.white,
+        
+        currentIndex: 2,
+        unselectedLabelStyle: const TextStyle(
+          fontWeight: FontWeight.w500,
+          color: Color.fromRGBO(84, 84, 84, 1),
+        ),
+        selectedLabelStyle: const TextStyle(
+          fontWeight: FontWeight.w500,
+          color: Colors.black,
+        ),
+        items: [
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/food_selected.png',
+                width: 24,
+                height: 24,
+              ),
+              label: 'Food'),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/stationary.png',
+                width: 24,
+                height: 24,
+              ),
+              label: 'Stationery'),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/others.png',
+                width: 24,
+                height: 24,
+              ),
+              label: 'Others'),
+        ],
+      ),
+    );
+  }
+}
+
+
+class NoOutlets extends StatelessWidget {
+  const NoOutlets({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
@@ -70,45 +138,6 @@ class _CustomerHomeState extends State<CustomerHome> {
               const CustomButton(isDisabled: false, buttonname: 'Try Again!'),
               const Spacer(),
             ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (value) {},
-        backgroundColor: Colors.white,
-        currentIndex: 2,
-        unselectedLabelStyle: const TextStyle(
-          fontWeight: FontWeight.w500,
-          color: const Color.fromRGBO(84, 84, 84, 1),
-        ),
-        selectedLabelStyle: const TextStyle(
-          fontWeight: FontWeight.w500,
-          color: Colors.black,
-        ),
-        items: [
-          BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/food_selected.png',
-                width: 24,
-                height: 24,
-              ),
-              label: 'Food'),
-          BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/stationary.png',
-                width: 24,
-                height: 24,
-              ),
-              label: 'Stationery'),
-          BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/others.png',
-                width: 24,
-                height: 24,
-              ),
-              label: 'Others'),
-        ],
-      ),
-    );
+          );
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:catalogue/models/shopkeeper.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,4 +19,15 @@ Future<void> getShopkeeper() async {
       });
 
   print(response.body);
+}
+
+Future<List<Shopkeeper>> getShops() async{
+  final prefs = await SharedPreferences.getInstance();
+  final response = await http.get(Uri.parse('${baseUrl}api/shopkeeper/all'),
+      headers: {
+        'content-type': 'application/json',
+      });
+  List<Shopkeeper> data = [];
+  print(response.body);
+  return [];
 }

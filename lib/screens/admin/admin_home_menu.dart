@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
+import 'package:catalogue/widgets/customer/customer_card.dart';
+import 'package:flutter/material.dart';
 import '../../widgets/admin/menu_card.dart';
 
 class AdminHomeMenu extends StatefulWidget {
@@ -14,7 +14,7 @@ class _AdminHomeMenuState extends State<AdminHomeMenu> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: MenuCard(),
+      child: CustomerCard(),
     );
   }
 }

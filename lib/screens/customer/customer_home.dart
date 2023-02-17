@@ -2,8 +2,6 @@ import 'package:catalogue/widgets/customer/search_bar.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
 
-
-
 class CustomerHome extends StatefulWidget {
   const CustomerHome({super.key});
 
@@ -57,12 +55,18 @@ class _CustomerHomeState extends State<CustomerHome> {
                 height: 136,
                 width: 136,
               ),
-              Text('No Outlets Available',style: TextStyle(fontSize: 20),),
-              Text(
-                'We couldn\'t find any shops nearby!',
-                style: TextStyle(fontSize: 14,color: const Color.fromRGBO(117, 117, 117, 1)),
+              const Text(
+                'No Outlets Available',
+                style: TextStyle(fontSize: 20),
               ),
-              const SizedBox(height: 24,),
+              const Text(
+                'We couldn\'t find any shops nearby!',
+                style: TextStyle(
+                    fontSize: 14, color: Color.fromRGBO(117, 117, 117, 1)),
+              ),
+              const SizedBox(
+                height: 24,
+              ),
               const CustomButton(isDisabled: false, buttonname: 'Try Again!'),
               const Spacer(),
             ],
@@ -70,22 +74,39 @@ class _CustomerHomeState extends State<CustomerHome> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        onTap: (value) {},
         backgroundColor: Colors.white,
         currentIndex: 2,
-        unselectedLabelStyle: TextStyle(
+        unselectedLabelStyle: const TextStyle(
           fontWeight: FontWeight.w500,
           color: const Color.fromRGBO(84, 84, 84, 1),
         ),
-        selectedLabelStyle: TextStyle(
+        selectedLabelStyle: const TextStyle(
           fontWeight: FontWeight.w500,
           color: Colors.black,
         ),
-        items:  [
-          BottomNavigationBarItem(icon: Image.asset('assets/Food.png'), label: 'Food'),
+        items: [
           BottomNavigationBarItem(
-              icon: Image.asset('assets/Stationary.png'), label: 'Stationery'),
+              icon: Image.asset(
+                'assets/food_selected.png',
+                width: 24,
+                height: 24,
+              ),
+              label: 'Food'),
           BottomNavigationBarItem(
-              icon: Image.asset('assets/Others.png'), label: 'Others'),
+              icon: Image.asset(
+                'assets/stationary.png',
+                width: 24,
+                height: 24,
+              ),
+              label: 'Stationery'),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/others.png',
+                width: 24,
+                height: 24,
+              ),
+              label: 'Others'),
         ],
       ),
     );

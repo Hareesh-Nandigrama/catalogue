@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '357443788060',
     projectId: 'kriti-12c33',
     storageBucket: 'kriti-12c33.appspot.com',
+    androidClientId: '357443788060-nd98urvlhica4duv0go5gt0rjgvuhnt4.apps.googleusercontent.com',
     iosClientId: '357443788060-ge2k65m8ts6bsg142ds51cf4tr1iri86.apps.googleusercontent.com',
     iosBundleId: 'com.example.catalogue',
   );

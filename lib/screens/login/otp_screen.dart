@@ -36,6 +36,7 @@ class _OTPScreenState extends State<OTPScreen> {
           children: [
             const Text(
               'Verify your Phone Number',
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.w700,
@@ -168,7 +169,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       await prefs.setBool('isVerified', true);
                       if (!mounted) return;
                       showSnackBar('Phone No. Successfully verified');
-                      Navigator.of(context).push(
+                      Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (BuildContext context) =>
                               const UsernameScreen(),

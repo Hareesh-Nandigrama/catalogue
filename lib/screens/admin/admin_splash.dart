@@ -27,7 +27,7 @@ class _AdminHomeState extends State<AdminSplash> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Hello!',
               style: TextStyle(
                 fontSize: 36,
@@ -36,8 +36,8 @@ class _AdminHomeState extends State<AdminSplash> {
               ),
             ),
             Text(
-              'Roasted Pot',
-              style: TextStyle(
+              ' ${widget.data['businessName']} ,',
+              style: const TextStyle(
                 height: 1,
                 fontSize: 41,
                 fontWeight: FontWeight.w400,

@@ -169,11 +169,12 @@ class _OTPScreenState extends State<OTPScreen> {
                       await prefs.setBool('isVerified', true);
                       if (!mounted) return;
                       showSnackBar('Phone No. Successfully verified');
-                      Navigator.of(context).pushReplacement(
+                      Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
                           builder: (BuildContext context) =>
                               const UsernameScreen(),
                         ),
+                          ModalRoute.withName('/')
                       );
                     } on FirebaseAuthException catch (_) {
                       showSnackBar('Entered OTP does not match');

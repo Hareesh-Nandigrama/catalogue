@@ -82,8 +82,8 @@ class _BusinessNameScreenState extends State<BusinessNameScreen> {
                   onTap: () {
                     Navigator.of(context).pop();
                   },
-                  child: const CustomButton(
-                    isDisabled: false,
+                  child: const CustomOutlinedButton(
+                    
                     buttonname: 'Previous',
                   ),
                 ),

@@ -46,20 +46,22 @@ class CategoryButton extends StatelessWidget {
       height: 43,
       decoration: BoxDecoration(
         border: Border.all(
-            color: isDisabled ? const Color(0xffbebebe) : Colors.black),
-        color: isDisabled ? Colors.white : const Color(0xffbebebe),
+            color: isDisabled ? Color.fromRGBO(0, 0, 0, 0.5) : Colors.white),
+        color: isDisabled ? Colors.white : Color.fromRGBO(0, 0, 0, 0.5),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14.5, vertical: 8.5),
-          child: Text(
-            shopCategory,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color: isDisabled ? const Color(0xffbebebe) : Colors.black,
+          child: FittedBox(
+            child: Text(
+              shopCategory,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: isDisabled ? Color.fromRGBO(0, 0, 0, 0.5) : Colors.white,
+              ),
             ),
           ),
         ),

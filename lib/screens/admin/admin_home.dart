@@ -1,5 +1,6 @@
 import 'package:catalogue/screens/admin/admin_home_menu.dart';
 import 'package:catalogue/screens/admin/admin_home_orders.dart';
+import 'package:catalogue/widgets/admin/status_switch.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -48,16 +49,9 @@ class _AdminOrderStatusState extends State<AdminHome> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    StatusSwitch(),
                     
-                    CupertinoSwitch(
-                      activeColor: Colors.green,
-                      value: _switchState,
-                      onChanged: (value) {
-                        setState(() {
-                          _switchState = !_switchState;
-                        });
-                      },
-                    ),
+                   
                     Row(
                       children: [
                         const Text(

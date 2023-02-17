@@ -272,7 +272,8 @@ class _TimingsScreenState extends State<TimingsScreen> {
                   GestureDetector(
                     onTap: () {
                       if (isDisabled) return;
-                      widget.data['location'] = dropdownvalue;
+                      widget.data['location'] =
+                          dropdownvalue.toLowerCase().replaceAll(' ', '');
                       widget.data['opens'] = opensAt;
                       widget.data['closes'] = closesAt;
                       Navigator.of(context).push(

@@ -112,11 +112,9 @@ class _UsernameScreenState extends State<UsernameScreen> {
 
                   if (!mounted) return;
 
-       
-
                   if (isCustomer) {
                     try {
-                    FocusManager.instance.primaryFocus?.unfocus();
+                      FocusManager.instance.primaryFocus?.unfocus();
                       await createCustomer(phoneNumber, usersName.text, uid);
                       showSnackBar('Your Acoount is successfully created');
                     } catch (e) {}
@@ -126,11 +124,12 @@ class _UsernameScreenState extends State<UsernameScreen> {
                     });
 
                     if (!mounted) return;
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => const CustomerHome(),
-                      ),
-                    );
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const CustomerHome(),
+                        ),
+                        ModalRoute.withName('/'));
                   } else {
                     Navigator.of(context).push(
                       MaterialPageRoute(

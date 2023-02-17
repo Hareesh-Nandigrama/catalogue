@@ -91,8 +91,8 @@ class _BusinessTypeScreenState extends State<BusinessTypeScreen> {
                         onTap: (){
                           Navigator.of(context).pop();
                         },
-                        child: const CustomButton(
-                          isDisabled: false,
+                        child: const CustomOutlinedButton(
+                     
                           buttonname: 'Previous',
                         ),
                       ),

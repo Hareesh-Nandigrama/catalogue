@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-class OnlineOfflineSwitch extends StatefulWidget {
-  const OnlineOfflineSwitch({Key? key}) : super(key: key);
+class StatusSwitch extends StatefulWidget {
+  const StatusSwitch({Key? key}) : super(key: key);
 
   @override
-  State<OnlineOfflineSwitch> createState() => _OnlineOfflineSwitchState();
+  State<StatusSwitch> createState() => _StatusSwitchState();
 }
 
-class _OnlineOfflineSwitchState extends State<OnlineOfflineSwitch> {
+class _StatusSwitchState extends State<StatusSwitch> {
   bool online=false;
 
   @override

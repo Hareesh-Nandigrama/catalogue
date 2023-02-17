@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:catalogue/apis/images.dart';
+import 'package:catalogue/controllers/otp_auth.dart';
 import 'package:catalogue/screens/admin/admin_splash.dart';
 import 'package:catalogue/screens/login/template.dart';
+import 'package:catalogue/widgets/common/custom_progress.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:catalogue/widgets/login/image_card.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +21,7 @@ class AddPhotos extends StatefulWidget {
 }
 
 class _AddPhotosState extends State<AddPhotos> {
+  bool isLoading = false;
   File? _image1;
   File? _image2;
   File? _image3;
@@ -78,111 +81,123 @@ class _AddPhotosState extends State<AddPhotos> {
   Widget build(BuildContext context) {
     return LoginTemplate(
         body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Stack(
         children: [
-          const Text(
-            'Add Photos',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              height: 2,
-              fontSize: 36,
-              fontWeight: FontWeight.w700,
-              color: Colors.black,
-            ),
-          ),
-          const Text(
-            "Add at least two photos to continue",
-            style: TextStyle(
-              fontSize: 14.23,
-              fontWeight: FontWeight.w400,
-              color: Colors.grey,
-            ),
-          ),
-          Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      getImage(1);
-                    },
-                    child: ImageCard(image: _image1),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      getImage(2);
-                    },
-                    child: ImageCard(image: _image2),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      getImage(3);
-                    },
-                    child: ImageCard(image: _image3),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      getImage(4);
-                    },
-                    child: ImageCard(image: _image4),
-                  ),
-                ],
-              )),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const CustomOutlinedButton(
-                    buttonname: 'Previous',
-                  ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Add Photos',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  height: 2,
+                  fontSize: 36,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
                 ),
-                GestureDetector(
-                  onTap: () async {
-                    if (isDisabled) return;
-
-                    List<String> photos = [];
-
-                    if (_image1 != null) {
-                      final photo = await uploadImage(_image1!);
-                      photos.add(photo);
-                    }
-                    if (_image2 != null) {
-                      final photo = await uploadImage(_image2!);
-                      photos.add(photo);
-                    }
-                    if (_image3 != null) {
-                      final photo = await uploadImage(_image3!);
-                      photos.add(photo);
-                    }
-                    if (_image4 != null) {
-                      final photo = await uploadImage(_image4!);
-                      photos.add(photo);
-                    }
-
-                    widget.data['photos'] = photos;
-
-                    if (!mounted) return;
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) =>  AdminSplash(data:widget.data),
+              ),
+              const Text(
+                "Add at least two photos to continue",
+                style: TextStyle(
+                  fontSize: 14.23,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.grey,
+                ),
+              ),
+              Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          getImage(1);
+                        },
+                        child: ImageCard(image: _image1),
                       ),
-                    );
-                  },
-                  child: CustomButton(
-                    isDisabled: isDisabled,
-                    buttonname: 'Next',
-                  ),
+                      GestureDetector(
+                        onTap: () {
+                          getImage(2);
+                        },
+                        child: ImageCard(image: _image2),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          getImage(3);
+                        },
+                        child: ImageCard(image: _image3),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          getImage(4);
+                        },
+                        child: ImageCard(image: _image4),
+                      ),
+                    ],
+                  )),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const CustomOutlinedButton(
+                        buttonname: 'Previous',
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        if (isDisabled) return;
+
+                        List<String> photos = [];
+
+                        setState(() {
+                          isLoading = true;
+                        });
+
+                        if (_image1 != null) {
+                          final photo = await uploadImage(_image1!);
+                          photos.add(photo);
+                        }
+                        if (_image2 != null) {
+                          final photo = await uploadImage(_image2!);
+                          photos.add(photo);
+                        }
+                        if (_image3 != null) {
+                          final photo = await uploadImage(_image3!);
+                          photos.add(photo);
+                        }
+                        if (_image4 != null) {
+                          final photo = await uploadImage(_image4!);
+                          photos.add(photo);
+                        }
+
+                        widget.data['photos'] = photos;
+                        showSnackBar('Photos successfully uploaded');
+
+                        if (!mounted) return;
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                AdminSplash(data: widget.data),
+                          ),
+                        );
+                      },
+                      child: CustomButton(
+                        isDisabled: isDisabled,
+                        buttonname: 'Next',
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
+          Visibility(visible: isLoading, child: CustomProgress())
         ],
       ),
     ));

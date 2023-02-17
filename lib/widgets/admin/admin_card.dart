@@ -14,8 +14,8 @@ class AdminCard extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Color.fromRGBO(0, 0, 0, 0.25),
-            blurRadius: 10,
-            spreadRadius: 1,
+            blurRadius: 100,
+            spreadRadius: 0.1,
             offset: Offset(0, 10),
           )
         ],

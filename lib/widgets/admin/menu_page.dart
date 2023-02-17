@@ -6,31 +6,12 @@ class MenuPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          child: Column(
+    return Expanded(
+      child: Column(
         children: [
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'Menu   ',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Image.asset(
-                  'assets/menu.png',
-                  height: 24,
-                  width: 24,
-                ),
-              ],
-            ),
-          ),
-          const Divider(),
+         const  SizedBox(height: 20,),
+          
+   
           Row(
             children: [
               Padding(
@@ -48,9 +29,12 @@ class MenuPage extends StatelessWidget {
               ),
             ],
           ),
+            const SizedBox(
+            height: 25,
+          ),
           const MenuCard(),
         ],
-      )),
+      ),
     );
   }
 }

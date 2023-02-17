@@ -2,14 +2,14 @@ import 'package:catalogue/screens/admin/admin_orders/preparing.dart';
 import 'package:catalogue/screens/admin/admin_orders/requests.dart';
 import 'package:flutter/material.dart';
 
-class AdminHomeOrders extends StatefulWidget {
-  const AdminHomeOrders({super.key});
+class AdminHomeInsights extends StatefulWidget {
+  const AdminHomeInsights({super.key});
 
   @override
-  State<AdminHomeOrders> createState() => _AdminHomeOrdersState();
+  State<AdminHomeInsights> createState() => _AdminHomeInsightsState();
 }
 
-class _AdminHomeOrdersState extends State<AdminHomeOrders>
+class _AdminHomeInsightsState extends State<AdminHomeInsights>
     with TickerProviderStateMixin {
   late TabController tabController;
 

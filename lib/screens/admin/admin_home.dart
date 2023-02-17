@@ -1,5 +1,7 @@
 import 'package:catalogue/screens/admin/admin_home_menu.dart';
 import 'package:catalogue/screens/admin/admin_home_orders.dart';
+import 'package:catalogue/screens/admin/admin_insights.dart';
+import 'package:catalogue/widgets/admin/menu_page.dart';
 import 'package:catalogue/widgets/admin/status_switch.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -16,8 +18,8 @@ class AdminHome extends StatefulWidget {
 class _AdminOrderStatusState extends State<AdminHome> {
   List<Widget> _pages = [
     const AdminHomeOrders(),
-   const AdminHomeMenu(),
-    const AdminHomeOrders(),
+   const MenuPage(),
+    const AdminHomeInsights(),
   ];
   int _selectedPageIndex = 0;
   void _selectPage(int index) {

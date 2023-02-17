@@ -49,16 +49,17 @@ Future<Map<String, dynamic>> createNewOrder(
   final prefs = await SharedPreferences.getInstance();
   final accessToken = prefs.getString('access_token');
   print(accessToken);
-
+  List<Map<String, dynamic>> itm = [];
+  items.forEach((element) {
+    itm.add(element.toJson());
+  });
   final response = await http.post(Uri.parse('${baseUrl}api/order'), headers: {
     'content-type': 'application/json',
     'Authorization': 'Token $accessToken'
   }, body: {
     "customerId": customerId,
     "shopkeeperId": shopkeeperId,
-    "items": items.forEach((element) {
-      element.toJson();
-    }),
+    "items": itm,
     "description": "new order"
   });
   print(response.body);

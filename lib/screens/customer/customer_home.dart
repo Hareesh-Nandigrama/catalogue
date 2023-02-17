@@ -22,8 +22,30 @@ class _CustomerHomeState extends State<CustomerHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leadingWidth: 0,
+        leading: Container(),
         actions: [
+          GestureDetector(
+            onTap: (){
 
+            },
+            child: CircleAvatar(
+              radius: 24,
+              backgroundColor: Colors.black,
+              child: CircleAvatar(
+                radius: 22,
+                backgroundColor: Colors.white,
+                child: Image.asset(
+                  'assets/profile.png',
+                  height: 18,
+                  width: 18,
+                ),
+              ),
+              // backgroundImage: AssetImage('assets/profile.png'),
+            ),
+          )
         ]
       ),
       resizeToAvoidBottomInset: false,

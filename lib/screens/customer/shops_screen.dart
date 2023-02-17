@@ -1,7 +1,7 @@
 import 'package:catalogue/widgets/customer/customer_card.dart';
 import 'package:flutter/material.dart';
-
 import '../../apis/seller.dart';
+import '../../widgets/common/shimmer.dart';
 
 class ShopsScreen extends StatefulWidget {
   final int index;
@@ -27,13 +27,28 @@ class _ShopsScreenState extends State<ShopsScreen> {
                         return Container(
                           height: 200,
                           padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: CircularProgressIndicator()
+                          child: ShowShimmer(
+                            height: 300,
+                            width: MediaQuery.of(context).size.width,
+                          ),
                         );
                       }),
                 );
               } else if (snapshot.hasData) {
                 List<dynamic> allShops = snapshot.data!;
+                if(widget.index == 0)
+                  {
+                    allShops.retainWhere((element) => element['businessType'] == 'foodOutlet');
+                  }
+                else if(widget.index == 1)
+                  {
+                    allShops.retainWhere((element) => element['businessType'] == 'stationary');
 
+                  }
+                else
+                  {
+                    allShops.retainWhere((element) => element['businessType'] == 'others');
+                  }
 
                   return Expanded(
                       child: allShops.isNotEmpty
@@ -44,12 +59,12 @@ class _ShopsScreenState extends State<ShopsScreen> {
                                 body:
                                 allShops[index]);
                           })
-                          : Center(
+                          : const Center(
                         child:
                         Text("No Result found"),
                       ));
               }
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             })
       ],
     );

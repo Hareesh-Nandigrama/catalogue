@@ -17,9 +17,9 @@ class AdminHome extends StatefulWidget {
 
 class _AdminOrderStatusState extends State<AdminHome> {
   List<Widget> _pages = [
-    AdminHomeOrders(),
-   AdminHomeMenu(),
-    PhoneNumberScreen(isCustomer: true)
+    const AdminHomeOrders(),
+   const AdminHomeMenu(),
+    const AdminHomeOrders(),
   ];
   int _selectedPageIndex = 0;
   void _selectPage(int index) {
@@ -71,19 +71,24 @@ class _AdminOrderStatusState extends State<AdminHome> {
                         const SizedBox(
                           width: 14,
                         ),
-                        CircleAvatar(
-                          radius: 24,
-                          backgroundColor: Colors.black,
+                        GestureDetector(
+                          onTap: (){
+
+                          },
                           child: CircleAvatar(
-                            radius: 22,
-                            backgroundColor: Colors.white,
-                            child: Image.asset(
-                              'assets/profile.png',
-                              height: 18,
-                              width: 18,
+                            radius: 24,
+                            backgroundColor: Colors.black,
+                            child: CircleAvatar(
+                              radius: 22,
+                              backgroundColor: Colors.white,
+                              child: Image.asset(
+                                'assets/profile.png',
+                                height: 18,
+                                width: 18,
+                              ),
                             ),
+                            // backgroundImage: AssetImage('assets/profile.png'),
                           ),
-                          // backgroundImage: AssetImage('assets/profile.png'),
                         )
                       ],
                     ),
@@ -99,11 +104,11 @@ class _AdminOrderStatusState extends State<AdminHome> {
         onTap: _selectPage,
         backgroundColor: Colors.white,
         currentIndex: _selectedPageIndex,
-        unselectedLabelStyle: TextStyle(
+        unselectedLabelStyle: const TextStyle(
           fontWeight: FontWeight.w500,
-          color: const Color.fromRGBO(84, 84, 84, 1),
+          color: Color.fromRGBO(84, 84, 84, 1),
         ),
-        selectedLabelStyle: TextStyle(
+        selectedLabelStyle: const TextStyle(
           fontWeight: FontWeight.w500,
           color: Colors.black,
         ),
@@ -139,7 +144,7 @@ class _AdminOrderStatusState extends State<AdminHome> {
                 height: 24,
               ),
               icon: Image.asset(
-                'assets/others.png',
+                'assets/Others.png',
                 width: 24,
                 height: 24,
               ),

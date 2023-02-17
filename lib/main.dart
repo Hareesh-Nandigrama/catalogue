@@ -8,7 +8,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -46,8 +45,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.grey,
         fontFamily: 'UberMove',
       ),
-
-
       home: FutureBuilder<String>(
           future: getVerifiedData(),
           builder: (context, snapshot) {
@@ -58,8 +55,7 @@ class MyApp extends StatelessWidget {
                         ? const UsernameScreen()
                         : snapshot.data == 'customer'
                             ? const CustomerHome()
-                            // TODO: change this
-                            :  AdminHome()
+                            : const AdminHome()
                 : Container();
           }),
     );

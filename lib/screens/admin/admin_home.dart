@@ -1,12 +1,9 @@
 import 'package:catalogue/screens/admin/admin_home_menu.dart';
 import 'package:catalogue/screens/admin/admin_home_orders.dart';
 
-import 'package:catalogue/screens/login/add_photos.dart';
-
-import 'package:catalogue/screens/login/phone_number_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
+
 
 class AdminHome extends StatefulWidget {
   const AdminHome({super.key});

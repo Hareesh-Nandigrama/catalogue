@@ -1,7 +1,11 @@
+import 'package:catalogue/models/menu.dart';
 import 'package:flutter/material.dart';
 
+import '../../apis/seller.dart';
+
 class ShopDetailsPage extends StatefulWidget {
-  const ShopDetailsPage({Key? key}) : super(key: key);
+  final data;
+  const ShopDetailsPage({Key? key, this.data}) : super(key: key);
 
   @override
   State<ShopDetailsPage> createState() => _ShopDetailsPageState();
@@ -20,8 +24,8 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
       ),
       body: Column(
         children: [
-              FutureBuilder<List<dynamic>>(
-                  future: getMenu(),
+              FutureBuilder<List<Menu>>(
+                  future: getMenu(widget.data['_id']),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState != ConnectionState.done) {
                       return Expanded(
@@ -36,9 +40,7 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
                             }),
                       );
                     } else if (snapshot.hasData) {
-                      List<dynamic> allShops = snapshot.data!;
-
-
+                      List<Menu> allShops = snapshot.data!;
                       return Expanded(
                           child: allShops.isNotEmpty
                               ? ListView.builder(

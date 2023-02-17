@@ -28,7 +28,6 @@ class Shopkeeper {
       required this.uid,
       required this.opeStatus});
 
-
   Map<String, dynamic> toJson() {
     return {
       "phoneNumber": phoneNumber,

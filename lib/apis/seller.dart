@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:catalogue/models/menu.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,23 +32,30 @@ Future<List<dynamic>> getShops() async {
   for (var json in body as List<dynamic>) {
     print(json);
     answer.add(json);
-    print(answer);
   }
-  print('here');
-  print(answer);
+
+
   print('im returning now');
   return answer;
 }
 
-Future<Menu> getMenu(String shopkeeperId) async {
+Future<List<Menu>> getMenu(String shopkeeperId) async {
+  print(shopkeeperId);
   final response =
-      await http.get(Uri.parse('${baseUrl}api/item/:$shopkeeperId'), headers: {
+      await http.get(Uri.parse('${baseUrl}api/item/$shopkeeperId'), headers: {
     'content-type': 'application/json',
   });
 
   final body = jsonDecode(response.body);
+  List <Menu> answer = [];
+  print('menu');
+  print(body);
+  for(var e in body)
+    {
+      answer.add(Menu.fromJson(e));
+    }
+  print('printing menu');
+  print(answer);
 
-  final menu = Menu.fromJson(body);
-
-  return menu;
+  return answer;
 }

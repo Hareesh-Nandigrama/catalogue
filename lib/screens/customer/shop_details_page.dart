@@ -145,7 +145,9 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
         final prefs =await SharedPreferences.getInstance();
         print('b');
 
-        final uid = prefs.getString('acesss_token') ?? '';
+        final uid = prefs.getString('uid') ?? '';
+        print('this is the uid');
+        print(uid);
         print('c');
 
         createNewOrder(uid, widget.data['_id'], CartStore.getOrder());

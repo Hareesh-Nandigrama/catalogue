@@ -43,8 +43,11 @@ Future<void> createCustomer(String phoneNumber, String name, String uid) async {
     "uid": uid,
   });
 
-  final response = await http.post(Uri.parse('${baseUrl}api/customer'),
-      body: body, headers: {'content-type': 'application/json'});
+  final response = await http.post(
+    Uri.parse('${baseUrl}api/customer'),
+    body: body,
+    headers: {'content-type': 'application/json'},
+  );
 
   final prefs = await SharedPreferences.getInstance();
   await prefs.setString('access_token', uid);

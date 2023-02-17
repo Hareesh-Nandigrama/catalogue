@@ -1,8 +1,8 @@
+import 'package:catalogue/apis/seller.dart';
 import 'package:catalogue/screens/login/phone_number_screen.dart';
 import 'package:catalogue/screens/login/template.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
-
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({Key? key}) : super(key: key);
@@ -46,7 +46,9 @@ class _FirstScreenState extends State<FirstScreen> {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (BuildContext context) => const PhoneNumberScreen(isCustomer: false,),
+                  builder: (BuildContext context) => const PhoneNumberScreen(
+                    isCustomer: false,
+                  ),
                 ),
               );
             },
@@ -66,7 +68,9 @@ class _FirstScreenState extends State<FirstScreen> {
             onTap: () async {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (BuildContext context) => const PhoneNumberScreen(isCustomer: true,),
+                  builder: (BuildContext context) => const PhoneNumberScreen(
+                    isCustomer: true,
+                  ),
                 ),
               );
             },

@@ -1,3 +1,4 @@
+import 'package:catalogue/screens/admin/admin_home_menu.dart';
 import 'package:catalogue/screens/admin/admin_home_orders.dart';
 
 import 'package:catalogue/screens/login/add_photos.dart';
@@ -5,6 +6,7 @@ import 'package:catalogue/screens/login/add_photos.dart';
 import 'package:catalogue/screens/login/phone_number_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 
 class AdminHome extends StatefulWidget {
   const AdminHome({super.key});
@@ -16,7 +18,7 @@ class AdminHome extends StatefulWidget {
 class _AdminOrderStatusState extends State<AdminHome> {
   List<Widget> _pages = [
     AdminHomeOrders(),
-    AddPhotos(data: {}),
+   AdminHomeMenu(),
     PhoneNumberScreen(isCustomer: true)
   ];
   int _selectedPageIndex = 0;
@@ -27,6 +29,7 @@ class _AdminOrderStatusState extends State<AdminHome> {
   }
 
   bool _switchState = false;
+  bool status = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,21 +51,7 @@ class _AdminOrderStatusState extends State<AdminHome> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    //  FlutterSwitch(
-                    //   width: 125.0,
-                    //   height: 55.0,
-                    //   valueFontSize: 25.0,
-                    //   toggleSize: 45.0,
-                    //   value: status,
-                    //   borderRadius: 30.0,
-                    //   padding: 8.0,
-                    //   showOnOff: true,
-                    //   onToggle: (val) {
-                    //     setState(() {
-                    //       status = val;
-                    //     });
-                    //   },
-                    // ),
+                    
                     CupertinoSwitch(
                       activeColor: Colors.green,
                       value: _switchState,
@@ -101,9 +90,7 @@ class _AdminOrderStatusState extends State<AdminHome> {
                   ],
                 ),
               ),
-
-            
-              AdminHomeOrders()
+              _pages[_selectedPageIndex]
             ],
           ),
         ),

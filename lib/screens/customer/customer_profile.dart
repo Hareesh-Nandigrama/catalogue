@@ -10,7 +10,18 @@ class CustomerProfile extends StatefulWidget {
   State<CustomerProfile> createState() => _CustomerProfileState();
 }
 
-class _CustomerProfileState extends State<CustomerProfile> {
+class _CustomerProfileState extends State<CustomerProfile> with TickerProviderStateMixin {
+  late TabController tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(
+      initialIndex: 0,
+      length: 2,
+      vsync: this,
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +45,32 @@ class _CustomerProfileState extends State<CustomerProfile> {
               )),
         ],
       ),
-      body: Column(),
+      body: Column(
+        children: [
+          TabBar(
+            indicatorColor: Colors.black,
+            controller: tabController,
+            tabs: const <Widget>[
+              Tab(
+                  child: Text(
+                    'Awaiting Payment',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500),
+                  )),
+              Tab(
+                  child: Text(
+                    'Pending Pick-up',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500),
+                  )),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

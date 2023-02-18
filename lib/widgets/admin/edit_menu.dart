@@ -96,7 +96,7 @@ class _EditMenuState extends State<EditMenu> {
                 return Row(
                   children: [
                     SizedBox(
-                      width: MediaQuery.of(context).size.width - 132,
+                      width: MediaQuery.of(context).size.width - 138,
                       height: 45,
                       child: TextFormField(
                         cursorColor: Colors.black,

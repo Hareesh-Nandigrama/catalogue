@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../models/menu.dart';
 import '../../screens/customer/cart_store.dart';
 
 class CustomerMenuCard extends StatefulWidget {
-  final Menu data;
+  final dynamic data;
   const CustomerMenuCard({Key? key, required this.data}) : super(key: key);
 
   @override
@@ -12,7 +11,7 @@ class CustomerMenuCard extends StatefulWidget {
 }
 
 class _CustomerMenuCardState extends State<CustomerMenuCard> {
-  int noOfItem=0;
+  int noOfItem = 0;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,7 +28,9 @@ class _CustomerMenuCardState extends State<CustomerMenuCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, ),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -37,33 +38,38 @@ class _CustomerMenuCardState extends State<CustomerMenuCard> {
                     children: [
                       Image.asset('assets/Veg.png', height: 18),
                       Text(
-                        '   '+widget.data.name,
-                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                        '   ' + widget.data['name'],
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500, fontSize: 18),
                       ),
                     ],
                   ),
                   Row(
-
                     children: [
-
-                      const SizedBox(width: 8,),
+                      const SizedBox(
+                        width: 8,
+                      ),
                       GestureDetector(
-                        child: const Icon(Icons.minimize_rounded,color: Colors.black,size: 18),
+                        child: const Icon(Icons.minimize_rounded,
+                            color: Colors.black, size: 18),
                         onTap: () {
                           setState(() {
-                            noOfItem>0?noOfItem--:0;
+                            noOfItem > 0 ? noOfItem-- : 0;
                           });
                           CartStore.deleteItem(widget.data);
                         },
                       ),
                       Padding(
-                        padding:  const EdgeInsets.only(top: 9),
-                        child: Text('  $noOfItem   ',style: const TextStyle(fontSize: 18),),
+                        padding: const EdgeInsets.only(top: 9),
+                        child: Text(
+                          '  $noOfItem   ',
+                          style: const TextStyle(fontSize: 18),
+                        ),
                       ),
                       GestureDetector(
                         child: const Padding(
-                          padding:  EdgeInsets.only(top: 9),
-                          child: Icon(Icons.add,color: Colors.black,size: 18),
+                          padding: EdgeInsets.only(top: 9),
+                          child: Icon(Icons.add, color: Colors.black, size: 18),
                         ),
                         onTap: () {
                           setState(() {
@@ -95,19 +101,19 @@ class _CustomerMenuCardState extends State<CustomerMenuCard> {
                         size: 14,
                       ),
                       Text(
-                        widget.data.price.toString(),
+                        widget.data['price'].toString(),
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                   Row(
-                    children:  [
+                    children: [
                       Icon(
                         Icons.timelapse,
                         size: 14,
                       ),
                       Text(
-                        '  '+widget.data.startTime.toString() + ' - '+widget.data.endTime.toString(),
+                        '${widget.data['startTime']} - ${widget.data['endTime']}',
                         style: TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 14),
                       ),
@@ -118,7 +124,7 @@ class _CustomerMenuCardState extends State<CustomerMenuCard> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-              child: Text(widget.data.description),
+              child: Text(widget.data['description']),
             ),
           ],
         ),

@@ -1,5 +1,6 @@
 import 'package:catalogue/screens/customer/cart_store.dart';
 import 'package:flutter/material.dart';
+
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
 
@@ -16,7 +17,7 @@ class _CartPageState extends State<CartPage> {
         elevation: 0,
         leadingWidth: 0,
         leading: IconButton(
-          onPressed: (){
+          onPressed: () {
             Navigator.of(context).pop();
           },
           icon: const Icon(Icons.arrow_back),
@@ -32,31 +33,41 @@ class _CartPageState extends State<CartPage> {
                 const SizedBox(
                   height: 30,
                 ),
-                for(var key in CartStore.detail.keys)
+                for (var key in CartStore.detail.keys)
                   SizedBox(
                     width: 350,
                     child: Card(
-
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children:  [
+                        children: [
                           SizedBox(
                             height: 45,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children:  [
+                              children: [
                                 SizedBox(
                                   width: 15,
                                   height: 15,
-                                  child: CartStore.detail[key]!.category == 'Veg'?Image.asset('assets/Veg.png'):Image.asset('assets/NonVeg.png'),
+                                  child:
+                                      CartStore.detail[key]!.category == 'Veg'
+                                          ? Image.asset('assets/Veg.png')
+                                          : Image.asset('assets/NonVeg.png'),
                                 ),
                                 SizedBox(
                                   width: 200,
-                                  child: Text(CartStore.detail[key]!.name, style: TextStyle(fontFamily: 'UberMove'),),
+                                  child: Text(
+                                    CartStore.detail[key]!.name,
+                                    style: TextStyle(fontFamily: 'UberMove'),
+                                  ),
                                 ),
                                 SizedBox(
                                   width: 50,
-                                  child: Center(child: Text('Qty.'+CartStore.cartItems[key].toString(), style: TextStyle(fontFamily: 'UberMove'),)),
+                                  child: Center(
+                                      child: Text(
+                                    'Qty.' +
+                                        CartStore.cartItems[key].toString(),
+                                    style: TextStyle(fontFamily: 'UberMove'),
+                                  )),
                                 ),
                               ],
                             ),
@@ -72,45 +83,52 @@ class _CartPageState extends State<CartPage> {
                                 ),
                                 SizedBox(
                                   width: 200,
-                                  child: Text('Price: '+CartStore.detail[key]!.price.toString(), style: TextStyle(fontFamily: 'UberMove'),),
+                                  child: Text(
+                                    'Price: ' +
+                                        CartStore.detail[key]!.price.toString(),
+                                    style: TextStyle(fontFamily: 'UberMove'),
+                                  ),
                                 ),
                                 SizedBox(
                                   width: 50,
-                                  child: Center(child: Text('Total'+(CartStore.detail[key]!.price*CartStore.cartItems[key]!).toString(), style: TextStyle(fontFamily: 'UberMove'),)),
+                                  child: Center(
+                                      child: Text(
+                                    'Total' +
+                                        (CartStore.detail[key]!.price *
+                                                CartStore.cartItems[key]!)
+                                            .toString(),
+                                    style: TextStyle(fontFamily: 'UberMove'),
+                                  )),
                                 ),
                               ],
                             ),
                           ),
-
                         ],
                       ),
                     ),
                   )
-
               ],
             ),
-
           ),
           Center(
             child: SizedBox(
               width: 320,
               child: FloatingActionButton(
-                onPressed: (){
+                onPressed: () {
                   Navigator.of(context).pop();
                 },
                 shape: const BeveledRectangleBorder(
-                    borderRadius: BorderRadius.zero
+                    borderRadius: BorderRadius.zero),
+                backgroundColor: Colors.black,
+                child: const Text(
+                  'Place here!',
+                  style: TextStyle(color: Colors.white),
                 ),
-                backgroundColor: Colors.black, child: const Text('Place here!', style: TextStyle(color: Colors.white),),
               ),
             ),
           )
         ],
       ),
-
-
     );
   }
 }
-
-

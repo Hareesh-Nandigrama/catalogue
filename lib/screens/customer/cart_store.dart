@@ -2,6 +2,13 @@ import 'package:catalogue/models/menu.dart';
 
 import '../../models/items.dart';
 
+class FIlterStore{
+  static List<dynamic> filteredList = [];
+  static void clear()
+  {
+   filteredList = [];
+  }
+}
 class CartStore {
   static Map<String, int> cartItems = {};
   static Map<String, Menu> detail = {};
@@ -53,7 +60,6 @@ class CartStore {
     }
   }
 
-
-
-
 }
+
+

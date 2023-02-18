@@ -1,3 +1,4 @@
+import 'package:catalogue/screens/customer/cart_store.dart';
 import 'package:catalogue/screens/customer/customer_profile.dart';
 import 'package:catalogue/widgets/customer/customer_card.dart';
 import 'package:catalogue/widgets/customer/search_bar.dart';
@@ -46,13 +47,10 @@ class _ShopItemsState extends State<ShopItems> {
                       print(ac.contains(val));
                       return ac.contains(contain.toLowerCase());
                     }).toList();
+                    FIlterStore.filteredList = filteredList;
                     print(filteredList);
 
                     print(val);
-                    // filteredList = renderList.where((element) {
-                    //   String string = body['businessName'];
-                    //   return string.contains(val);
-                    // })
                   });
                 }),
               ),
@@ -81,10 +79,10 @@ class _ShopItemsState extends State<ShopItems> {
         ),
         Expanded(
           child: ListView.builder(
-              itemCount: filteredList.length,
+              itemCount: FIlterStore.filteredList.length,
               itemBuilder: (context, index) {
                 return CustomerCard(
-                  body: filteredList[index],
+                  body: FIlterStore.filteredList[index],
                 );
               }),
         )

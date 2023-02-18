@@ -1,4 +1,6 @@
+import 'package:catalogue/apis/seller.dart';
 import 'package:catalogue/widgets/admin/edit_menu.dart';
+import 'package:catalogue/widgets/common/custom_progress.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
 import '../../screens/customer/customer_profile.dart';
@@ -36,10 +38,23 @@ class MenuPage extends StatelessWidget {
             height: 25,
           ),
           Expanded(
-            child: ListView.builder(
-              itemBuilder: (context, index) => const MenuCard(),
-              itemCount: 10,
-            ),
+            child: FutureBuilder<dynamic>(
+                future: getMenu(),
+                builder: (context, snapshot) {
+                  if (snapshot.data == ConnectionState.waiting) {
+                    return Text('adssd');
+                  } else if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemBuilder: (context, index) => MenuCard(
+                        data: snapshot.data[index],
+                      ),
+                      itemCount: snapshot.data!.length,
+                    );
+                  } else {
+                    return CustomProgress();
+                    // return CustomProgress();
+                  }
+                }),
           ),
 
           // EditMenu(),
@@ -52,8 +67,6 @@ class MenuPage extends StatelessWidget {
                       insetPadding: EdgeInsets.all(10),
                       child: EditMenu()),
                 );
-
-                
               },
               icon: const CircleAvatar(
                 backgroundColor: Colors.black,
@@ -134,4 +147,3 @@ class NoMenu extends StatelessWidget {
     );
   }
 }
-

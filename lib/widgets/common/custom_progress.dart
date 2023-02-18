@@ -6,7 +6,7 @@ class CustomProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromRGBO(0, 0, 0, 0.8),
+      color: Color.fromRGBO(0, 0, 0, 0.1),
       child: Center(
         child: SizedBox(
           width: 100,

@@ -26,9 +26,7 @@ class _EditMenuState extends State<EditMenu> {
   bool _isDisabled = true;
 
   void check() {
-    print('in check function');
-    print(dishName.isEmpty);
-    print(priceofDish.isEmpty);
+
 
     if (dishName.isEmpty ||
         priceofDish.isEmpty ||
@@ -326,10 +324,11 @@ class _EditMenuState extends State<EditMenu> {
 
                   final prefs = await SharedPreferences.getInstance();
                   final id = prefs.getString('_id') ?? '';
+             
                   await createMenu(dishName, priceofDish, food_type, id, ' ',
-                      descriptionofDish);
+                      descriptionofDish,availableFrom,availableUntill);
 
-                 
+                  Navigator.of(context).pop();
                 },
                 child: CustomButton(
                     isDisabled: _isDisabled, buttonname: 'Save Changes'),

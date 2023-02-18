@@ -22,7 +22,6 @@ class AdminSplash extends StatefulWidget {
 class _AdminHomeState extends State<AdminSplash> {
   bool _switchState = false;
   bool _isLoading = false;
-
   @override
   Widget build(BuildContext context) {
     return LoginTemplate(
@@ -38,7 +37,8 @@ class _AdminHomeState extends State<AdminSplash> {
                   height: 70,
                 ),
                 AdminCard(
-                  data: widget.data
+                  data: widget.data,
+                  
                 ),
                 const Spacer(),
                 Row(

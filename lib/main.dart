@@ -42,21 +42,23 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.grey,
         fontFamily: 'UberMove',
       ),
-      home: FutureBuilder<String>(
-          future: getVerifiedData(),
-          builder: (context, snapshot) {
-            return snapshot.hasData
-                ? snapshot.data == 'first'
-                    ? const FirstScreen()
-                    : (snapshot.data == 'customer'
-                        ? const CustomerHome()
-                        : const AdminHome())
-                : Scaffold(
-                    body: Center(
-                      child: Text('Some Error Occured'),
-                    ),
-                  );
-          }),
+      // home: CustomerHome(),
+      home: AdminHome(),
+      // home: FutureBuilder<String>(
+      //     future: getVerifiedData(),
+      //     builder: (context, snapshot) {
+      //       return snapshot.hasData
+      //           ? snapshot.data == 'first'
+      //               ? const FirstScreen()
+      //               : (snapshot.data == 'customer'
+      //                   ? const CustomerHome()
+      //                   : const AdminHome())
+      //           : Scaffold(
+      //               body: Center(
+      //                 child: Text('Some Error Occured'),
+      //               ),
+      //             );
+      //     }),
     );
   }
 }

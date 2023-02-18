@@ -114,8 +114,8 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
       ),
       body: _selectedPageIndex == 0 ?Column(
         children: [
-              FutureBuilder<List<Menu>>(
-                  future: getMenu(widget.data['_id']),
+              FutureBuilder<dynamic>(
+                  future: getMenu(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState != ConnectionState.done) {
                       return Expanded(

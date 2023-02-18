@@ -1,8 +1,10 @@
+import 'package:catalogue/apis/seller.dart';
 import 'package:catalogue/screens/admin/admin_home_orders.dart';
 import 'package:catalogue/screens/admin/admin_insights.dart';
 import 'package:catalogue/screens/admin/shop_profile.dart';
 import 'package:catalogue/widgets/admin/menu_page.dart';
 import 'package:catalogue/widgets/admin/status_switch.dart';
+import 'package:catalogue/widgets/common/custom_progress.dart';
 import 'package:flutter/material.dart';
 
 class AdminHome extends StatefulWidget {
@@ -25,7 +27,6 @@ class _AdminOrderStatusState extends State<AdminHome> {
     });
   }
 
-
   bool status = false;
   @override
   Widget build(BuildContext context) {
@@ -33,59 +34,73 @@ class _AdminOrderStatusState extends State<AdminHome> {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                        color: Color.fromRGBO(226, 226, 226, 1), width: 1),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    StatusSwitch(),
-                    Row(
-                      children: [
-                        const Text(
-                          'Roasted Pot',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w800, fontSize: 18),
-                        ),
-                        const SizedBox(
-                          width: 14,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => ShopKeeperDetails()));
-                          },
-                          child: CircleAvatar(
-                            radius: 20,
-                            backgroundColor: Colors.black,
-                            child: CircleAvatar(
-                              radius: 18,
-                              backgroundColor: Colors.white,
-                              child: Image.asset(
-                                'assets/profile.png',
-                                height: 18,
-                                width: 18,
-                              ),
-                            ),
-                            // backgroundImage: AssetImage('assets/profile.png'),
+          child: FutureBuilder(
+              future: getCurrentShopDetails(),
+              builder: (context, snapshot) {
+                print(snapshot.data);
+                if (snapshot.hasData) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 16),
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                                color: Color.fromRGBO(226, 226, 226, 1),
+                                width: 1),
                           ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              _pages[_selectedPageIndex]
-            ],
-          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            StatusSwitch(),
+                            Row(
+                              children: [
+                                const Text(
+                                  'Roasted Pot',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 18),
+                                ),
+                                const SizedBox(
+                                  width: 14,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ShopKeeperDetails()));
+                                  },
+                                  child: CircleAvatar(
+                                    radius: 20,
+                                    backgroundColor: Colors.black,
+                                    child: CircleAvatar(
+                                      radius: 18,
+                                      backgroundColor: Colors.white,
+                                      child: Image.asset(
+                                        'assets/profile.png',
+                                        height: 18,
+                                        width: 18,
+                                      ),
+                                    ),
+                                    // backgroundImage: AssetImage('assets/profile.png'),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      _pages[_selectedPageIndex]
+                    ],
+                  );
+                } else {
+                  return CustomProgress();
+                }
+              }),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(

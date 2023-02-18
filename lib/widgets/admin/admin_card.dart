@@ -1,8 +1,27 @@
 import 'package:catalogue/widgets/admin/edit_button.dart';
 import 'package:flutter/material.dart';
-class AdminCard extends StatelessWidget {
-  const AdminCard({super.key});
+import 'package:shared_preferences/shared_preferences.dart';
+class AdminCard extends StatefulWidget {
+  final data;
+  const AdminCard({super.key, this.data});
 
+  @override
+  State<AdminCard> createState() => _AdminCardState();
+}
+
+class _AdminCardState extends State<AdminCard> {
+  String phone = '';
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    function();
+  }
+
+  function() async {
+    final prefs = await SharedPreferences.getInstance();
+     phone = prefs.getString('phone') ?? '';
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,8 +62,8 @@ class AdminCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Hello, Roasted Pot',
+                 Text(
+                  'Hello, ${widget.data['businessName']}',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.w400,
@@ -62,7 +81,7 @@ class AdminCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         RichText(
-                          text: const TextSpan(children: [
+                          text: TextSpan(children: [
                             TextSpan(
                               text: 'Location:',
                               style: TextStyle(
@@ -70,14 +89,14 @@ class AdminCard extends StatelessWidget {
                                   height: 1.6),
                             ),
                             TextSpan(
-                              text: '     Khokha',
+                              text: '     ${widget.data['location']}',
                               style: TextStyle(
                                   color: Colors.black, height: 1.6),
                             ),
                           ]),
                         ),
                         RichText(
-                          text: const TextSpan(children: [
+                          text: TextSpan(children: [
                             TextSpan(
                               text: 'MoneyMaker:',
                               style: TextStyle(
@@ -85,22 +104,22 @@ class AdminCard extends StatelessWidget {
                                   height: 1.6),
                             ),
                             TextSpan(
-                              text: '   Chinmay',
+                              text: '   ${widget.data['username']}',
                               style: TextStyle(
                                   color: Colors.black, height: 1.6),
                             ),
                           ]),
                         ),
                         RichText(
-                          text: const TextSpan(children: [
+                          text:  TextSpan(children: [
                             TextSpan(
-                              text: 'Contact No.:',
+                              text: 'Contact No:'+phone,
                               style: TextStyle(
                                   color: Color.fromRGBO(84, 84, 84, 1),
                                   height: 1.6),
                             ),
                             TextSpan(
-                              text: '  89383839893',
+                              text: '  ',
                               style: TextStyle(
                                   color: Colors.black, height: 1.6),
                             ),
@@ -108,7 +127,7 @@ class AdminCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const EditButton(),
+                    //const EditButton(),
                   ],
                 ),
               ],

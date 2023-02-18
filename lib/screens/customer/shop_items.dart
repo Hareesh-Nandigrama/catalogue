@@ -17,6 +17,8 @@ class _ShopItemsState extends State<ShopItems> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print('rebiulf');
+    FIlterStore.filteredList = widget.data;
   }
 
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:catalogue/controllers/otp_auth.dart';
 import 'package:catalogue/screens/customer/cart_store.dart';
 import 'package:catalogue/widgets/customer/cust_menu_card.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +104,7 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
                                       return Column(
                                         children: [
                                           CustomerMenuCard(
-                                            data: allShops[0],
+                                            data: allShops[index],
                                           ),
                                           // Text(allShops[0].name),
                                           // ElevatedButton(onPressed: (){
@@ -131,6 +132,11 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
                         itemCount: CartStore.cartItems.keys.length,
                         itemBuilder: (context, index) {
                           var list = CartStore.cartItems.keys.toList();
+                          final total = (int.parse(CartStore
+                                  .detail[list[index]]!['price']
+                                  .toString()) *
+                              CartStore.cartItems[list[index]]!);
+
                           return SizedBox(
                               width: 350,
                               child: Card(
@@ -196,14 +202,10 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
                                                 fontFamily: 'UberMove'),
                                           ),
                                         ),
-                                        SizedBox(
-                                          width: 50,
-                                          child: Center(
-                                              child: Text(
-                                            'Total ${int.parse(CartStore.detail[list[index]]!['price']) * CartStore.cartItems[list[index]]!}',
-                                            style: TextStyle(
-                                                fontFamily: 'UberMove'),
-                                          )),
+                                        Text(
+                                          'Total: $total',
+                                          style:
+                                              TextStyle(fontFamily: 'UberMove'),
                                         ),
                                       ],
                                     ),
@@ -237,6 +239,9 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
                           },
                         ),
                       );
+
+                      Navigator.of(context).pop();
+                      showSnackBar('Order Succesfully placed');
                       print(resp.body);
                     },
                     child: Container(

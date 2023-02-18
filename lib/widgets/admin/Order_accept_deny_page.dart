@@ -21,7 +21,7 @@ class _OrderCardAcceptorDenyState extends State<OrderCardAcceptorDeny> {
       }
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 17, vertical: 8),
-      height: 266,
+      //height: 266,
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
@@ -170,7 +170,7 @@ class _OrderCardAcceptorDenyState extends State<OrderCardAcceptorDeny> {
               color: Colors.grey,
             ),
           ),
-          Row(
+          widget.data['status'] == 'pending'?Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               GestureDetector(
@@ -187,6 +187,7 @@ class _OrderCardAcceptorDenyState extends State<OrderCardAcceptorDeny> {
                       accepted: true, buttonname: 'Accept')),
             ],
           )
+              : Text('Awaiting Payment')
         ],
       ),
     );

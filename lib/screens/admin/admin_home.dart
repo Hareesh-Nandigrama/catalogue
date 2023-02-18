@@ -37,6 +37,7 @@ class _AdminOrderStatusState extends State<AdminHome> {
           child: FutureBuilder(
               future: getCurrentShopDetails(),
               builder: (context, snapshot) {
+                print('admin home here');
                 print(snapshot.data);
                 if (snapshot.hasData) {
                   return Column(
@@ -163,28 +164,26 @@ class NoAvailable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          const Spacer(),
-          Image.asset(
-            'assets/baker.png',
-            height: 136,
-            width: 136,
-          ),
-          const Text(
-            'No Ongoing Orders',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-          ),
-          const Text(
-            'Hold Still a Customer will soon order from your\n restaurant!',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 14, color: Color.fromRGBO(117, 117, 117, 1)),
-          ),
-          const Spacer()
-        ],
-      ),
+    return Column(
+      children: [
+        const Spacer(),
+        Image.asset(
+          'assets/baker.png',
+          height: 136,
+          width: 136,
+        ),
+        const Text(
+          'No Ongoing Orders',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+        ),
+        const Text(
+          'Hold Still a Customer will soon order from your\n restaurant!',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 14, color: Color.fromRGBO(117, 117, 117, 1)),
+        ),
+        const Spacer()
+      ],
     );
   }
 }

@@ -6,7 +6,7 @@ class OrderReadyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 17),
+      margin: const EdgeInsets.symmetric(horizontal: 17,vertical: 8),
       height: 266,
       width: double.infinity,
       decoration: BoxDecoration(

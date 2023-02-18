@@ -8,7 +8,7 @@ class BusinessDescriptionScreen extends StatefulWidget {
   const BusinessDescriptionScreen({Key? key, required this.data}) : super(key: key);
 
   @override
-  State<BusinessDescriptionScreen> createState() => _BusinessNameDescriptionState();
+  State<BusinessDescriptionScreen> createState() => _BusinessDescriptionScreenState();
 }
 
 class _BusinessDescriptionScreenState extends State<BusinessDescriptionScreen> {

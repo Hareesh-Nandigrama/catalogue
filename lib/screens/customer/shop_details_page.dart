@@ -160,19 +160,91 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
                     return const CircularProgressIndicator();
                   })
                   ],
-      ):ListView.builder(
-        itemCount: CartStore.cartItems.length,
-          itemBuilder: (context, index){
-            List<String> newList = CartStore.cartItems.keys.toList();
-        return Container(
-          child: Column(
-            children: [
-              Text(CartStore.detail[newList[index]]!.name),
-              Text(CartStore.cartItems[newList[index]].toString()),
-            ],
+      ):Column(
+        children: [
+          SizedBox(
+            height: 600,
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 30,
+                ),
+                for(var key in CartStore.detail.keys)
+                  SizedBox(
+                    width: 350,
+                    child: Card(
+
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children:  [
+                          SizedBox(
+                            height: 45,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children:  [
+                                SizedBox(
+                                  width: 15,
+                                  height: 15,
+                                  child: CartStore.detail[key]!.category == 'Veg'?Image.asset('assets/Veg.png'):Image.asset('assets/NonVeg.png'),
+                                ),
+                                SizedBox(
+                                  width: 200,
+                                  child: Text(CartStore.detail[key]!.name, style: TextStyle(fontFamily: 'UberMove'),),
+                                ),
+                                SizedBox(
+                                  width: 50,
+                                  child: Center(child: Text('Qty.'+CartStore.cartItems[key].toString(), style: TextStyle(fontFamily: 'UberMove'),)),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 45,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                SizedBox(
+                                  width: 15,
+                                  height: 15,
+                                ),
+                                SizedBox(
+                                  width: 200,
+                                  child: Text('Price: '+CartStore.detail[key]!.price.toString(), style: TextStyle(fontFamily: 'UberMove'),),
+                                ),
+                                SizedBox(
+                                  width: 50,
+                                  child: Center(child: Text('Total'+(CartStore.detail[key]!.price*CartStore.cartItems[key]!).toString(), style: TextStyle(fontFamily: 'UberMove'),)),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                        ],
+                      ),
+                    ),
+                  )
+
+              ],
+            ),
+
           ),
-        );
-      }),
+          Center(
+            child: SizedBox(
+              width: 320,
+              child: FloatingActionButton(
+                onPressed: (){
+                  Navigator.of(context).pop();
+                },
+                shape: const BeveledRectangleBorder(
+                    borderRadius: BorderRadius.zero
+                ),
+                backgroundColor: Colors.black, child: const Text('Place here!', style: TextStyle(color: Colors.white),),
+              ),
+            ),
+          )
+        ],
+      ),
+        
       floatingActionButton: ElevatedButton(onPressed: (){
         var options = {
           'key': 'rzp_test_lH1Cp1gS0WSphU',

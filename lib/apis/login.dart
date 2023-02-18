@@ -39,7 +39,6 @@ Future<void> createShopkeeper(
   final res_body = jsonDecode(response.body);
 
   prefs.setString('_id', res_body['shopkeeper']['_id']);
-
 }
 
 Future<void> createCustomer(String phoneNumber, String name, String uid) async {
@@ -55,8 +54,9 @@ Future<void> createCustomer(String phoneNumber, String name, String uid) async {
     headers: {'content-type': 'application/json'},
   );
 
+  final res_body = jsonDecode(response.body);
   final prefs = await SharedPreferences.getInstance();
+  prefs.setString('_id', res_body['customerData']['_id']);
+  ;
   await prefs.setString('access_token', uid);
-
-
 }

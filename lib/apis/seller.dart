@@ -18,8 +18,6 @@ Future<void> getShopkeeper() async {
         'content-type': 'application/json',
         "Authorization": "Token $access_token"
       });
-
-
 }
 
 Future<List<dynamic>> getShops() async {
@@ -32,7 +30,6 @@ Future<List<dynamic>> getShops() async {
   List<dynamic> answer = [];
   print('here 2');
   for (var json in body as List<dynamic>) {
-
     answer.add(json);
   }
 
@@ -56,8 +53,6 @@ Future<dynamic> getMenu(String? shopkeeperId1) async {
   });
 
   final body = jsonDecode(response.body);
-  List<Menu> answer = [];
-
 
   return body;
 }
@@ -78,7 +73,6 @@ Future<Map<String, dynamic>> createMenu(
 
   final _type = type.toLowerCase();
 
-
   final response = await http.post(Uri.parse('${baseUrl}api/item'),
       headers: {
         'content-type': 'application/json',
@@ -96,7 +90,6 @@ Future<Map<String, dynamic>> createMenu(
       }));
 
   final body = jsonDecode(response.body);
-
 
   showSnackBar('Menu Item added');
 
@@ -126,7 +119,6 @@ Future<Map<String, dynamic>> editMenu(
         "Authorization": "Token $access_token"
       },
       body: jsonEncode({
-
         "price": price,
         "name": name,
         "type": _type,
@@ -144,8 +136,7 @@ Future<Map<String, dynamic>> editMenu(
   return body;
 }
 
-deleteItem(String id)
-async {
+deleteItem(String id) async {
   final prefs = await SharedPreferences.getInstance();
 
   final access_token = prefs.getString('access_token') ?? '';

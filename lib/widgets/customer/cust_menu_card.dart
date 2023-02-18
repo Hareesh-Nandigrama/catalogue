@@ -14,6 +14,7 @@ class _CustomerMenuCardState extends State<CustomerMenuCard> {
   int noOfItem = 0;
   @override
   Widget build(BuildContext context) {
+   
     return SafeArea(
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -36,7 +37,7 @@ class _CustomerMenuCardState extends State<CustomerMenuCard> {
                 children: [
                   Row(
                     children: [
-                      Image.asset('assets/Veg.png', height: 18),
+                     widget.data['type']=='veg'?  Image.asset('assets/Veg.png', height: 18): Image.asset('assets/non_veg.png', height: 18) ,
                       Text(
                         '   ' + widget.data['name'],
                         style: TextStyle(

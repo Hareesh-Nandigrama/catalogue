@@ -1,4 +1,3 @@
-import 'package:catalogue/models/menu.dart';
 
 import '../../models/items.dart';
 
@@ -11,7 +10,7 @@ class FIlterStore{
 }
 class CartStore {
   static Map<String, int> cartItems = {};
-  static Map<String, Menu> detail = {};
+  static Map<String, dynamic> detail = {};
 
   static void clear(){
     cartItems = {};
@@ -28,29 +27,29 @@ class CartStore {
     return answer;
   }
 
-  static void addItem(Menu x){
-    if(detail.containsKey(x.id))
+  static void addItem(var x){
+    if(detail.containsKey(x['_id']))
       {
         print('there');
-        cartItems[x.id] = (cartItems[x.id]!+ 1);
+        cartItems[x['_id']] = (cartItems[x['_id']]!+ 1);
       }
     else
       {
         print('notthere');
-        cartItems[x.id] = 1;
-        detail[x.id] = x;
+        cartItems[x['_id']] = 1;
+        detail[x['_id']] = x;
       }
   }
 
-  static void deleteItem(Menu x){
-    if(detail.containsKey(x.id))
+  static void deleteItem(var x){
+    if(detail.containsKey(x['_id']))
     {
       print('there');
-      cartItems[x.id] = (cartItems[x.id]!- 1);
-      if(cartItems[x.id] == 0)
+      cartItems[x['_id']] = (cartItems[x['_id']]!- 1);
+      if(cartItems[x['_id']] == 0)
         {
-          cartItems.remove(x.id);
-          detail.remove(x.id);
+          cartItems.remove(x['_id']);
+          detail.remove(x['_id']);
         }
     }
     else

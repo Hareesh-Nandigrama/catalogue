@@ -1,13 +1,11 @@
-import 'package:catalogue/apis/orders.dart';
-import 'package:catalogue/models/menu.dart';
+import 'dart:convert';
 import 'package:catalogue/screens/customer/cart_store.dart';
 import 'package:catalogue/widgets/customer/cust_menu_card.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../apis/seller.dart';
 import '../../widgets/common/shimmer.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:http/http.dart' as http;
 
 class ShopDetailsPage extends StatefulWidget {
   final data;
@@ -20,10 +18,10 @@ class ShopDetailsPage extends StatefulWidget {
 class _ShopDetailsPageState extends State<ShopDetailsPage> {
   var _razorpay = Razorpay();
 
-  int _selectedPageIndex = 0;
+  int _selectedPageindex = 0;
   void _selectPage(int index) {
     setState(() {
-      _selectedPageIndex = index;
+      _selectedPageindex = index;
     });
   }
 
@@ -58,13 +56,211 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('printing HELOO');
-    print(widget.data);
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(
+                Icons.clear,
+                color: Colors.white,
+              ))
+        ],
+      ),
+      body: _selectedPageindex == 0
+          ? Column(
+              children: [
+                FutureBuilder<dynamic>(
+                    future: getMenu(widget.data['_id']),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState != ConnectionState.done) {
+                        return Expanded(
+                          child: ListView.builder(
+                              itemCount: 10,
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  height: 100,
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8),
+                                  child: ShowShimmer(
+                                    height: 100,
+                                    width: MediaQuery.of(context).size.width,
+                                  ),
+                                );
+                              }),
+                        );
+                      } else if (snapshot.hasData) {
+                        List<dynamic> allShops = snapshot.data!;
+
+                        return Expanded(
+                            child: allShops.isNotEmpty
+                                ? ListView.builder(
+                                    itemCount: allShops.length,
+                                    itemBuilder: (context, index) {
+                                      return Column(
+                                        children: [
+                                          CustomerMenuCard(
+                                            data: allShops[0],
+                                          ),
+                                          // Text(allShops[0].name),
+                                          // ElevatedButton(onPressed: (){
+                                          //
+                                          // }, child: Text('add')),
+                                          // ElevatedButton(onPressed: (){
+                                          //   CartStore.deleteItem(allShops[0]);
+                                          // }, child: Text('delete'))
+                                        ],
+                                      );
+                                    })
+                                : const Center(
+                                    child: Text("No items on menu"),
+                                  ));
+                      }
+                      return const CircularProgressIndicator();
+                    })
+              ],
+            )
+          : Center(
+              child: Column(
+                children: [
+                  Flexible(
+                    child: ListView.builder(
+                        itemCount: CartStore.cartItems.keys.length,
+                        itemBuilder: (context, index) {
+                          var list = CartStore.cartItems.keys.toList();
+                          return SizedBox(
+                              width: 350,
+                              child: Card(
+                                  child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  SizedBox(
+                                    height: 45,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        SizedBox(
+                                          width: 15,
+                                          height: 15,
+                                          child: CartStore.detail[list[index]]![
+                                                      'category'] ==
+                                                  'veg'
+                                              ? Image.asset('assets/Veg.png')
+                                              : Image.asset(
+                                                  'assets/non_veg.png'),
+                                        ),
+                                        SizedBox(
+                                          width: 200,
+                                          child: Text(
+                                            CartStore
+                                                .detail[list[index]]!['name']
+                                                .toString(),
+                                            style: TextStyle(
+                                              fontFamily: 'UberMove',
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 50,
+                                          child: Center(
+                                              child: Text(
+                                            'Qty. ${CartStore.cartItems[list[index]]!.toString()}',
+                                            style: TextStyle(
+                                              fontFamily: 'UberMove',
+                                            ),
+                                          )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 45,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Icon(
+                                          Icons.currency_rupee_sharp,
+                                          color: Colors.amber,
+                                        ),
+                                        SizedBox(
+                                          width: 200,
+                                          child: Text(
+                                            'Price:  ${CartStore.detail[list[index]]!['price'].toString()}',
+                                            style: TextStyle(
+                                                fontFamily: 'UberMove'),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 50,
+                                          child: Center(
+                                              child: Text(
+                                            'Total ${int.parse(CartStore.detail[list[index]]!['price']) * CartStore.cartItems[list[index]]!}',
+                                            style: TextStyle(
+                                                fontFamily: 'UberMove'),
+                                          )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )));
+                        }),
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      const baseUrl = 'https://kamengkriti.onrender.com/';
+                      final list = [];
+
+                      for (var key in CartStore.cartItems.keys) {
+                        list.add({
+                          'item': CartStore.detail[key]['_id'],
+                          'qty': CartStore.cartItems[key]
+                        });
+                      }
+                      print(list);
+
+                      final resp = await http.post(
+                        Uri.parse('${baseUrl}api/order'),
+                        headers: {"content-type": 'application/json'},
+                        body: jsonEncode(
+                          {
+                            "customerId": "63f086c3b4c45b0dbc13bf21",
+                            "shopkeeperId": "63f0e60ce89e2b43008620af",
+                            "items": list,
+                            "description": 'none'
+                          },
+                        ),
+                      );
+                      print(resp.body);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8),
+                        ),
+                      ),
+                      height: 50,
+                      width: 200,
+                      child: Center(
+                          child: Text(
+                        'Place Order!',
+                        style: TextStyle(color: Colors.white),
+                      )),
+                    ),
+                  ),
+                ],
+              ),
+            ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
-        backgroundColor: Colors.white,
-        currentIndex: _selectedPageIndex,
+        currentIndex: _selectedPageindex,
         unselectedLabelStyle: const TextStyle(
           fontWeight: FontWeight.w500,
           color: Color.fromRGBO(84, 84, 84, 1),
@@ -100,211 +296,22 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
               label: 'Cart'),
         ],
       ),
-      appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              icon: const Icon(Icons.clear))
-        ],
-      ),
-      body: _selectedPageIndex == 0
-          ? Column(
-              children: [
-                FutureBuilder<dynamic>(
-                    future: getMenu(widget.data['_id']),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState != ConnectionState.done) {
-                        return Expanded(
-                          child: ListView.builder(
-                              itemCount: 10,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  height: 100,
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8),
-                                  child: ShowShimmer(
-                                    height: 100,
-                                    width: MediaQuery.of(context).size.width,
-                                  ),
-                                );
-                              }),
-                        );
-                      } else if (snapshot.hasData) {
-              
-                        List<dynamic> allShops = snapshot.data!;
-
-                        return Expanded(
-                            child: allShops.isNotEmpty
-                                ? ListView.builder(
-                                    itemCount: allShops.length,
-                                    itemBuilder: (context, index) {
-                        
-                                      return Column(
-                                        children: [
-                                          CustomerMenuCard(data: allShops[index],),
-                                          // Text(allShops[index].name),
-                                          // ElevatedButton(onPressed: (){
-                                          //
-                                          // }, child: Text('add')),
-                                          // ElevatedButton(onPressed: (){
-                                          //   CartStore.deleteItem(allShops[index]);
-                                          // }, child: Text('delete'))
-                                        ],
-                                      );
-                                    })
-                                : const Center(
-                                    child: Text("No items on menu"),
-                                  ));
-                      }
-                      return const CircularProgressIndicator();
-                    })
-              ],
-            )
-          : Column(
-              children: [
-                SizedBox(
-                  height: 600,
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      for (var key in CartStore.detail.keys)
-                        SizedBox(
-                          width: 350,
-                          child: Card(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                SizedBox(
-                                  height: 45,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      SizedBox(
-                                        width: 15,
-                                        height: 15,
-                                        child: CartStore
-                                                    .detail[key]!.category ==
-                                                'Veg'
-                                            ? Image.asset('assets/Veg.png')
-                                            : Image.asset('assets/NonVeg.png'),
-                                      ),
-                                      SizedBox(
-                                        width: 200,
-                                        child: Text(
-                                          CartStore.detail[key]!.name,
-                                          style:
-                                              TextStyle(fontFamily: 'UberMove'),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 50,
-                                        child: Center(
-                                            child: Text(
-                                          'Qty.' +
-                                              CartStore.cartItems[key]
-                                                  .toString(),
-                                          style:
-                                              TextStyle(fontFamily: 'UberMove'),
-                                        )),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 45,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      SizedBox(
-                                        width: 15,
-                                        height: 15,
-                                      ),
-                                      SizedBox(
-                                        width: 200,
-                                        child: Text(
-                                          'Price: ' +
-                                              CartStore.detail[key]!.price
-                                                  .toString(),
-                                          style:
-                                              TextStyle(fontFamily: 'UberMove'),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 50,
-                                        child: Center(
-                                            child: Text(
-                                          'Total' +
-                                              (CartStore.detail[key]!.price *
-                                                      CartStore.cartItems[key]!)
-                                                  .toString(),
-                                          style:
-                                              TextStyle(fontFamily: 'UberMove'),
-                                        )),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                    ],
-                  ),
-                ),
-                Center(
-                  child: SizedBox(
-                    width: 320,
-                    child: FloatingActionButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      shape: const BeveledRectangleBorder(
-                          borderRadius: BorderRadius.zero),
-                      backgroundColor: Colors.black,
-                      child: const Text(
-                        'Place here!',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-
-      floatingActionButton: ElevatedButton(
-        onPressed: () {
-          var options = {
-            'key': 'rzp_test_lH1Cp1gS0WSphU',
-            'amount': 10000,
-            'name': 'Acme Corp.',
-            'description': 'Fine T-Shirt',
-            'prefill': {'contact': '8888888888', 'email': 'test@razorpay.com'}
-          };
-          _razorpay.open(options);
-        },
-        child: Text('pay'),
-      ),
-      // floatingActionButton: _selectedPageIndex == 1? ElevatedButton(onPressed: ()async{
-      //   print('a');
-      //   final prefs =await SharedPreferences.getInstance();
-      //   print('b');
-      //
-      //   final uid = prefs.getString('uid') ?? '';
-      //   print('this is the uid');
-      //   print(uid);
-      //   print('c');
-      //
-      //   createNewOrder(uid, widget.data['_id'], CartStore.getOrder());
-      //   print('d');
-      //
-      // },
-      //     child: Text('hello')):Container(),
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.black,
+          child: Text(
+            'Pay',
+            style: TextStyle(color: Colors.white),
+          ),
+          onPressed: () {
+            var options = {
+              'key': 'rzp_test_lH1Cp1gS0WSphU',
+              'amount': 10000,
+              'name': 'Kameng Corp.',
+              'description': 'Fine T-Shirt',
+              'prefill': {'contact': '8888888888', 'email': 'test@razorpay.com'}
+            };
+            _razorpay.open(options);
+          }),
     );
   }
 }

@@ -2,6 +2,7 @@ const CustomerServices = require("../services/customer.services");
 const Joi = require("joi");
 const validatePayload = require("../utils/validator");
 const AppError = require("../utils/AppError");
+const Order = require("../models/order.model");
 
 const CreateNewCustomer = async (req, res, next) => {
     const payloadSchema = {
@@ -71,6 +72,17 @@ const GetMyCompletedOrders = async (req, res, next) => {
     });
 };
 
+const AcceptOrder = async (req, res, next) => {
+    // console.log(req.user._id);
+    const { orderId } = req.params;
+    const accepted = await Order.findByIdAndUpdate(orderId, { status: "accepted" }, { new: true });
+
+    return res.json({
+        accepted: true,
+        order: accepted,
+    });
+};
+
 module.exports = {
     CreateNewCustomer,
     GetMyOrders,
@@ -78,4 +90,5 @@ module.exports = {
     GetMyAcceptedOrders,
     GetMyUnpaidOrders,
     GetMyCompletedOrders,
+    AcceptOrder,
 };

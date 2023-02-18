@@ -16,5 +16,5 @@ router.get(
     isAuthenticated,
     catchAsync(CustomerController.GetMyCompletedOrders)
 );
-
+router.post("/accept/:orderId", isAuthenticated, catchAsync(CustomerController.AcceptOrder));
 module.exports = router;

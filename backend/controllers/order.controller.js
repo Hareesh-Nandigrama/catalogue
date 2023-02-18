@@ -37,6 +37,12 @@ const GetAllOrders = async (req, res, next) => {
     return res.json({ orders: pendingOrders });
 };
 
+const GetDeliveredOrders = async (req, res, next) => {
+    const pendingOrders = await OrderServices.GetDeliveredOrders(req.user._id);
+    if (!pendingOrders) return res.json({ all: false });
+    return res.json({ orders: pendingOrders });
+};
+
 const CreateNewOrder = async (req, res, next) => {
     const itemSchema = {
         item: Joi.string().required(),
@@ -131,4 +137,5 @@ module.exports = {
     GetOrderDetails,
     PaidOrder,
     DeliverOrder,
+    GetDeliveredOrders,
 };

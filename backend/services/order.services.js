@@ -14,7 +14,7 @@ const GetPendingOrders = async (shopkeeperId) => {
     })
         .populate("items.item", ["name", "price", "type"])
         .select("-__v -shopkeeperId");
-    if (pendingOrders.length === 0) return false;
+    if (pendingOrders.length === 0 && unpaidOrders.length === 0) return false;
     return { pendingOrders, unpaidOrders };
 };
 
@@ -22,6 +22,17 @@ const GetAcceptedOrders = async (shopkeeperId) => {
     const pendingOrders = await Orders.find({
         shopkeeperId: shopkeeperId,
         status: "accepted",
+    })
+        .populate("items.item", ["name", "price", "type"])
+        .select("-__v -shopkeeperId");
+    if (pendingOrders.length === 0) return false;
+    return pendingOrders;
+};
+
+const GetDeliveredOrders = async (shopkeeperId) => {
+    const pendingOrders = await Orders.find({
+        shopkeeperId: shopkeeperId,
+        status: "delivered",
     })
         .populate("items.item", ["name", "price", "type"])
         .select("-__v -shopkeeperId");
@@ -140,4 +151,5 @@ module.exports = {
     GetCompletedOrders,
     PaidOrder,
     DeliverOrder,
+    GetDeliveredOrders,
 };

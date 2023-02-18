@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.grey,
         fontFamily: 'UberMove',
       ),
+
       home: FutureBuilder<String>(
           future: getVerifiedData(),
           builder: (context, snapshot) {

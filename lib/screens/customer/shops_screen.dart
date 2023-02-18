@@ -1,4 +1,5 @@
 import 'package:catalogue/widgets/customer/customer_card.dart';
+import 'package:catalogue/widgets/customer/customer_shop_card.dart';
 import 'package:catalogue/widgets/customer/search_bar.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
@@ -86,22 +87,17 @@ class _ShopsScreenState extends State<ShopsScreen> {
                                 ],
                               ),
                             ),
-                            ListView.builder(
-                                itemCount: allShops.length,
-                                itemBuilder: (context, index) {
-                                  return CustomerCard(
-                                    body: allShops[index],
-                                  );
-                                })
+                            Expanded(
+                              child: ListView.builder(
+                                  itemCount: allShops.length,
+                                  itemBuilder: (context, index) {
+                                    return CustomerCard(
+                                      body: allShops[index],
+                                    );
+                                  }),
+                            )
                           ],
                         )
-                      // ? ListView.builder(
-                      //     itemCount: allShops.length,
-                      //     itemBuilder: (context, index) {
-                      //       return CustomerCard(
-                      //         body: allShops[index],
-                      //       );
-                      //     })
                       : NoOutlets(),
                 );
               }

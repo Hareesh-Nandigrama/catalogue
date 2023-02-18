@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
 class CustomerSearchBar extends StatelessWidget {
-  const CustomerSearchBar({super.key});
+  final Function callback;
+  const CustomerSearchBar({super.key, required this.callback});
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: TextInputType.name,
       cursorColor: const Color.fromRGBO(140, 142, 151, 1),
+      onChanged: (val) {
+        callback(val);
+      },
       decoration: const InputDecoration(
         filled: true,
         contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 15),

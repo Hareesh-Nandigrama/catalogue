@@ -6,6 +6,7 @@ const isShopkeeper = require("../middleware/isShopkeeper");
 const OrderController = require("../controllers/order.controller");
 
 router.get("/pending", isShopkeeper, catchAsync(OrderController.GetPendingOrders));
+// router.get("/unpaid", isShopkeeper, catchAsync(OrderController.GetPendingOrders));
 router.get("/accepted", isShopkeeper, catchAsync(OrderController.GetAcceptedOrders));
 router.get("/cancelled", isShopkeeper, catchAsync(OrderController.GetCancelledOrders));
 router.get("/completed", isShopkeeper, catchAsync(OrderController.GetCompletedOrders));

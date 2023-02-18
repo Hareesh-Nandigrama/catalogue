@@ -6,9 +6,12 @@ const OrderServices = require("../services/order.services");
 const OrderModel = require("../models/order.model");
 
 const GetPendingOrders = async (req, res, next) => {
-    const pendingOrders = await OrderServices.GetPendingOrders(req.user._id);
-    if (!pendingOrders) return res.json({ pending: false });
-    return res.json({ pending: true, orders: pendingOrders });
+    const data = await OrderServices.GetPendingOrders(req.user._id);
+    if (!data) return res.json({ pending: false });
+    return res.json({
+        pending: true,
+        orders: [...data.pendingOrders, ...data.unpaidOrders],
+    });
 };
 
 const GetCancelledOrders = async (req, res, next) => {

@@ -2,15 +2,12 @@ import 'package:catalogue/apis/seller.dart';
 import 'package:catalogue/screens/login/first_screen.dart';
 import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../widgets/admin/admin_card.dart';
 import '../../widgets/login/button.dart';
-
 class ShopKeeperDetails extends StatefulWidget {
-  const ShopKeeperDetails({Key? key}) : super(key: key);
+  final data;
+  const ShopKeeperDetails({Key? key, this.data}) : super(key: key);
 
   @override
   State<ShopKeeperDetails> createState() => _ShopKeeperDetailsState();
@@ -43,6 +40,12 @@ class _ShopKeeperDetailsState extends State<ShopKeeperDetails> {
       type = x;
     });
   }
+  @override
+  void initState(){
+    super.initState();
+    _name=widget.data['name'];
+    _shopname=widget.data['businessName'];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +72,7 @@ class _ShopKeeperDetailsState extends State<ShopKeeperDetails> {
                   fit: BoxFit.cover,
                 ),
               )),
-          InField('Name', _name, 'a', 0),
+          InField('Name', _name, 'a', 0,),
           InField('Shop Name', _shopname, 'a', 0),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -217,10 +220,10 @@ class _ShopKeeperDetailsState extends State<ShopKeeperDetails> {
                         children: [
                           Text(
                             opensAt,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Color.fromRGBO(100, 100, 100, 1)),
                           ),
-                          Icon(
+                          const Icon(
                             Icons.access_time_filled,
                             color: Color.fromRGBO(100, 100, 100, 1),
                           )
@@ -291,6 +294,14 @@ class _ShopKeeperDetailsState extends State<ShopKeeperDetails> {
           ),
           Expanded(child: Container(),),
           Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+            child: GestureDetector(child: const EditProfileButton(buttonname: '   Edit Profile'),
+              onTap: (){
+                editshop_profile(_name.text, dropdownvalue, opensAt, closesAt, type, _shopname.text);
+              },
+            ),
+          ),
+          Padding(
             padding: const EdgeInsets.only(top: 8.0, bottom: 15),
             child: GestureDetector(
               onTap: () async {
@@ -302,9 +313,8 @@ class _ShopKeeperDetailsState extends State<ShopKeeperDetails> {
               child: Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.logout_sharp, size: 25,color: Colors.red,),
-                    Text('Logout', style: TextStyle(fontSize: 20, color: Colors.red),),
+                  children: const [
+                    LogoutOutlinedButton(buttonname: '    Logout')
                   ],
                 ),
               ),

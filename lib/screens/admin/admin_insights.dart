@@ -1,3 +1,4 @@
+import 'package:catalogue/screens/admin/admin_orders/delievered.dart';
 import 'package:catalogue/screens/admin/admin_orders/preparing.dart';
 import 'package:catalogue/screens/admin/admin_orders/requests.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +55,7 @@ class _AdminHomeInsightsState extends State<AdminHomeInsights>
               child: TabBarView(
                 controller: tabController,
                 children: [
-                  Requests(),
+                  Delievered(),
                   Preparing(),
                 ],
               ))

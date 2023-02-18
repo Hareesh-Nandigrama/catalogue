@@ -205,7 +205,7 @@ class _OrderCardAcceptorDenyState extends State<OrderCardAcceptorDeny> {
               ):
           widget.data['status'] == 'completed'?GestureDetector(
             onTap: () async {
-              //await orderReady(widget.data['_id']);
+              await orderReady(widget.data['_id']);
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -213,7 +213,7 @@ class _OrderCardAcceptorDenyState extends State<OrderCardAcceptorDeny> {
                 CustomButton(isDisabled: false, buttonname: 'Delievered'),
               ],
             ),
-          ):Padding(
+          ):widget.data['status'] == 'delivered'?Container():Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4,vertical: 8),
             child: Column(
               children: [

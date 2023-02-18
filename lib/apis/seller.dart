@@ -57,6 +57,41 @@ Future<dynamic> getMenu(String? shopkeeperId1) async {
   return body;
 }
 
+Future<Map<String, dynamic>> editshop_profile(
+    String name,
+    String location,
+    String startTime,
+    String endTime,
+    String businessType,
+    String businessName,
+    ) async {
+  final prefs = await SharedPreferences.getInstance();
+  final shopkeeperId = prefs.getString('_id');
+
+  var access_token = prefs.getString('access_token') ?? '';
+
+
+  final response = await http.put(Uri.parse('${baseUrl}api/shopkeeper'),
+      headers: {
+        'content-type': 'application/json',
+        "Authorization": "Token $access_token"
+      },
+      body: jsonEncode({
+        "name": name,
+        "shopkeeperId": shopkeeperId,
+        "businessType":businessType,
+        "startTime":startTime,
+        "endTime":endTime,
+        "businessName":businessName,
+      }));
+
+  final body = jsonDecode(response.body);
+
+  showSnackBar('Profile Updated Successfully');
+
+  return body;
+}
+
 Future<Map<String, dynamic>> createMenu(
     String name,
     String price,

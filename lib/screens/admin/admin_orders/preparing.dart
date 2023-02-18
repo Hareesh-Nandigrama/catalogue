@@ -12,10 +12,8 @@ class Preparing extends StatelessWidget {
     return FutureBuilder<Map<String, dynamic>>(
         future: getAcceptedOrders(),
         builder: (context,snapshot){
-          print(snapshot.data);
           if(snapshot.hasData)
           {
-            print(snapshot.data);
             if(snapshot.data!['accepted'] == false)
             {
               return NoAvailable();

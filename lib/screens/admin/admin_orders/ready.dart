@@ -18,10 +18,8 @@ class _ReadyState extends State<Ready> {
     return FutureBuilder<Map<String, dynamic>>(
         future: getReadyOrders(),
         builder: (context,snapshot){
-          print(snapshot.data);
           if(snapshot.hasData)
           {
-            print(snapshot.data);
             if(snapshot.data!['completed'] == false)
             {
               return NoAvailable();
@@ -36,6 +34,6 @@ class _ReadyState extends State<Ready> {
             return const CustomProgress();
 
           }
-        });;
+        });
   }
 }

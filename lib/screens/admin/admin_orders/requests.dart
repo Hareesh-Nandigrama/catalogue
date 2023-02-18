@@ -10,10 +10,8 @@ class Requests extends StatelessWidget {
     return FutureBuilder<Map<String, dynamic>>(
         future: getPendingOrders(),
         builder: (context,snapshot){
-          print(snapshot.data);
           if(snapshot.hasData)
           {
-            print(snapshot.data);
             if(snapshot.data!['pending'] == false)
             {
               return NoAvailable();

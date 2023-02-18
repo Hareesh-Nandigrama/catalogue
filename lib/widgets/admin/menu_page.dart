@@ -1,9 +1,9 @@
 import 'package:catalogue/apis/seller.dart';
-import 'package:catalogue/widgets/admin/edit_menu.dart';
 import 'package:catalogue/widgets/common/custom_progress.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
 import '../../screens/customer/customer_profile.dart';
+import 'add_menu.dart';
 import 'menu_card.dart';
 
 class MenuPage extends StatefulWidget {
@@ -54,7 +54,7 @@ class _MenuPageState extends State<MenuPage> {
                 future: getMenu(null),
                 builder: (context, snapshot) {
                   if (snapshot.data == ConnectionState.waiting) {
-                    return Text('adssd');
+                    return Text('loading');
                   } else if (snapshot.hasData) {
                     return ListView.builder(
                       itemBuilder: (context, index) => MenuCard(
@@ -78,7 +78,7 @@ class _MenuPageState extends State<MenuPage> {
                   builder: (context) => Dialog(
                       backgroundColor: Colors.transparent,
                       insetPadding: EdgeInsets.all(10),
-                      child: EditMenu()),
+                      child: AddMenu()),
                 );
               },
               icon: const CircleAvatar(

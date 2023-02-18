@@ -1,5 +1,4 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:catalogue/widgets/admin/edit_button.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,7 +32,7 @@ class _AdminCardState extends State<AdminCard> {
   Widget build(BuildContext context) {
     print(widget.data);
     return Container(
-      height: 320,
+      //height: 320,
       width: double.infinity,
       margin: const EdgeInsets.symmetric(vertical: 33),
       decoration: const BoxDecoration(

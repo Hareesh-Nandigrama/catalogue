@@ -1,4 +1,5 @@
 import 'package:catalogue/screens/customer/shop_items.dart';
+import 'package:catalogue/screens/customer/customer_profile.dart';
 import 'package:catalogue/widgets/customer/customer_card.dart';
 import 'package:catalogue/widgets/customer/search_bar.dart';
 import 'package:catalogue/widgets/login/button.dart';

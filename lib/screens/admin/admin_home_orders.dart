@@ -1,6 +1,5 @@
 import 'package:catalogue/screens/admin/admin_orders/preparing.dart';
 import 'package:catalogue/screens/admin/admin_orders/requests.dart';
-import 'package:catalogue/screens/login/first_screen.dart';
 import 'package:flutter/material.dart';
 
 class AdminHomeOrders extends StatefulWidget {

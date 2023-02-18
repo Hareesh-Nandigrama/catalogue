@@ -1,3 +1,4 @@
+import 'package:catalogue/widgets/admin/edit_menu.dart';
 import 'package:flutter/material.dart';
 import 'menu_card.dart';
 
@@ -32,7 +33,29 @@ class MenuPage extends StatelessWidget {
           const SizedBox(
             height: 25,
           ),
-          const MenuCard(),
+          Expanded(
+            child: ListView.builder(
+              itemBuilder: (context, index) => const MenuCard(),
+              itemCount: 10,
+            ),
+          ),
+          IconButton(
+              onPressed: () {
+                showBottomSheet(
+                  context: context,
+                  builder: (context) => SimpleDialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    children: [EditMenu()],
+                  ),
+                );
+              },
+              icon: const CircleAvatar(
+                backgroundColor: Colors.black,
+                radius: 32,
+                child: Icon(Icons.add),
+              ))
         ],
       ),
     );

@@ -1,4 +1,3 @@
-import 'package:catalogue/screens/admin/admin_home_menu.dart';
 import 'package:catalogue/screens/admin/admin_home_orders.dart';
 import 'package:catalogue/screens/admin/admin_insights.dart';
 import 'package:catalogue/widgets/admin/menu_page.dart';
@@ -64,10 +63,10 @@ class _AdminOrderStatusState extends State<AdminHome> {
                         GestureDetector(
                           onTap: () {},
                           child: CircleAvatar(
-                            radius: 24,
+                            radius: 20,
                             backgroundColor: Colors.black,
                             child: CircleAvatar(
-                              radius: 22,
+                              radius: 18,
                               backgroundColor: Colors.white,
                               child: Image.asset(
                                 'assets/profile.png',

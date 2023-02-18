@@ -35,7 +35,7 @@ class MenuCard extends StatelessWidget {
                       //   child: Image.asset('assets/Must_try.png',height: 12,width: 35,),
                       // ),
                       Image.asset('assets/Veg.png', height: 18),
-                      SizedBox(width: 8,),
+                      const SizedBox(width: 8,),
                       GestureDetector(
                         child: Icon(Icons.edit,color: Colors.black,size: 18),
                         onTap: () {

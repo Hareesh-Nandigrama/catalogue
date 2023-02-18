@@ -62,10 +62,20 @@ const GetMyAcceptedOrders = async (req, res, next) => {
     });
 };
 
+const GetMyCompletedOrders = async (req, res, next) => {
+    // console.log(req.user._id);
+    const allOrders = await CustomerServices.GetMyCompletedOrders(req.user._id);
+
+    return res.json({
+        allOrders: allOrders,
+    });
+};
+
 module.exports = {
     CreateNewCustomer,
     GetMyOrders,
     GetMyPendingOrders,
     GetMyAcceptedOrders,
     GetMyUnpaidOrders,
+    GetMyCompletedOrders,
 };

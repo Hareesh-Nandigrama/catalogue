@@ -29,6 +29,10 @@ const GetMyAcceptedOrders = async (customerId) => {
     const allOrders = await Orders.find({ customerId: customerId, status: "accepted" });
     return allOrders;
 };
+const GetMyCompletedOrders = async (customerId) => {
+    const allOrders = await Orders.find({ customerId: customerId, status: "completed" });
+    return allOrders;
+};
 
 module.exports = {
     CreateNewCustomer,
@@ -36,4 +40,5 @@ module.exports = {
     GetMyUnpaidOrders,
     GetMyAcceptedOrders,
     GetMyPendingOrders,
+    GetMyCompletedOrders,
 };

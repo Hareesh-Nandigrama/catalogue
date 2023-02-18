@@ -1,39 +1,59 @@
+import 'package:catalogue/models/menu.dart';
+
+import '../../models/items.dart';
+
 class CartStore {
-  List<Map<String, dynamic>> cartItems = [];
+  static Map<String, int> cartItems = {};
+  static Map<String, Menu> detail = {};
 
-  clear(){
-    cartItems = [];
+  static void clear(){
+    cartItems = {};
+    detail = {};
   }
 
-  void addItem(String id){
-    for(var item in cartItems)
+  static List<Item> getOrder(){
+    List<Item> answer = [];
+    for(var keys in cartItems.keys)
       {
-        if(item['item'] == id)
-          {
-            item['qty']++;
-            return;
-          }
+        answer.add(Item(name: keys, qty: cartItems[keys]!));
       }
-    cartItems.add({
-      'item': id,
-      'qty': 1
-    });
+    print(answer);
+    return answer;
   }
 
-  void deleteItem(String id)
-  {
-    for(var item in cartItems)
+  static void addItem(Menu x){
+    if(detail.containsKey(x.id))
+      {
+        print('there');
+        cartItems[x.id] = (cartItems[x.id]!+ 1);
+      }
+    else
+      {
+        print('notthere');
+        cartItems[x.id] = 1;
+        detail[x.id] = x;
+      }
+  }
+
+  static void deleteItem(Menu x){
+    if(detail.containsKey(x.id))
     {
-      if(item['item'] == id)
-      {
-        item['qty']--;
-        return;
-      }
+      print('there');
+      cartItems[x.id] = (cartItems[x.id]!- 1);
+      if(cartItems[x.id] == 0)
+        {
+          cartItems.remove(x.id);
+          detail.remove(x.id);
+        }
     }
-    cartItems.add({
-      'item': id,
-      'qty': 1
-    });
-
+    else
+    {
+      print('not there');
+      return;
+    }
   }
+
+
+
+
 }

@@ -1,5 +1,8 @@
+import 'package:catalogue/apis/orders.dart';
 import 'package:catalogue/models/menu.dart';
+import 'package:catalogue/screens/customer/cart_store.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../apis/seller.dart';
 import '../../widgets/common/shimmer.dart';
@@ -19,6 +22,13 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
     setState(() {
       _selectedPageIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    CartStore.clear();
   }
 
   @override
@@ -97,7 +107,17 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
                               ? ListView.builder(
                               itemCount: allShops.length,
                               itemBuilder: (context, index) {
-                                return const Text('hello');
+                                return Column(
+                                  children: [
+                                    Text(allShops[index].name),
+                                    ElevatedButton(onPressed: (){
+                                      CartStore.addItem(allShops[index]);
+                                    }, child: Text('add')),
+                                    ElevatedButton(onPressed: (){
+                                      CartStore.deleteItem(allShops[index]);
+                                    }, child: Text('delete'))
+                                  ],
+                                );
                               })
                               : const Center(
                             child:
@@ -107,9 +127,33 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
                     return const CircularProgressIndicator();
                   })
                   ],
-      ):Column(
+      ):ListView.builder(
+        itemCount: CartStore.cartItems.length,
+          itemBuilder: (context, index){
+            List<String> newList = CartStore.cartItems.keys.toList();
+        return Container(
+          child: Column(
+            children: [
+              Text(CartStore.detail[newList[index]]!.name),
+              Text(CartStore.cartItems[newList[index]].toString()),
+            ],
+          ),
+        );
+      }),
+      floatingActionButton: _selectedPageIndex == 1? ElevatedButton(onPressed: ()async{
+        print('a');
+        final prefs =await SharedPreferences.getInstance();
+        print('b');
 
-      ),
+        final uid = prefs.getString('uid') ?? '';
+        print('this is the uid');
+        print(uid);
+        print('c');
+
+        createNewOrder(uid, widget.data['_id'], CartStore.getOrder());
+        print('d');
+
+      }, child: Text('hello')):Container(),
     );
   }
 }

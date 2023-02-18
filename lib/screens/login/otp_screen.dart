@@ -165,6 +165,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       final prefs = await SharedPreferences.getInstance();
                       await prefs.setString('phone', widget.phoneNumber);
                       await prefs.setString('uid', response.user!.uid);
+                      print(prefs.getString('uid'));
                       await prefs.setBool('isCustomer', widget.isCustomer);
                       await prefs.setBool('isVerified', true);
                       if (!mounted) return;

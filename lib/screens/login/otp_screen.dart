@@ -155,6 +155,9 @@ class _OTPScreenState extends State<OTPScreen> {
                   } else {
                     try {
                       final auth = FirebaseAuth.instance;
+              
+
+
                       PhoneAuthCredential credential =
                           PhoneAuthProvider.credential(
                         verificationId: widget.verificationId,

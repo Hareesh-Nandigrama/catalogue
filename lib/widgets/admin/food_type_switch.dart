@@ -1,19 +1,21 @@
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:flutter/material.dart';
+
 class FoodTypeSwitch extends StatefulWidget {
-  const FoodTypeSwitch({Key? key}) : super(key: key);
+  final Function state;
+  const FoodTypeSwitch({Key? key, required this.state}) : super(key: key);
 
   @override
   State<FoodTypeSwitch> createState() => _FoodTypeSwitchState();
 }
 
 class _FoodTypeSwitchState extends State<FoodTypeSwitch> {
-  bool online=false;
+  bool online = false;
 
   @override
   Widget build(BuildContext context) {
     return FlutterSwitch(
-        width:102,
+        width: 102,
         height: 42,
         toggleSize: 24,
         borderRadius: 100,
@@ -27,14 +29,17 @@ class _FoodTypeSwitchState extends State<FoodTypeSwitch> {
         activeText: 'Veg',
         activeTextColor: Colors.white,
         showOnOff: true,
-        activeSwitchBorder: const Border(
-        ),
+        activeSwitchBorder: const Border(),
         value: online,
-        onToggle:(val){
+        onToggle: (val) {
           setState(() {
-            online=val;
+            online = val;
           });
-        }
-    );
+          var type = '';
+
+          val ? type = 'Veg' : type = 'Non Veg';
+
+          widget.state(type);
+        });
   }
 }

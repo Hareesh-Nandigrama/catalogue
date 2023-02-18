@@ -1,3 +1,4 @@
+import 'package:catalogue/widgets/admin/food_type_switch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../login/button.dart';
@@ -21,15 +22,16 @@ class EditMenu extends StatefulWidget {
 class _EditMenuState extends State<EditMenu> {
   TextEditingController dishName = TextEditingController();
   TextEditingController dishPrice = TextEditingController();
-  TextEditingController availableFrom = TextEditingController();
-  TextEditingController availableTill = TextEditingController();
+  var availablefrom = '';
+  var availableTill = '';
+  var food_type = 'Veg';
+
   TextEditingController descriptionofDish = TextEditingController();
   bool _switchState = false;
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
-      height: 300,
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
@@ -39,7 +41,7 @@ class _EditMenuState extends State<EditMenu> {
       child: Column(
         children: [
           const Padding(
-            padding: EdgeInsets.only(top: 8, bottom: 8),
+            padding: EdgeInsets.only(top: 8, bottom: 16),
             child: Center(
               child: Text(
                 'Edit Menu',
@@ -152,14 +154,13 @@ class _EditMenuState extends State<EditMenu> {
                 height: 45,
                 width: MediaQuery.of(context).size.width / 4.5,
                 child: TextField(
-                  controller: availableFrom,
                   onTap: () async {
                     TimeOfDay? time = TimeOfDay.now();
                     FocusScope.of(context).requestFocus(FocusNode());
                     time = await showTimePicker(
                         context: context, initialTime: TimeOfDay.now());
                     if (!mounted) return;
-                    availableFrom.text = time!.format(context);
+                    availablefrom = time!.format(context);
                   },
                   decoration: InputDecoration(
                     hintText: 'Available from',
@@ -189,14 +190,13 @@ class _EditMenuState extends State<EditMenu> {
                 height: 45,
                 width: MediaQuery.of(context).size.width / 4.5,
                 child: TextFormField(
-                  controller: availableTill,
                   onTap: () async {
                     TimeOfDay? time = TimeOfDay.now();
                     FocusScope.of(context).requestFocus(FocusNode());
                     time = await showTimePicker(
                         context: context, initialTime: TimeOfDay.now());
                     if (!mounted) return;
-                    availableTill.text = time!.format(context);
+                    availableTill = time!.format(context);
                   },
                   decoration: InputDecoration(
                     // suffixIcon: const ImageIcon(
@@ -221,16 +221,11 @@ class _EditMenuState extends State<EditMenu> {
                   ),
                 ),
               ),
-              CupertinoSwitch(
-                activeColor: Colors.green,
-                trackColor: Colors.red,
-                value: _switchState,
-                onChanged: (value) {
-                  setState(() {
-                    _switchState = !_switchState;
-                  });
+              FoodTypeSwitch(
+                state: (val) {
+                  food_type = val;
                 },
-              ),
+              )
             ],
           ),
           Padding(
@@ -268,17 +263,26 @@ class _EditMenuState extends State<EditMenu> {
               ),
             ),
           ),
-          Padding(
-            padding:
-                const EdgeInsets.only(left: 16, top: 18, right: 16, bottom: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                CustomOutlinedButton(buttonname: 'Delete Item'),
-                CustomButton(isDisabled: false, buttonname: 'Save Changes')
-              ],
-            ),
-          )
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  
+                  print('ee');
+                  print(dishName.text);
+                  print(dishPrice.text);
+                  print(availablefrom);
+                  print(availableTill);
+                  print(descriptionofDish.text);
+                  print(food_type);
+                },
+                child: const CustomButton(
+                    isDisabled: false, buttonname: 'Save Changes'),
+              )
+            ],
+          ),
         ],
       ),
     );

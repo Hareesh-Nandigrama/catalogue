@@ -21,30 +21,7 @@ class _CustomerHomeState extends State<CustomerHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leadingWidth: 0,
-          leading: Container(),
-          actions: [
-            GestureDetector(
-              onTap: () {},
-              child: CircleAvatar(
-                radius: 24,
-                backgroundColor: Colors.black,
-                child: CircleAvatar(
-                  radius: 22,
-                  backgroundColor: Colors.white,
-                  child: Image.asset(
-                    'assets/profile.png',
-                    height: 18,
-                    width: 18,
-                  ),
-                ),
-                // backgroundImage: AssetImage('assets/profile.png'),
-              ),
-            )
-          ]),
+    
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: ShopsScreen(index: _selectedPageIndex),
@@ -104,64 +81,4 @@ class _CustomerHomeState extends State<CustomerHome> {
   }
 }
 
-class NoOutlets extends StatelessWidget {
-  const NoOutlets({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          decoration: const BoxDecoration(
-            border: Border(
-              bottom:
-                  BorderSide(color: Color.fromRGBO(226, 226, 226, 1), width: 1),
-            ),
-          ),
-          child: Row(
-            children: [
-              const Expanded(
-                child: CustomerSearchBar(),
-              ),
-              const SizedBox(
-                width: 14,
-              ),
-              CircleAvatar(
-                radius: 25,
-                backgroundColor: const Color.fromRGBO(226, 226, 226, 1),
-                child: Image.asset(
-                  'assets/profile.png',
-                  height: 25,
-                  width: 25,
-                ),
-                // backgroundImage: AssetImage('assets/profile.png'),
-              )
-            ],
-          ),
-        ),
-        const Spacer(),
-        Image.asset(
-          'assets/outlet.png',
-          height: 136,
-          width: 136,
-        ),
-        const Text(
-          'No Outlets Available',
-          style: TextStyle(fontSize: 20),
-        ),
-        const Text(
-          'We couldn\'t find any shops nearby!',
-          style:
-              TextStyle(fontSize: 14, color: Color.fromRGBO(117, 117, 117, 1)),
-        ),
-        const SizedBox(
-          height: 24,
-        ),
-        const CustomButton(isDisabled: false, buttonname: 'Try Again!'),
-        const Spacer(),
-      ],
-    );
-  }
-}

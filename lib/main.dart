@@ -1,4 +1,7 @@
 import 'package:catalogue/screens/admin/admin_home.dart';
+import 'package:catalogue/screens/customer/customer_home.dart';
+import 'package:catalogue/screens/login/first_screen.dart';
+import 'package:catalogue/screens/login/username_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,29 +36,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        navigatorKey: navigatorKey,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primaryColor: Colors.black,
-          primarySwatch: Colors.grey,
-          fontFamily: 'UberMove',
-        ),
-        home: AdminHome(),
-
-
-      // home: FutureBuilder<String>(
-      //     future: getVerifiedData(),
-      //     builder: (context, snapshot) {
-      //       return snapshot.hasData
-      //           ? snapshot.data == 'first'
-      //               ? const FirstScreen()
-      //               : (snapshot.data == 'name'
-      //                   ? const UsernameScreen()
-      //                   : (snapshot.data == 'customer'
-      //                       ? const CustomerHome()
-      //                       : const AdminHome()))
-      //           : Container();
-      //     }),
+      navigatorKey: navigatorKey,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.black,
+        primarySwatch: Colors.grey,
+        fontFamily: 'UberMove',
+      ),
+      home: FutureBuilder<String>(
+          future: getVerifiedData(),
+          builder: (context, snapshot) {
+            return snapshot.hasData
+                ? snapshot.data == 'first'
+                    ? const FirstScreen()
+                    : (snapshot.data == 'name'
+                        ? const UsernameScreen()
+                        : (snapshot.data == 'customer'
+                            ? const CustomerHome()
+                            : const AdminHome()))
+                : Container();
+          }),
     );
   }
 }

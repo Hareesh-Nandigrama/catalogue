@@ -21,14 +21,14 @@ class _ShowShimmerState extends State<ShowShimmer> {
         children: [
           Expanded(
             child: Shimmer.fromColors(
-                baseColor: Color.fromRGBO(47, 48, 51, 1),
-                highlightColor: Color.fromRGBO(68, 71, 79, 1),
+                baseColor: const Color.fromRGBO(0, 0, 0, 0.4),
+                highlightColor: const Color.fromRGBO(0, 0, 0, 0.3),
                 child: Container(
                   height: widget.height,
                   width: widget.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(24),
-                      color: Color.fromRGBO(47, 48, 51, 1),)
+                      color: Color.fromRGBO(0, 0, 0, 1),)
                 )),
           ),
         ],

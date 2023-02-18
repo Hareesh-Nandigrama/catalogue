@@ -1,10 +1,12 @@
 import 'package:catalogue/screens/admin/admin_home_orders.dart';
 import 'package:catalogue/screens/admin/admin_insights.dart';
+import 'package:catalogue/screens/admin/profile_page.dart';
 import 'package:catalogue/widgets/admin/menu_page.dart';
 import 'package:catalogue/widgets/admin/status_switch.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AdminHome extends StatefulWidget {
   const AdminHome({super.key});
@@ -25,7 +27,6 @@ class _AdminOrderStatusState extends State<AdminHome> {
       _selectedPageIndex = index;
     });
   }
-
 
   bool status = false;
   @override
@@ -61,7 +62,15 @@ class _AdminOrderStatusState extends State<AdminHome> {
                           width: 14,
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () async {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                   ProfilePage()
+                              ),
+                            );
+                            
+                          },
                           child: CircleAvatar(
                             radius: 20,
                             backgroundColor: Colors.black,

@@ -15,7 +15,7 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-# Catalogue
+# Catalogue(Android App)
 
 <p align="center">
 </p>
@@ -26,12 +26,11 @@ samples, guidance on mobile development, and a full API reference.
 <a  href="https://firebase.google.com/"  target="_blank"><img  height="39"  src="https://user-images.githubusercontent.com/37345795/205487145-a7ad5e40-71e1-46d5-a828-ef82ee168885.png"  alt="Appwrite Logo"></a>
 </p>
 
-Tagify enables the user to create and manage groups with ease. It lets the user find the right set of people and communicate relevant information with them.
-- After creating an account, users can assign themselves tags, for e.g. appdev, rajasthan, burger, etc.
-- Say we want to address everyone who is in Rajasthan and likes Burger or is in Assam and likes Fish, then we can simply create a group with this logic: `(rajasthan AND burger) OR (assam AND fish)` which is equivalent to `(rajasthan & burger) | (assam & fish)` and a group with those people will automatically be made!
-- To enter the logic for a group, we are using a bunch of buckets, there can be any number of buckets, and each bucket can contain any number of tags. The tags inside a bucket are `AND`ed, and then the buckets are `OR`ed together.
-- Here is a [presentation](https://drive.google.com/file/d/1HFzEsUJGfNh_XIjrI4xhybGDt-T39Ijp/view) explaining the working of the app with screenshots.
-- Here is a [video](https://drive.google.com/file/d/1ia9vZDcWBGl6M7pMer5KGyFjOuaQ4fOu/view?usp=share_link) demonstrating the app.
+Catalogue enables the user to create and manage their online outlets as well as access local shops online
+- After creating an account, users can choose a role either as buisness or as an Customer.
+- Suppose I am a Buisnessman, So i will get an option to create a buisness account, Proceeding further i will have the ability to add menu and accept or decline orders   from users.I can choose type of my outlets and services which i can provide based upon the earlier choice of outlet type
+- Upon accepting order I can get payments and can always view insights of orders to view cancelled and completed orders
+- Customer can view a shop and based upon their necessities they can order things as well as make payment
 
 ## Setting up the project in your local environment💻
 
@@ -108,15 +107,3 @@ git push --set-upstream origin <your-branch-name>
 8. Create a pull request from GitHub and wait for the review!
 
 **Contributions of any kind welcome!**
-
-# Authors
-
-This project was developed under a hackathon by
-
-- [Harshit Seksaria](https://github.com/letsintegreat/)
-- [Priyanshu Srivastava](https://github.com/GeekyPS)
-- [Nishchay Nilabh](https://github.com/Rockhopper130)
-
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/37345795/205490374-3b0bcefd-c48c-46f3-82ea-4db8c7afa98e.png"/>
-</p>

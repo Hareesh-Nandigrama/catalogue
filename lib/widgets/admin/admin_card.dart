@@ -1,6 +1,8 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:catalogue/widgets/admin/edit_button.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 class AdminCard extends StatefulWidget {
   final data;
   const AdminCard({super.key, this.data});
@@ -10,22 +12,28 @@ class AdminCard extends StatefulWidget {
 }
 
 class _AdminCardState extends State<AdminCard> {
+  int _current = 0;
+
+  List<String> items = [];
+
   String phone = '';
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     function();
   }
 
   function() async {
     final prefs = await SharedPreferences.getInstance();
-     phone = prefs.getString('phone') ?? '';
+    phone = prefs.getString('phone') ?? '';
+   items =  widget.data['photos'] as List<String>;
   }
+
   @override
   Widget build(BuildContext context) {
+    print(widget.data);
     return Container(
-      height: 300,
+      height: 320,
       width: double.infinity,
       margin: const EdgeInsets.symmetric(vertical: 33),
       decoration: const BoxDecoration(
@@ -45,24 +53,31 @@ class _AdminCardState extends State<AdminCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-              height: 150,
-              width: double.infinity,
-              child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(6), topRight: Radius.circular(6)),
-                child: Image.asset(
-                  'assets/beach.jpeg',
-                  fit: BoxFit.cover,
-                ),
-              )),
+          CarouselSlider(
+            items: items
+                .map((item) => Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: Image.network(
+                        item,
+                        fit: BoxFit.cover,
+                      ),
+                    ))
+                .toList(),
+            options: CarouselOptions(
+                autoPlay: true,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _current = index;
+                  });
+                }),
+          ),
           Padding(
             padding:
                 const EdgeInsets.only(top: 6, left: 16, right: 16, bottom: 13),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 Text(
+                Text(
                   'Hello, ${widget.data['businessName']}',
                   style: TextStyle(
                     fontSize: 28,
@@ -90,8 +105,8 @@ class _AdminCardState extends State<AdminCard> {
                             ),
                             TextSpan(
                               text: '     ${widget.data['location']}',
-                              style: TextStyle(
-                                  color: Colors.black, height: 1.6),
+                              style:
+                                  TextStyle(color: Colors.black, height: 1.6),
                             ),
                           ]),
                         ),
@@ -105,23 +120,23 @@ class _AdminCardState extends State<AdminCard> {
                             ),
                             TextSpan(
                               text: '   ${widget.data['username']}',
-                              style: TextStyle(
-                                  color: Colors.black, height: 1.6),
+                              style:
+                                  TextStyle(color: Colors.black, height: 1.6),
                             ),
                           ]),
                         ),
                         RichText(
-                          text:  TextSpan(children: [
+                          text: TextSpan(children: [
                             TextSpan(
-                              text: 'Contact No:'+phone,
+                              text: 'Contact No:' + phone,
                               style: TextStyle(
                                   color: Color.fromRGBO(84, 84, 84, 1),
                                   height: 1.6),
                             ),
                             TextSpan(
                               text: '  ',
-                              style: TextStyle(
-                                  color: Colors.black, height: 1.6),
+                              style:
+                                  TextStyle(color: Colors.black, height: 1.6),
                             ),
                           ]),
                         ),

@@ -36,9 +36,8 @@ class _FoodTypeSwitchState extends State<FoodTypeSwitch> {
             online = val;
           });
           var type = '';
-
           val ? type = 'Veg' : type = 'Non Veg';
-
+          print(type);
           widget.state(type);
         });
   }

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class MenuCard extends StatelessWidget {
-  const MenuCard({Key? key}) : super(key: key);
+  final data;
+  const MenuCard({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -24,8 +26,8 @@ class MenuCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'Paneer Massala',
+                  Text(
+                    data['name'],
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                   ),
                   Row(
@@ -34,10 +36,13 @@ class MenuCard extends StatelessWidget {
                       //   padding: const EdgeInsets.only(right: 8),
                       //   child: Image.asset('assets/Must_try.png',height: 12,width: 35,),
                       // ),
-                      Image.asset('assets/Veg.png', height: 18),
-                      const SizedBox(width: 8,),
+                      data['type']=='veg'?
+                      Image.asset('assets/Veg.png', height: 18): Image.asset('assets/non_veg.png', height: 18),
+                      const SizedBox(
+                        width: 8,
+                      ),
                       GestureDetector(
-                        child: Icon(Icons.edit,color: Colors.black,size: 18),
+                        child: Icon(Icons.edit, color: Colors.black, size: 18),
                         onTap: () {
                           // showModalBottomSheet(context: context, builder: (context)=>{
                           //   return Co
@@ -62,25 +67,25 @@ class MenuCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
-                    children: const [
+                    children: [
                       Icon(
                         Icons.currency_rupee,
                         size: 14,
                       ),
                       Text(
-                        '190',
+                        data['price'].toString(),
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                   Row(
-                    children: const [
+                    children: [
                       Icon(
                         Icons.timelapse,
                         size: 14,
                       ),
                       Text(
-                        '  10:00 AM-9:00 PM',
+                        '  ${data['startTime']} - ${data['endTime']}',
                         style: TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 14),
                       ),
@@ -89,9 +94,9 @@ class MenuCard extends StatelessWidget {
                 ],
               ),
             ),
-            const Padding(
+        Padding(
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-              child: Text('This is a very good Dish . Must Try'),
+              child: Text(data['description'].toString()),
             ),
           ],
         ),

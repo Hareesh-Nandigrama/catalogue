@@ -8,6 +8,7 @@ class CustomerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(body);
     return Padding(
       padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
       child: GestureDetector(

@@ -8,8 +8,9 @@ const baseUrl = 'https://kamengkriti.onrender.com/';
 Future<Map<String, dynamic>> getPendingOrders() async {
   print('inget id');
   final prefs = await SharedPreferences.getInstance();
-  final accessToken = prefs.getString('access_token');
+  var accessToken = prefs.getString('access_token');
   print(accessToken);
+
 
   final response = await http.get(Uri.parse('${baseUrl}api/order/pending'),
       headers: {
@@ -51,10 +52,9 @@ Future<Map<String, dynamic>> createNewOrder(
   print('abcd12345');
   print(accessToken);
   List<Map<String, dynamic>> itm = [];
-  for(int i = 0; i < items.length; i++)
-    {
-      itm.add(items[i].toJson());
-    }
+  for (int i = 0; i < items.length; i++) {
+    itm.add(items[i].toJson());
+  }
   print('here in the big thing');
   print(itm);
   print({
@@ -64,14 +64,15 @@ Future<Map<String, dynamic>> createNewOrder(
     "description": "new order"
   });
   print(accessToken);
-  final response = await http.post(Uri.parse('${baseUrl}api/order'), headers: {
-    'Authorization': 'Token $accessToken'
-  }, body:jsonEncode({
-    "customerId": customerId,
-    "shopkeeperId": shopkeeperId,
-    "items": itm,
-    "description": "new order"
-  }),
+  final response = await http.post(
+    Uri.parse('${baseUrl}api/order'),
+    headers: {'Authorization': 'Token $accessToken'},
+    body: jsonEncode({
+      "customerId": customerId,
+      "shopkeeperId": shopkeeperId,
+      "items": itm,
+      "description": "new order"
+    }),
   );
   print(response.body);
 

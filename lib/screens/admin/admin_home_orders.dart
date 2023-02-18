@@ -2,6 +2,8 @@ import 'package:catalogue/screens/admin/admin_orders/preparing.dart';
 import 'package:catalogue/screens/admin/admin_orders/requests.dart';
 import 'package:flutter/material.dart';
 
+import 'admin_orders/ready.dart';
+
 class AdminHomeOrders extends StatefulWidget {
   const AdminHomeOrders({super.key});
 
@@ -34,7 +36,7 @@ class _AdminHomeOrdersState extends State<AdminHomeOrders>
             tabs: const <Widget>[
               Tab(
                   child: Text(
-                'Requests(0)',
+                'Requests',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 14,
@@ -42,7 +44,7 @@ class _AdminHomeOrdersState extends State<AdminHomeOrders>
               )),
               Tab(
                   child: Text(
-                'Preparing(0)',
+                'Preparing',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 14,
@@ -50,7 +52,7 @@ class _AdminHomeOrdersState extends State<AdminHomeOrders>
               )),
               Tab(
                   child: Text(
-                'Ready(0)',
+                'Ready',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 14,
@@ -64,7 +66,7 @@ class _AdminHomeOrdersState extends State<AdminHomeOrders>
             children: [
               Requests(),
               Preparing(),
-              Preparing(),
+              Ready(),
 
             ],
           ))

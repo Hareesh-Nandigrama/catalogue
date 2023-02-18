@@ -6,7 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../login/button.dart';
 
 class EditMenu extends StatefulWidget {
-  const EditMenu({Key? key}) : super(key: key);
+  final dynamic data;
+  const EditMenu({Key? key, this.data}) : super(key: key);
 
   @override
   State<EditMenu> createState() => _EditMenuState();
@@ -22,8 +23,28 @@ class _EditMenuState extends State<EditMenu> {
   String food_type = 'Non Veg';
 
   String descriptionofDish = '';
-  bool _switchState = false;
   bool _isDisabled = true;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if(widget.data != null)
+      {
+        dishName = widget.data!['name'];
+        priceofDish = widget.data!['price'].toString();
+
+        availableUntill = widget.data!['endTime'].toString();
+        availableFrom = widget.data!['startTime'].toString();
+        food_type = widget.data!['type'];
+        descriptionofDish = widget.data!['description'];
+        setState(() {
+          _isDisabled = false;
+        });
+      }
+
+
+  }
 
   void check() {
 
@@ -79,6 +100,7 @@ class _EditMenuState extends State<EditMenu> {
                       height: 45,
                       child: TextFormField(
                         cursorColor: Colors.black,
+                        initialValue: dishName,
                         keyboardType: TextInputType.name,
                         onChanged: (val) {
                           dishName = val;
@@ -244,6 +266,7 @@ class _EditMenuState extends State<EditMenu> {
                       },
                       cursorColor: Colors.black,
                       keyboardType: TextInputType.number,
+                      initialValue: priceofDish,
                       decoration: InputDecoration(
                         hintText: 'Price',
                         hintStyle: const TextStyle(
@@ -285,6 +308,7 @@ class _EditMenuState extends State<EditMenu> {
                 check(),
               },
               cursorColor: Colors.black,
+              initialValue: descriptionofDish,
               keyboardType: TextInputType.name,
               decoration: InputDecoration(
                 hintText: 'Description',
@@ -320,13 +344,23 @@ class _EditMenuState extends State<EditMenu> {
             children: [
               GestureDetector(
                 onTap: () async {
+
                   if (_isDisabled) return;
 
                   final prefs = await SharedPreferences.getInstance();
                   final id = prefs.getString('_id') ?? '';
-             
-                  await createMenu(dishName, priceofDish, food_type, id, ' ',
-                      descriptionofDish,availableFrom,availableUntill);
+
+                  if(widget.data != null)
+                    {
+                      await editMenu(dishName, priceofDish, food_type, id, ' ',
+                          descriptionofDish,availableFrom,availableUntill, widget.data['_id']);
+                    }
+                  else
+                    {
+                      await createMenu(dishName, priceofDish, food_type, id, ' ',
+                          descriptionofDish,availableFrom,availableUntill);
+                    }
+
 
                   Navigator.of(context).pop();
                 },

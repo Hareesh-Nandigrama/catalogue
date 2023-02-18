@@ -6,37 +6,57 @@ import '../models/items.dart';
 const baseUrl = 'https://kamengkriti.onrender.com/';
 
 Future<Map<String, dynamic>> getPendingOrders() async {
-  print('inget id');
+
   final prefs = await SharedPreferences.getInstance();
   var accessToken = prefs.getString('access_token');
-  print(accessToken);
 
+print('i am here 123');
 
   final response = await http.get(Uri.parse('${baseUrl}api/order/pending'),
       headers: {
         'content-type': 'application/json',
         'Authorization': 'Token $accessToken'
       });
-  print(response.body);
+
 
   final body = jsonDecode(response.body);
+  print('this is the body');
 
   print(body);
-
+  print('body done');
   return body;
 }
 
 Future<Map<String, dynamic>> getAcceptedOrders() async {
   final prefs = await SharedPreferences.getInstance();
   final accessToken = prefs.getString('access_token');
-  print(accessToken);
+
 
   final response = await http.get(Uri.parse('${baseUrl}api/order/accepted'),
       headers: {
         'content-type': 'application/json',
         'Authorization': 'Token $accessToken'
       });
-  print(response.body);
+
+
+  final body = jsonDecode(response.body);
+  print('this is accepted orders');
+  print(body);
+
+  return body;
+}
+
+Future<Map<String, dynamic>> getReadyOrders() async {
+  final prefs = await SharedPreferences.getInstance();
+  final accessToken = prefs.getString('access_token');
+
+
+  final response = await http.get(Uri.parse('${baseUrl}api/order/completed'),
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': 'Token $accessToken'
+      });
+
 
   final body = jsonDecode(response.body);
 
@@ -99,7 +119,7 @@ Future<Map<String, dynamic>> acceptPendingOrder(String orderId) async {
 
   final body = jsonDecode(response.body);
 
-  print(body);
+
 
   return body;
 }

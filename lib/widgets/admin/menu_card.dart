@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../apis/seller.dart';
+import 'edit_menu.dart';
+
 class MenuCard extends StatelessWidget {
   final data;
-  const MenuCard({Key? key, required this.data}) : super(key: key);
+  final callback;
+  const MenuCard({Key? key, required this.data, this.callback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +46,27 @@ class MenuCard extends StatelessWidget {
                         width: 8,
                       ),
                       GestureDetector(
+                        child: Icon(Icons.delete, color: Colors.red, size: 20),
+                        onTap: () async {
+                          await deleteItem(data['_id']);
+                          callback;
+                        },
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      GestureDetector(
                         child: Icon(Icons.edit, color: Colors.black, size: 18),
                         onTap: () {
-                          // showModalBottomSheet(context: context, builder: (context)=>{
-                          //   return Co
-                          // })
+                          showDialog(
+                            context: context,
+                            builder: (context) => Dialog(
+                                backgroundColor: Colors.transparent,
+                                insetPadding: EdgeInsets.all(10),
+                                child: EditMenu(
+                                  data: data,
+                                )),
+                          );
                         },
                       ),
                     ],

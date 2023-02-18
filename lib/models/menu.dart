@@ -42,7 +42,7 @@ class Menu {
         name: json["name"],
         price: json["price"],
         type: json["type"],
-        photo: json["photo"],
+        photo: json["photo"] ?? '',
         shopkeeperId: json["shopkeeperId"],
         category: json["category"],
         description: json["description"],

@@ -1,4 +1,4 @@
-# catalogue
+# Catalogue
 
 A new Flutter project.
 

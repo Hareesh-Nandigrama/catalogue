@@ -8,8 +8,14 @@ const GetPendingOrders = async (shopkeeperId) => {
     })
         .populate("items.item", ["name", "price", "type"])
         .select("-__v -shopkeeperId");
+    const unpaidOrders = await Orders.find({
+        shopkeeperId: shopkeeperId,
+        status: "awaiting-payment",
+    })
+        .populate("items.item", ["name", "price", "type"])
+        .select("-__v -shopkeeperId");
     if (pendingOrders.length === 0) return false;
-    return pendingOrders;
+    return { pendingOrders, unpaidOrders };
 };
 
 const GetAcceptedOrders = async (shopkeeperId) => {

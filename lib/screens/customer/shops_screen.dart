@@ -53,6 +53,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
                 }
                 renderList = allShops;
 
+
                 return Expanded(
                   child: renderList.isNotEmpty
                       ? ShopItems(

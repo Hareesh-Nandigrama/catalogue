@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../models/menu.dart';
+import '../../screens/customer/cart_store.dart';
+
 class CustomerMenuCard extends StatefulWidget {
-  final data;
-  const CustomerMenuCard({Key? key, this.data}) : super(key: key);
+  final Menu data;
+  const CustomerMenuCard({Key? key, required this.data}) : super(key: key);
 
   @override
   State<CustomerMenuCard> createState() => _CustomerMenuCardState();
@@ -33,8 +36,8 @@ class _CustomerMenuCardState extends State<CustomerMenuCard> {
                   Row(
                     children: [
                       Image.asset('assets/Veg.png', height: 18),
-                      const Text(
-                        '   Paneer Massala',
+                      Text(
+                        '   '+widget.data.name,
                         style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
                       ),
                     ],
@@ -50,9 +53,7 @@ class _CustomerMenuCardState extends State<CustomerMenuCard> {
                           setState(() {
                             noOfItem>0?noOfItem--:0;
                           });
-                          // showModalBottomSheet(context: context, builder: (context)=>{
-                          //   return Co
-                          // })
+                          CartStore.deleteItem(widget.data);
                         },
                       ),
                       Padding(
@@ -68,6 +69,7 @@ class _CustomerMenuCardState extends State<CustomerMenuCard> {
                           setState(() {
                             noOfItem++;
                           });
+                          CartStore.addItem(widget.data);
                         },
                       ),
                     ],
@@ -87,25 +89,25 @@ class _CustomerMenuCardState extends State<CustomerMenuCard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
-                    children: const [
+                    children: [
                       Icon(
                         Icons.currency_rupee,
                         size: 14,
                       ),
                       Text(
-                        '190',
+                        widget.data.price.toString(),
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                   Row(
-                    children: const [
+                    children:  [
                       Icon(
                         Icons.timelapse,
                         size: 14,
                       ),
                       Text(
-                        '  10:00 AM-9:00 PM',
+                        '  '+widget.data.startTime.toString() + ' - '+widget.data.endTime.toString(),
                         style: TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 14),
                       ),
@@ -114,9 +116,9 @@ class _CustomerMenuCardState extends State<CustomerMenuCard> {
                 ],
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-              child: Text('This is a very good Dish . Must Try'),
+              child: Text(widget.data.description),
             ),
           ],
         ),

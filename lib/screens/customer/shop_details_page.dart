@@ -1,6 +1,7 @@
 import 'package:catalogue/apis/orders.dart';
 import 'package:catalogue/models/menu.dart';
 import 'package:catalogue/screens/customer/cart_store.dart';
+import 'package:catalogue/widgets/customer/cust_menu_card.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -140,13 +141,14 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
                               itemBuilder: (context, index) {
                                 return Column(
                                   children: [
-                                    Text(allShops[index].name),
-                                    ElevatedButton(onPressed: (){
-                                      CartStore.addItem(allShops[index]);
-                                    }, child: Text('add')),
-                                    ElevatedButton(onPressed: (){
-                                      CartStore.deleteItem(allShops[index]);
-                                    }, child: Text('delete'))
+                                    CustomerMenuCard(data: allShops[index],),
+                                    // Text(allShops[index].name),
+                                    // ElevatedButton(onPressed: (){
+                                    //
+                                    // }, child: Text('add')),
+                                    // ElevatedButton(onPressed: (){
+                                    //   CartStore.deleteItem(allShops[index]);
+                                    // }, child: Text('delete'))
                                   ],
                                 );
                               })

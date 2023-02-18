@@ -15,7 +15,9 @@ class _CartPageState extends State<CartPage> {
         elevation: 0,
         leadingWidth: 0,
         leading: IconButton(
-          onPressed: (){},
+          onPressed: (){
+            Navigator.of(context).pop();
+          },
           icon: const Icon(Icons.arrow_back),
           color: Colors.black,
         ),
@@ -29,6 +31,7 @@ class _CartPageState extends State<CartPage> {
                 const SizedBox(
                   height: 30,
                 ),
+
                 SizedBox(
                   width: 350,
                   child: Card(
@@ -90,7 +93,9 @@ class _CartPageState extends State<CartPage> {
             child: SizedBox(
               width: 320,
               child: FloatingActionButton(
-                onPressed: (){},
+                onPressed: (){
+                  Navigator.of(context).pop();
+                },
                 shape: const BeveledRectangleBorder(
                     borderRadius: BorderRadius.zero
                 ),
@@ -105,4 +110,5 @@ class _CartPageState extends State<CartPage> {
     );
   }
 }
+
 

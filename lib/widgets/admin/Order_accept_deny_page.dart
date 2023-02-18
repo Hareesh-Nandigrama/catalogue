@@ -17,7 +17,7 @@ class _OrderCardAcceptorDenyState extends State<OrderCardAcceptorDeny> {
     num answer = 0;
     for(var item in widget.data['items'])
       {
-        answer += item['qty']*item['price'];
+        answer += item['qty']*item['item']['price'];
       }
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 17, vertical: 8),
@@ -40,7 +40,7 @@ class _OrderCardAcceptorDenyState extends State<OrderCardAcceptorDeny> {
                   child: Row(
                     children: [
                       Text(
-                        widget.data['_id'].toString().substring(0, 5),
+                        'Order id: '+widget.data['_id'].toString().substring(0, 5),
                       ),
                     ],
                   ),
@@ -49,7 +49,7 @@ class _OrderCardAcceptorDenyState extends State<OrderCardAcceptorDeny> {
                   padding: const EdgeInsets.only(right: 8),
                   child: Row(
                     children: [
-                      Text(widget.data['createdAt']),
+                      Text(widget.data['createdAt'].toString().substring(0,10)),
                       Icon(Icons.more_vert_rounded),
                     ],
                   ),
@@ -66,23 +66,10 @@ class _OrderCardAcceptorDenyState extends State<OrderCardAcceptorDeny> {
                   padding: const EdgeInsets.only(left: 8),
                   child: Row(
                     children: [
-                      CircleAvatar(
-                        radius: 13,
-                        backgroundColor: Colors.black,
-                        child: CircleAvatar(
-                          radius: 11,
-                          backgroundColor: Colors.white,
-                          child: Image.asset(
-                            'assets/profile.png',
-                            height: 14,
-                            width: 18,
-                          ),
-                        ),
-                        // backgroundImage: AssetImage('assets/profile.png'),
-                      ),
+
                       Padding(
                         padding: EdgeInsets.only(left: 4),
-                        child: Text(widget.data['customerId']),
+                        child: Text('User Id:'+widget.data['customerId']),
                       ),
                     ],
                   ),
@@ -120,7 +107,7 @@ class _OrderCardAcceptorDenyState extends State<OrderCardAcceptorDeny> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 4),
-                          child: Text('${item['name']} x${item['qty']}'),
+                          child: Text('${item['item']['name']} x${item['qty']}'),
                         ),
                       ],
                     ),
@@ -133,7 +120,7 @@ class _OrderCardAcceptorDenyState extends State<OrderCardAcceptorDeny> {
                           Icons.currency_rupee,
                           size: 14,
                         ),
-                        Text(item['price'] * item['qty']),
+                        Text('${item['qty']*item['item']['price']}'),
                       ],
                     ),
                   ),

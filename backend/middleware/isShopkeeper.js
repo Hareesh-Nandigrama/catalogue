@@ -7,8 +7,7 @@ const isSeller = async function (req, res, next) {
 	const user = await Shopkeeper.findOne({ uid: token });
 	if (!user) return next(new AppError(403, "Not Authenticated"));
 	req.user = user;
-	if (user) return res.json(1);
-  return res.json(0);
+	return next();
 };
 
 module.exports = isSeller;

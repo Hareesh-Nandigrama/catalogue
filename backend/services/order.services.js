@@ -6,7 +6,7 @@ const GetPendingOrders = async (shopkeeperId) => {
         shopkeeperId: shopkeeperId,
         status: "pending",
     })
-        .populate("items.item", ["name", "price"])
+        .populate("items.item", ["name", "price", "type"])
         .select("-__v -shopkeeperId");
     if (pendingOrders.length === 0) return false;
     return pendingOrders;
@@ -17,7 +17,29 @@ const GetAcceptedOrders = async (shopkeeperId) => {
         shopkeeperId: shopkeeperId,
         status: "accepted",
     })
-        .populate("items.item", ["name", "price"])
+        .populate("items.item", ["name", "price", "type"])
+        .select("-__v -shopkeeperId");
+    if (pendingOrders.length === 0) return false;
+    return pendingOrders;
+};
+
+const GetCancelledOrders = async (shopkeeperId) => {
+    const pendingOrders = await Orders.find({
+        shopkeeperId: shopkeeperId,
+        status: "declined",
+    })
+        .populate("items.item", ["name", "price", "type"])
+        .select("-__v -shopkeeperId");
+    if (pendingOrders.length === 0) return false;
+    return pendingOrders;
+};
+
+const GetCompletedOrders = async (shopkeeperId) => {
+    const pendingOrders = await Orders.find({
+        shopkeeperId: shopkeeperId,
+        status: "completed",
+    })
+        .populate("items.item", ["name", "price", "type"])
         .select("-__v -shopkeeperId");
     if (pendingOrders.length === 0) return false;
     return pendingOrders;
@@ -25,13 +47,33 @@ const GetAcceptedOrders = async (shopkeeperId) => {
 
 const GetAllOrders = async (shopkeeperId) => {
     const pendingOrders = await Orders.find({})
-        .populate("items.item", ["name", "price"])
+        .populate("items.item", ["name", "price", "type"])
         .select("-__v -shopkeeperId");
     if (pendingOrders.length === 0) return false;
     return pendingOrders;
 };
 
 const ApproveOrder = async (orderId, shopkeeperId) => {
+    const existingOrder = await Orders.findById(orderId);
+    if (!existingOrder) {
+        throw new AppError(404, "Order not found");
+        return;
+    }
+
+    if (!existingOrder.shopkeeperId.equals(shopkeeperId)) {
+        throw new AppError(403, "Not authorized!");
+        return;
+    }
+
+    const order = await Orders.findByIdAndUpdate(
+        orderId,
+        { status: "awaiting-payment" },
+        { new: true }
+    );
+    return order;
+};
+
+const PaidOrder = async (orderId, shopkeeperId) => {
     const existingOrder = await Orders.findById(orderId);
     if (!existingOrder) {
         throw new AppError(404, "Order not found");
@@ -65,6 +107,11 @@ const CreateNewOrder = async (data) => {
     return newOrder;
 };
 
+const GetOrder = async (data) => {
+    const order = await Orders.findById({});
+    return newOrder;
+};
+
 module.exports = {
     GetPendingOrders,
     CreateNewOrder,
@@ -73,4 +120,7 @@ module.exports = {
     CompleteOrder,
     GetAllOrders,
     GetAcceptedOrders,
+    GetCancelledOrders,
+    GetCompletedOrders,
+    PaidOrder,
 };

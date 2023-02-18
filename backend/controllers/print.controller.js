@@ -24,9 +24,9 @@ const GetAllOrders = async (req, res, next) => {
 
 const CreateNewOrder = async (req, res, next) => {
     const payloadSchema = {
-        customerId: Joi.string().min(5).required(),
-        shopkeeperId: Joi.string().min(5).required(),
-        type: Joi.string().min(5).required(),
+        customerId: Joi.string().required(),
+        shopkeeperId: Joi.string().required(),
+        type: Joi.string().required(),
         files: Joi.array(),
     };
 

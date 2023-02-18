@@ -20,6 +20,9 @@ app.use("/api/customer", usersRouter);
 const printRoutes = require("./routes/print.routes");
 app.use("/api/print", printRoutes);
 
+const transactionRoutes = require("./routes/transaction.routes");
+app.use("/api/transaction", transactionRoutes);
+
 const shopkeepersRouter = require("./routes/shopkeeper.routes");
 app.use("/api/shopkeeper", shopkeepersRouter);
 

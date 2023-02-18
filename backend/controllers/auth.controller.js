@@ -9,79 +9,96 @@ console.log(AuthServices);
 const User = require("../models/customer.model");
 const SendEmail = require("../services/email/sendEmail");
 
+const ShopkeeperModel = require("../models/shopkeeper.model");
+const CustomerModel = require("../models/customer.model");
+
 const CreateNewUser = async (req, res, next) => {
-	const payloadSchema = {
-		name: Joi.string().required(),
-		email: Joi.string().email().required(),
-		password: Joi.string().required(),
-	};
+    const payloadSchema = {
+        name: Joi.string().required(),
+        email: Joi.string().email().required(),
+        password: Joi.string().required(),
+    };
 
-	const data = req.body;
-	const valid = validatePayload(payloadSchema, data);
+    const data = req.body;
+    const valid = validatePayload(payloadSchema, data);
 
-	if (valid.error) {
-		return next(new AppError(400, valid.error));
-	}
+    if (valid.error) {
+        return next(new AppError(400, valid.error));
+    }
 
-	const newUser = await UserServices.createUser(data);
+    const newUser = await UserServices.createUser(data);
 
-	await AuthServices.GenerateOTP(newUser._id, newUser.email);
+    await AuthServices.GenerateOTP(newUser._id, newUser.email);
 
-	return res.status(200).json({
-		error: false,
-		accountCreated: true,
-		token: newUser._id,
-	});
+    return res.status(200).json({
+        error: false,
+        accountCreated: true,
+        token: newUser._id,
+    });
 };
 
 const VerifyOTP = async (req, res, next) => {
-	const payloadSchema = {
-		otp: Joi.number().required(),
-		token: Joi.string().required(),
-	};
-	const data = req.body;
-	const valid = validatePayload(payloadSchema, data);
+    const payloadSchema = {
+        otp: Joi.number().required(),
+        token: Joi.string().required(),
+    };
+    const data = req.body;
+    const valid = validatePayload(payloadSchema, data);
 
-	if (valid.error) {
-		return next(new AppError(400, valid.error));
-	}
+    if (valid.error) {
+        return next(new AppError(400, valid.error));
+    }
 
-	const access_token = await AuthServices.VerifyOTP(data.token, data.otp);
-	if (!access_token) return next(new AppError(403, "Invalid OTP"));
+    const access_token = await AuthServices.VerifyOTP(data.token, data.otp);
+    if (!access_token) return next(new AppError(403, "Invalid OTP"));
 
-	return res.status(200).json({ access_token });
+    return res.status(200).json({ access_token });
 };
 
 const LoginUser = async (req, res, next) => {
-	const payloadSchema = {
-		email: Joi.string().email().required(),
-		password: Joi.string().required(),
-	};
+    const payloadSchema = {
+        email: Joi.string().email().required(),
+        password: Joi.string().required(),
+    };
 
-	const data = req.body;
+    const data = req.body;
 
-	const valid = validatePayload(payloadSchema, data);
+    const valid = validatePayload(payloadSchema, data);
 
-	if (valid.error) {
-		return next(new AppError(400, valid.error));
-	}
+    if (valid.error) {
+        return next(new AppError(400, valid.error));
+    }
 
-	const existingUser = await User.findOne({ email: data.email });
-	if (!existingUser) return next(new AppError(403, "Invalid email or password"));
+    const existingUser = await User.findOne({ email: data.email });
+    if (!existingUser) return next(new AppError(403, "Invalid email or password"));
 
-	const matched = await existingUser.comparePassword(data.password);
-	if (!matched) return next(new AppError(403, "Invalid email or password"));
+    const matched = await existingUser.comparePassword(data.password);
+    if (!matched) return next(new AppError(403, "Invalid email or password"));
 
-	if (!existingUser.isVerified) {
-		await AuthServices.GenerateOTP(existingUser._id, existingUser.email);
-		return res.json({
-			message: "Account not verified",
-			token: existingUser._id,
-		});
-	}
+    if (!existingUser.isVerified) {
+        await AuthServices.GenerateOTP(existingUser._id, existingUser.email);
+        return res.json({
+            message: "Account not verified",
+            token: existingUser._id,
+        });
+    }
 
-	const access_token = existingUser.generateJWT();
-	return res.status(200).json({ access_token });
+    const access_token = existingUser.generateJWT();
+    return res.status(200).json({ access_token });
 };
 
-module.exports = { CreateNewUser, LoginUser, VerifyOTP };
+const CustomerExists = async (req, res, next) => {
+    const { phoneNumber } = req.params;
+    const _user = await CustomerModel.findOne({ phoneNumber });
+    if (!_user) return res.json({ exists: false });
+    return res.json({ exists: true, data: _user });
+};
+
+const ShopkeeperExists = async (req, res, next) => {
+    const { phoneNumber } = req.params;
+    const _user = await ShopkeeperModel.findOne({ phoneNumber });
+    if (!_user) return res.json({ exists: false });
+    return res.json({ exists: true, data: _user });
+};
+
+module.exports = { CreateNewUser, LoginUser, VerifyOTP, CustomerExists, ShopkeeperExists };

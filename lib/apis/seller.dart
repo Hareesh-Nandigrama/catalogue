@@ -19,7 +19,7 @@ Future<void> getShopkeeper() async {
         "Authorization": "Token $access_token"
       });
 
-  print(response.body);
+
 }
 
 Future<List<dynamic>> getShops() async {
@@ -29,13 +29,12 @@ Future<List<dynamic>> getShops() async {
   });
   var body = jsonDecode(response.body);
   List<dynamic> answer = [];
-  print('here 2');
+
   for (var json in body as List<dynamic>) {
-    print(json);
+
     answer.add(json);
   }
 
-  print('im returning now');
   return answer;
 }
 
@@ -52,7 +51,6 @@ Future<dynamic> getMenu() async {
   final body = jsonDecode(response.body);
   List<Menu> answer = [];
 
-  print(body);
 
   return body;
 }
@@ -73,10 +71,6 @@ Future<Map<String, dynamic>> createMenu(
 
   final _type = type.toLowerCase();
 
-  print(_type);
-  print('starttime');
-  print(startTime);
-  print(endTime);
 
   final response = await http.post(Uri.parse('${baseUrl}api/item'),
       headers: {
@@ -95,7 +89,7 @@ Future<Map<String, dynamic>> createMenu(
       }));
 
   final body = jsonDecode(response.body);
-  print(response.body);
+
 
   showSnackBar('Menu Item added');
 
@@ -118,10 +112,8 @@ Future<Map<String, dynamic>> editMenu(
   var access_token = prefs.getString('access_token') ?? '';
 
   final _type = type.toLowerCase();
-  print("TESTING");
-  print(price);
-  print(itemID);
-  final response = await http.put(Uri.parse('${baseUrl}api/item/:$itemID'),
+
+  final response = await http.put(Uri.parse('${baseUrl}api/item/$itemID'),
       headers: {
         'content-type': 'application/json',
         "Authorization": "Token $access_token"
@@ -139,10 +131,25 @@ Future<Map<String, dynamic>> editMenu(
       }));
 
   final body = jsonDecode(response.body);
-  print(response.body);
 
-  showSnackBar('Menu Item added');
+  showSnackBar('Menu Edit added');
 
+  return body;
+}
+
+deleteItem(String id)
+async {
+  final prefs = await SharedPreferences.getInstance();
+
+  final access_token = prefs.getString('access_token') ?? '';
+
+  final response = await http.delete(Uri.parse('${baseUrl}api/item/$id'),
+      headers: {
+        'content-type': 'application/json',
+        "Authorization": "Token $access_token"
+      });
+
+  final body = jsonDecode(response.body);
   return body;
 }
 
@@ -150,7 +157,6 @@ Future<Map<String, dynamic>> getCurrentShopDetails() async {
   final prefs = await SharedPreferences.getInstance();
 
   final access_token = prefs.getString('access_token') ?? '';
-  print(access_token);
 
   final response = await http.get(Uri.parse('${baseUrl}api/shopkeeper'),
       headers: {
@@ -158,7 +164,6 @@ Future<Map<String, dynamic>> getCurrentShopDetails() async {
         "Authorization": "Token $access_token"
       });
 
-  print('printing from shop details');
   final body = jsonDecode(response.body);
   return body;
 }

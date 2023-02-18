@@ -6,9 +6,21 @@ import 'package:flutter/material.dart';
 import '../../screens/customer/customer_profile.dart';
 import 'menu_card.dart';
 
-class MenuPage extends StatelessWidget {
+class MenuPage extends StatefulWidget {
   const MenuPage({Key? key}) : super(key: key);
 
+  @override
+  State<MenuPage> createState() => _MenuPageState();
+}
+
+class _MenuPageState extends State<MenuPage> {
+
+  void func()
+  {
+    setState(() {
+
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -47,6 +59,7 @@ class MenuPage extends StatelessWidget {
                     return ListView.builder(
                       itemBuilder: (context, index) => MenuCard(
                         data: snapshot.data[index],
+                        callback: func,
                       ),
                       itemCount: snapshot.data!.length,
                     );

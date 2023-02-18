@@ -40,11 +40,11 @@ Future<dynamic> getMenu(String? shopkeeperId1) async {
   final prefs = await SharedPreferences.getInstance();
   var shopkeeperId = '';
   if (shopkeeperId1 == null) {
-    final shopkeeperId = prefs.getString('_id');
+    shopkeeperId = prefs.getString('_id') ?? '';
   } else {
     shopkeeperId = shopkeeperId1;
   }
-
+  print('shop keeper id is this');
   print(shopkeeperId);
   print('this is');
   final response =

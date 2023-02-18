@@ -25,7 +25,9 @@ class _ReadyState extends State<Ready> {
               return NoAvailable();
             }
             return ListView.builder(
-              itemBuilder: (context, index) => const OrderCardAcceptorDeny(),
+              itemBuilder: (context, index) => OrderCardAcceptorDeny(
+                  data: snapshot.data!['orders'][index]
+              ),
               itemCount: snapshot.data!['orders'].length,
             );
           }

@@ -3,6 +3,8 @@ import 'package:catalogue/apis/seller.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../login/button.dart';
+
 class OrderCardAcceptorDeny extends StatefulWidget {
   final data;
   const OrderCardAcceptorDeny({Key? key, this.data}) : super(key: key);
@@ -170,24 +172,66 @@ class _OrderCardAcceptorDenyState extends State<OrderCardAcceptorDeny> {
               color: Colors.grey,
             ),
           ),
-          widget.data['status'] == 'pending'?Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              GestureDetector(
-                  onTap: () {
-                    declinePendingOrder( widget.data['_id']);
+          widget.data['status'] == 'pending'?Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GestureDetector(
+                    onTap: () async {
+                      await declinePendingOrder( widget.data['_id']);
+                    },
+                    child: CustomButtonAcceptOrDeny(
+                        accepted: false, buttonname: 'Decline')),
+                GestureDetector(
+                  onTap: () async {
+                    await acceptPendingOrder( widget.data['_id']);
                   },
-                  child: CustomButtonAcceptOrDeny(
-                      accepted: false, buttonname: 'Decline')),
-              GestureDetector(
-                onTap: (){
-                  acceptPendingOrder( widget.data['_id']);
-                },
-                  child: CustomButtonAcceptOrDeny(
-                      accepted: true, buttonname: 'Accept')),
-            ],
+                    child: CustomButtonAcceptOrDeny(
+                        accepted: true, buttonname: 'Accept')),
+              ],
+            ),
           )
-              : Text('Awaiting Payment')
+              : widget.data['status'] == 'accepted'?GestureDetector(
+            onTap: () async {
+              await orderReady(widget.data['_id']);
+            },
+                child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:  const [
+                CustomButton(isDisabled: false, buttonname: 'Order Ready'),
+            ],
+          ),
+              ):
+          widget.data['status'] == 'completed'?GestureDetector(
+            onTap: () async {
+              //await orderReady(widget.data['_id']);
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:  const [
+                CustomButton(isDisabled: false, buttonname: 'Delievered'),
+              ],
+            ),
+          ):Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4,vertical: 8),
+            child: Column(
+              children: [
+                const Text('Waiting for payment',style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 16,
+                ),),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                        Icons.timelapse
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

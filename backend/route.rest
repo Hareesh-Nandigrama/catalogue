@@ -1,0 +1,28 @@
+GET http://localhost:3000/users/
+
+###
+
+GET http://localhost:3000/users/8
+
+###
+
+GET http://localhost:3000/shopkeepers/
+
+###
+
+POST http://localhost:3000/shopkeepers/
+content-type: application/json
+
+{
+    "phoneNumber": "1234567880",
+    "name": "John Doe",
+    "businessName": "John's Shop",
+    "email": "john@oe.com",
+    "businessType": "stationary",
+    "location": "Kameng",
+    "openTime": "10:00",
+    "closeTime": "18:00",
+    "description": "John's Shop is a shop that sells stuff.",
+    "openStatus": "1"
+}
+

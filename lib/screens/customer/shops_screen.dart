@@ -1,3 +1,4 @@
+import 'package:catalogue/screens/customer/customer_profile.dart';
 import 'package:catalogue/widgets/customer/customer_card.dart';
 import 'package:catalogue/widgets/customer/search_bar.dart';
 import 'package:catalogue/widgets/login/button.dart';
@@ -72,36 +73,29 @@ class _ShopsScreenState extends State<ShopsScreen> {
                                   const SizedBox(
                                     width: 14,
                                   ),
-                                  CircleAvatar(
-                                    radius: 25,
-                                    backgroundColor:
-                                        const Color.fromRGBO(226, 226, 226, 1),
-                                    child: Image.asset(
-                                      'assets/profile.png',
-                                      height: 25,
-                                      width: 25,
+                                  GestureDetector(
+                                    onTap: (){
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CustomerProfile()));
+                                    },
+                                    child: CircleAvatar(
+                                      radius: 25,
+                                      backgroundColor:
+                                          const Color.fromRGBO(226, 226, 226, 1),
+                                      child: Image.asset(
+                                        'assets/profile.png',
+                                        height: 25,
+                                        width: 25,
+                                      ),
+                                      // backgroundImage: AssetImage('assets/profile.png'),
                                     ),
-                                    // backgroundImage: AssetImage('assets/profile.png'),
                                   )
                                 ],
                               ),
                             ),
-                            ListView.builder(
-                                itemCount: allShops.length,
-                                itemBuilder: (context, index) {
-                                  return CustomerCard(
-                                    body: allShops[index],
-                                  );
-                                })
+                            for(var shop in allShops)
+                              CustomerCard(body: shop,)
                           ],
                         )
-                      // ? ListView.builder(
-                      //     itemCount: allShops.length,
-                      //     itemBuilder: (context, index) {
-                      //       return CustomerCard(
-                      //         body: allShops[index],
-                      //       );
-                      //     })
                       : NoOutlets(),
                 );
               }

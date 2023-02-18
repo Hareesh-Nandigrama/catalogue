@@ -95,6 +95,8 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                   buttonname: 'Next',
                 ),
                 onTap: () async {
+
+                  
                   if (disabled) {
                     return;
                   } else {
@@ -103,15 +105,15 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                       isLoading = true;
                     });
                     await phoneNumber(phoneNum.text.trim(), widget.isCustomer);
+                    setState(() {
+                      isLoading = false;
+                    });
                   }
                 },
               ),
             ],
           ),
-          Visibility(
-            visible: isLoading,
-            child: const CustomProgress()
-          )
+          Visibility(visible: isLoading, child: const CustomProgress())
         ],
       ),
     );

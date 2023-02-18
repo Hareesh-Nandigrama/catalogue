@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:catalogue/controllers/otp_auth.dart';
+import 'package:catalogue/screens/admin/admin_home.dart';
+import 'package:catalogue/screens/customer/customer_home.dart';
 import 'package:catalogue/screens/login/template.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,6 +12,7 @@ import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'username_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class OTPScreen extends StatefulWidget {
   final String phoneNumber;
@@ -155,8 +160,6 @@ class _OTPScreenState extends State<OTPScreen> {
                   } else {
                     try {
                       final auth = FirebaseAuth.instance;
-              
-
 
                       PhoneAuthCredential credential =
                           PhoneAuthProvider.credential(
@@ -171,15 +174,43 @@ class _OTPScreenState extends State<OTPScreen> {
                       print(prefs.getString('uid'));
                       await prefs.setBool('isCustomer', widget.isCustomer);
                       await prefs.setBool('isVerified', true);
+                      const baseUrl = 'https://kamengkriti.onrender.com/';
+
+                      if (!widget.isCustomer) {
+                        final resp = await http.get(
+                          Uri.parse(
+                              '${baseUrl}api/auth/shopkeeper/exists/${widget.phoneNumber}'),
+                        );
+                        final body = jsonDecode(resp.body);
+                        if (body['exists'] == 'true') {
+                          Navigator.of(context)
+                              .pushReplacement(MaterialPageRoute(
+                            builder: (context) => AdminHome(),
+                          ));
+                        }
+                      } else {
+                        final resp = await http.get(
+                          Uri.parse(
+                              '${baseUrl}api/auth/customer/exists/${widget.phoneNumber}'),
+                        );
+                        final body = jsonDecode(resp.body);
+
+                        if (body['exists'] == 'true') {
+                          Navigator.of(context)
+                              .pushReplacement(MaterialPageRoute(
+                            builder: (context) => CustomerHome(),
+                          ));
+                        }
+                      }
+
                       if (!mounted) return;
                       showSnackBar('Phone No. Successfully verified');
                       Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const UsernameScreen(),
-                        ),
-                          ModalRoute.withName('/')
-                      );
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const UsernameScreen(),
+                          ),
+                          ModalRoute.withName('/'));
                     } on FirebaseAuthException catch (_) {
                       showSnackBar('Entered OTP does not match');
                     }

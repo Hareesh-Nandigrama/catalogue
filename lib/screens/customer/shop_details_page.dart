@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../apis/seller.dart';
 import '../../widgets/common/shimmer.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class ShopDetailsPage extends StatefulWidget {
   final data;
@@ -17,6 +18,10 @@ class ShopDetailsPage extends StatefulWidget {
 
 class _ShopDetailsPageState extends State<ShopDetailsPage> {
 
+  var _razorpay = Razorpay();
+
+
+
   int _selectedPageIndex = 0;
   void _selectPage(int index) {
     setState(() {
@@ -24,13 +29,39 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
     });
   }
 
+
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    // Do something when payment succeeds
+
+
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    // Do something when payment fails
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    // Do something when an external wallet was selected
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     CartStore.clear();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
   }
 
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _razorpay.clear();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,7 +152,7 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
                               })
                               : const Center(
                             child:
-                            Text("No Result found"),
+                            Text("No items on menu"),
                           ));
                     }
                     return const CircularProgressIndicator();
@@ -140,20 +171,45 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
           ),
         );
       }),
-      floatingActionButton: _selectedPageIndex == 1? ElevatedButton(onPressed: ()async{
-        print('a');
-        final prefs =await SharedPreferences.getInstance();
-        print('b');
+      floatingActionButton: ElevatedButton(onPressed: (){
+        var options = {
+          'key': 'rzp_test_lH1Cp1gS0WSphU',
+          'amount': 10000,
+          'name': 'Acme Corp.',
+          'description': 'Fine T-Shirt',
+          'prefill': {
+            'contact': '8888888888',
+            'email': 'test@razorpay.com'
+          }
+        };
+        _razorpay.open(options);
 
-        final uid = prefs.getString('uid') ?? '';
-        print('this is the uid');
-        print(uid);
-        print('c');
 
-        createNewOrder(uid, widget.data['_id'], CartStore.getOrder());
-        print('d');
 
-      }, child: Text('hello')):Container(),
+
+
+
+
+
+
+
+
+      },child: Text('pay'),),
+      // floatingActionButton: _selectedPageIndex == 1? ElevatedButton(onPressed: ()async{
+      //   print('a');
+      //   final prefs =await SharedPreferences.getInstance();
+      //   print('b');
+      //
+      //   final uid = prefs.getString('uid') ?? '';
+      //   print('this is the uid');
+      //   print(uid);
+      //   print('c');
+      //
+      //   createNewOrder(uid, widget.data['_id'], CartStore.getOrder());
+      //   print('d');
+      //
+      // },
+      //     child: Text('hello')):Container(),
     );
   }
 }

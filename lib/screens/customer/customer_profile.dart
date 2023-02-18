@@ -20,12 +20,18 @@ class _CustomerProfileState extends State<CustomerProfile> {
         title: Text("Profile Page"),
         centerTitle: true,
         actions: [
-          IconButton(onPressed: () async {
-            FirebaseAuth.instance.signOut();
-            var pref = await SharedPreferences.getInstance();
-            pref.clear();
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => FirstScreen()));
-          }, icon: Icon(Icons.logout_sharp, color: Colors.red,)),
+          IconButton(
+              onPressed: () async {
+                FirebaseAuth.instance.signOut();
+                var pref = await SharedPreferences.getInstance();
+                pref.clear();
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => FirstScreen()));
+              },
+              icon: Icon(
+                Icons.logout_sharp,
+                color: Colors.red,
+              )),
         ],
       ),
       body: Column(),

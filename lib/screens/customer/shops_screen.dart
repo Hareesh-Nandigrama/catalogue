@@ -55,7 +55,10 @@ class _ShopsScreenState extends State<ShopsScreen> {
 
                 return Expanded(
                   child: renderList.isNotEmpty
-                      ? ShopItems(data: renderList,)
+                      ? ShopItems(
+                          data: renderList,
+                          
+                        )
                       : NoOutlets(),
                 );
               }
@@ -90,15 +93,22 @@ class NoOutlets extends StatelessWidget {
               const SizedBox(
                 width: 14,
               ),
-              CircleAvatar(
-                radius: 25,
-                backgroundColor: const Color.fromRGBO(226, 226, 226, 1),
-                child: Image.asset(
-                  'assets/profile.png',
-                  height: 25,
-                  width: 25,
+              GestureDetector(
+                onTap: () => {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => CustomerProfile(),
+                  ))
+                },
+                child: CircleAvatar(
+                  radius: 25,
+                  backgroundColor: const Color.fromRGBO(226, 226, 226, 1),
+                  child: Image.asset(
+                    'assets/profile.png',
+                    height: 25,
+                    width: 25,
+                  ),
+                  // backgroundImage: AssetImage('assets/profile.png'),
                 ),
-                // backgroundImage: AssetImage('assets/profile.png'),
               )
             ],
           ),

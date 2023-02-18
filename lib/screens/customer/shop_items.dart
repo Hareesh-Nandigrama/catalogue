@@ -1,3 +1,4 @@
+import 'package:catalogue/screens/customer/customer_profile.dart';
 import 'package:catalogue/widgets/customer/customer_card.dart';
 import 'package:catalogue/widgets/customer/search_bar.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,14 @@ class ShopItems extends StatefulWidget {
 
 class _ShopItemsState extends State<ShopItems> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
-    final renderList = widget.data;
+    List<dynamic> renderList = widget.data;
+    var filteredList = [];
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -31,36 +38,53 @@ class _ShopItemsState extends State<ShopItems> {
               Expanded(
                 child: CustomerSearchBar(callback: (val) {
                   setState(() {
-                    renderList.retainWhere((element) {
-                      String name = element['businessName'];
+                    filteredList = renderList.where((element) {
+                      String ac = element['businessName'];
+                      String contain = val;
+                      print('fjkhsjhdgfshjds');
+                      print(ac);
+                      print(ac.contains(val));
+                      return ac.contains(contain.toLowerCase());
+                    }).toList();
+                    print(filteredList);
 
-                      return name.contains(val);
-                    });
+                    print(val);
+                    // filteredList = renderList.where((element) {
+                    //   String string = body['businessName'];
+                    //   return string.contains(val);
+                    // })
                   });
                 }),
               ),
               const SizedBox(
                 width: 14,
               ),
-              CircleAvatar(
-                radius: 25,
-                backgroundColor: const Color.fromRGBO(226, 226, 226, 1),
-                child: Image.asset(
-                  'assets/profile.png',
-                  height: 25,
-                  width: 25,
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => CustomerProfile(),
+                  ));
+                },
+                child: CircleAvatar(
+                  radius: 25,
+                  backgroundColor: const Color.fromRGBO(226, 226, 226, 1),
+                  child: Image.asset(
+                    'assets/profile.png',
+                    height: 25,
+                    width: 25,
+                  ),
+                  // backgroundImage: AssetImage('assets/profile.png'),
                 ),
-                // backgroundImage: AssetImage('assets/profile.png'),
               )
             ],
           ),
         ),
         Expanded(
           child: ListView.builder(
-              itemCount: renderList.length,
+              itemCount: filteredList.length,
               itemBuilder: (context, index) {
                 return CustomerCard(
-                  body: renderList[index],
+                  body: filteredList[index],
                 );
               }),
         )

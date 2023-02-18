@@ -4,11 +4,9 @@ import 'menu_card.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({Key? key}) : super(key: key);
-  
 
   @override
   Widget build(BuildContext context) {
-    
     return Expanded(
       child: Column(
         children: [
@@ -41,21 +39,19 @@ class MenuPage extends StatelessWidget {
               itemCount: 10,
             ),
           ),
-          EditMenu(),
+
           // EditMenu(),
           IconButton(
               onPressed: () {
-                showBottomSheet(
-
+                showDialog(
                   context: context,
-                  builder: (context) => SimpleDialog(
-
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    children: [EditMenu()],
-                  ),
+                  builder: (context) => Dialog(
+                      backgroundColor: Colors.transparent,
+                      insetPadding: EdgeInsets.all(10),
+                      child: EditMenu()),
                 );
+
+                
               },
               icon: const CircleAvatar(
                 backgroundColor: Colors.black,

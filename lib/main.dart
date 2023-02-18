@@ -18,18 +18,13 @@ final navigatorKey = GlobalKey<NavigatorState>();
 Future<String> getVerifiedData() async {
   final prefs = await SharedPreferences.getInstance();
   bool isSigned = FirebaseAuth.instance.currentUser == null ? false : true;
-  if(isSigned)
-  {
+  if (isSigned) {
     if (prefs.getBool('isCustomer') ?? false) {
       return 'customer';
-    }
-    else
-    {
+    } else {
       return 'admin';
     }
-  }
-  else
-  {
+  } else {
     return 'first';
   }
 }
@@ -47,24 +42,20 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.grey,
         fontFamily: 'UberMove',
       ),
-
-      //home: AdminHome(),
-
-
       home: FutureBuilder<String>(
           future: getVerifiedData(),
           builder: (context, snapshot) {
             return snapshot.hasData
                 ? snapshot.data == 'first'
-                ? const FirstScreen()
-                : (snapshot.data == 'customer'
-                ? const CustomerHome()
-                : const AdminHome())
+                    ? const FirstScreen()
+                    : (snapshot.data == 'customer'
+                        ? const CustomerHome()
+                        : const AdminHome())
                 : Scaffold(
-              body: Center(
-                child: Text('Some Error Occured'),
-              ),
-            );
+                    body: Center(
+                      child: Text('Some Error Occured'),
+                    ),
+                  );
           }),
     );
   }

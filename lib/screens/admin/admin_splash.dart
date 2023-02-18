@@ -63,27 +63,29 @@ class _AdminHomeState extends State<AdminSplash> {
                         final phone = prefs.getString('phone') ?? '';
                         final uid = prefs.getString('uid') ?? '';
                         final data = widget.data;
-                      
 
-                        createShopkeeper(
-                          phone,
-                          data['username'],
-                          data['businessName'],
-                          data['type'],
-                          data['location'],
-                          data['closes'],
-                          data['opens'],
-                          data['photos'],
-                          uid,
-                        );
+                        try {
+                          createShopkeeper(
+                            phone,
+                            data['username'],
+                            data['businessName'],
+                            data['type'],
+                            data['location'],
+                            data['closes'],
+                            data['opens'],
+                            data['photos'],
+                            uid,
+                          );
+                        } catch (e) {
+                          print(e);
+                        }
                         if (!mounted) return;
                         showSnackBar('Succesfully Registered');
                         Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => AdminHome(),
-                          ),
-                            ModalRoute.withName('/')
-                        );
+                            MaterialPageRoute(
+                              builder: (BuildContext context) => AdminHome(),
+                            ),
+                            ModalRoute.withName('/'));
                       },
                       child: const CustomOutlinedButton(
                         buttonname: 'Skip for later',
@@ -91,12 +93,11 @@ class _AdminHomeState extends State<AdminSplash> {
                     ),
                     GestureDetector(
                       onTap: () async {
-                         Navigator.of(context).push(
+                        Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (BuildContext context) => MenuPage(),
                           ),
                         );
-              
                       },
                       child: const CustomButton(
                         isDisabled: false,

@@ -3,8 +3,6 @@ import 'package:catalogue/screens/admin/admin_insights.dart';
 import 'package:catalogue/screens/admin/shop_profile.dart';
 import 'package:catalogue/widgets/admin/menu_page.dart';
 import 'package:catalogue/widgets/admin/status_switch.dart';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AdminHome extends StatefulWidget {

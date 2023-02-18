@@ -24,11 +24,14 @@ Future<void> createShopkeeper(
     "openTime": openTime,
     "closeTime": closeTime,
     "photos": photos,
-    "uid": uid
+    "uid": uid,
+    "description": "hello"
   });
 
   final response = await http.post(Uri.parse('${baseUrl}api/shopkeeper'),
       body: body, headers: {'content-type': 'application/json'});
+
+  print(response.body);
   final prefs = await SharedPreferences.getInstance();
 
   await prefs.setString('access_token', uid);

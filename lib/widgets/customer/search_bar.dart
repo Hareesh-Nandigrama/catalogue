@@ -9,6 +9,8 @@ class CustomerSearchBar extends StatelessWidget {
       keyboardType: TextInputType.name,
       cursorColor: const Color.fromRGBO(140, 142, 151, 1),
       onChanged: (val) {
+        print(val);
+
         callback(val);
       },
       decoration: const InputDecoration(

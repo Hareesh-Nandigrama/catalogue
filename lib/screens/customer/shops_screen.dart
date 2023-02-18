@@ -1,5 +1,5 @@
+import 'package:catalogue/screens/customer/shop_items.dart';
 import 'package:catalogue/widgets/customer/customer_card.dart';
-import 'package:catalogue/widgets/customer/customer_shop_card.dart';
 import 'package:catalogue/widgets/customer/search_bar.dart';
 import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +15,7 @@ class ShopsScreen extends StatefulWidget {
 }
 
 class _ShopsScreenState extends State<ShopsScreen> {
+  List<dynamic> renderList = [];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -49,55 +50,11 @@ class _ShopsScreenState extends State<ShopsScreen> {
                   allShops.retainWhere(
                       (element) => element['businessType'] == 'others');
                 }
+                renderList = allShops;
 
                 return Expanded(
-                  child: allShops.isNotEmpty
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 16),
-                              decoration: const BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                      color: Color.fromRGBO(226, 226, 226, 1),
-                                      width: 1),
-                                ),
-                              ),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: CustomerSearchBar(),
-                                  ),
-                                  const SizedBox(
-                                    width: 14,
-                                  ),
-                                  CircleAvatar(
-                                    radius: 25,
-                                    backgroundColor:
-                                        const Color.fromRGBO(226, 226, 226, 1),
-                                    child: Image.asset(
-                                      'assets/profile.png',
-                                      height: 25,
-                                      width: 25,
-                                    ),
-                                    // backgroundImage: AssetImage('assets/profile.png'),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child: ListView.builder(
-                                  itemCount: allShops.length,
-                                  itemBuilder: (context, index) {
-                                    return CustomerCard(
-                                      body: allShops[index],
-                                    );
-                                  }),
-                            )
-                          ],
-                        )
+                  child: renderList.isNotEmpty
+                      ? ShopItems(data: renderList,)
                       : NoOutlets(),
                 );
               }

@@ -139,3 +139,24 @@ Future<Map<String, dynamic>> getAllOrders() async {
 
   return body;
 }
+
+Future<Map<String, dynamic>> declinePendingOrder(String orderId) async {
+  final prefs = await SharedPreferences.getInstance();
+  final accessToken = prefs.getString('access_token');
+  print(accessToken);
+
+  final response = await http.post(
+    Uri.parse('${baseUrl}api/order/decline/$orderId'),
+    headers: {
+      'content-type': 'application/json',
+      'Authorization': 'Token $accessToken'
+    },
+  );
+  print(response.body);
+
+  final body = jsonDecode(response.body);
+
+  print(body);
+
+  return body;
+}

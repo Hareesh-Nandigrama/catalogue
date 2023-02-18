@@ -18,6 +18,7 @@ class Preparing extends StatelessWidget {
             {
               return NoAvailable();
             }
+            print('this is the data');
             return ListView.builder(
               itemBuilder: (context, index) => OrderCardAcceptorDeny(
                 data: snapshot.data!['orders'][index]

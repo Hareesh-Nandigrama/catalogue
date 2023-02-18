@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../login/button.dart';
 
-class EditMenu extends StatefulWidget {
+class AddMenu extends StatefulWidget {
   final dynamic data;
-  const EditMenu({Key? key, this.data}) : super(key: key);
+  const AddMenu({Key? key, this.data}) : super(key: key);
 
   @override
-  State<EditMenu> createState() => _EditMenuState();
+  State<AddMenu> createState() => _AddMenuState();
 }
 
-class _EditMenuState extends State<EditMenu> {
+class _AddMenuState extends State<AddMenu> {
   String dishName = '';
 
   String priceofDish = '';
@@ -30,18 +30,18 @@ class _EditMenuState extends State<EditMenu> {
     // TODO: implement initState
     super.initState();
     if(widget.data != null)
-      {
-        dishName = widget.data!['name'];
-        priceofDish = widget.data!['price'].toString();
+    {
+      dishName = widget.data!['name'];
+      priceofDish = widget.data!['price'].toString();
 
-        availableUntill = widget.data!['endTime'].toString();
-        availableFrom = widget.data!['startTime'].toString();
-        food_type = widget.data!['type'];
-        descriptionofDish = widget.data!['description'];
-        setState(() {
-          _isDisabled = false;
-        });
-      }
+      availableUntill = widget.data!['endTime'].toString();
+      availableFrom = widget.data!['startTime'].toString();
+      food_type = widget.data!['type'];
+      descriptionofDish = widget.data!['description'];
+      setState(() {
+        _isDisabled = false;
+      });
+    }
 
 
   }
@@ -83,7 +83,7 @@ class _EditMenuState extends State<EditMenu> {
           ),
           const Center(
             child: Text(
-              'Edit Menu',
+              'Add Nem Menu Item',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
           ),
@@ -351,15 +351,15 @@ class _EditMenuState extends State<EditMenu> {
                   final id = prefs.getString('_id') ?? '';
 
                   if(widget.data != null)
-                    {
-                      await editMenu(dishName, priceofDish, food_type, id, ' ',
-                          descriptionofDish,availableFrom,availableUntill, widget.data['_id']);
-                    }
+                  {
+                    await editMenu(dishName, priceofDish, food_type, id, ' ',
+                        descriptionofDish,availableFrom,availableUntill, widget.data['_id']);
+                  }
                   else
-                    {
-                      await createMenu(dishName, priceofDish, food_type, id, ' ',
-                          descriptionofDish,availableFrom,availableUntill);
-                    }
+                  {
+                    await createMenu(dishName, priceofDish, food_type, id, ' ',
+                        descriptionofDish,availableFrom,availableUntill);
+                  }
 
 
                   Navigator.of(context).pop();

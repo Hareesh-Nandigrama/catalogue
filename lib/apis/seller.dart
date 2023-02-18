@@ -23,13 +23,14 @@ Future<void> getShopkeeper() async {
 }
 
 Future<List<dynamic>> getShops() async {
+  print('in get shops');
   final Response response =
       await http.get(Uri.parse('${baseUrl}api/shopkeeper/all'), headers: {
     'content-type': 'application/json',
   });
   var body = jsonDecode(response.body);
   List<dynamic> answer = [];
-
+  print('here 2');
   for (var json in body as List<dynamic>) {
 
     answer.add(json);
@@ -38,11 +39,17 @@ Future<List<dynamic>> getShops() async {
   return answer;
 }
 
-Future<dynamic> getMenu() async {
+Future<dynamic> getMenu(String? shopkeeperId1) async {
   final prefs = await SharedPreferences.getInstance();
+  var shopkeeperId = '';
+  if (shopkeeperId1 == null) {
+    final shopkeeperId = prefs.getString('_id');
+  } else {
+    shopkeeperId = shopkeeperId1;
+  }
 
-  final shopkeeperId = prefs.getString('_id');
-
+  print(shopkeeperId);
+  print('this is');
   final response =
       await http.get(Uri.parse('${baseUrl}api/item/$shopkeeperId'), headers: {
     'content-type': 'application/json',

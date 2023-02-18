@@ -48,6 +48,11 @@ class CustomerCard extends StatelessWidget {
                       width: double.infinity,
                     ),
                   ),
+                  Container(
+                    color: const Color.fromRGBO(0, 0, 0, 0.2),
+                    height: 200,
+                    width: double.infinity,
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(left: 17, bottom: 14),
                     child: Text(
@@ -64,7 +69,7 @@ class CustomerCard extends StatelessWidget {
                                 fontSize: 12, color: Colors.white),
                           )
                         : Container(),
-                  )
+                  ),
                 ]),
                 Padding(
                   padding:

@@ -49,7 +49,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
                       (element) => element['businessType'] == 'stationary');
                 } else {
                   allShops.retainWhere(
-                      (element) => element['businessType'] == 'others');
+                      (element) => element['businessType'] == 'other');
                 }
                 renderList = allShops;
 

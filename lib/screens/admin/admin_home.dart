@@ -7,7 +7,6 @@ import 'package:catalogue/widgets/admin/status_switch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class AdminHome extends StatefulWidget {
   const AdminHome({super.key});
 
@@ -16,10 +15,10 @@ class AdminHome extends StatefulWidget {
 }
 
 class _AdminOrderStatusState extends State<AdminHome> {
-  List<Widget> _pages = [
-    const AdminHomeOrders(),
-   const MenuPage(),
-    const AdminHomeInsights(),
+  final List<Widget> _pages = const [
+    AdminHomeOrders(),
+    MenuPage(),
+    AdminHomeInsights(),
   ];
   int _selectedPageIndex = 0;
   void _selectPage(int index) {
@@ -28,7 +27,7 @@ class _AdminOrderStatusState extends State<AdminHome> {
     });
   }
 
-  bool _switchState = false;
+
   bool status = false;
   @override
   Widget build(BuildContext context) {
@@ -52,8 +51,6 @@ class _AdminOrderStatusState extends State<AdminHome> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     StatusSwitch(),
-                    
-                   
                     Row(
                       children: [
                         const Text(
@@ -65,9 +62,7 @@ class _AdminOrderStatusState extends State<AdminHome> {
                           width: 14,
                         ),
                         GestureDetector(
-                          onTap: (){
-
-                          },
+                          onTap: () {},
                           child: CircleAvatar(
                             radius: 24,
                             backgroundColor: Colors.black,

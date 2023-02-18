@@ -9,9 +9,9 @@ class MenuPage extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
-         const  SizedBox(height: 20,),
-          
-   
+          const SizedBox(
+            height: 20,
+          ),
           Row(
             children: [
               Padding(
@@ -29,7 +29,7 @@ class MenuPage extends StatelessWidget {
               ),
             ],
           ),
-            const SizedBox(
+          const SizedBox(
             height: 25,
           ),
           const MenuCard(),

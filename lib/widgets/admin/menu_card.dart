@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class MenuCard extends StatelessWidget {
   const MenuCard({Key? key}) : super(key: key);
@@ -35,12 +35,14 @@ class MenuCard extends StatelessWidget {
                       //   child: Image.asset('assets/Must_try.png',height: 12,width: 35,),
                       // ),
                       Image.asset('assets/Veg.png', height: 18),
+                      SizedBox(width: 8,),
                       GestureDetector(
-                        child: const Icon(
-                          Icons.more_vert_rounded,
-                          size: 18,
-                        ),
-                        onTap: () {},
+                        child: Icon(Icons.edit,color: Colors.black,size: 18),
+                        onTap: () {
+                          // showModalBottomSheet(context: context, builder: (context)=>{
+                          //   return Co
+                          // })
+                        },
                       ),
                     ],
                   ),

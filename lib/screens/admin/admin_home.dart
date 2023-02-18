@@ -1,5 +1,6 @@
 import 'package:catalogue/screens/admin/admin_home_orders.dart';
 import 'package:catalogue/screens/admin/admin_insights.dart';
+import 'package:catalogue/screens/admin/shop_profile.dart';
 import 'package:catalogue/widgets/admin/menu_page.dart';
 import 'package:catalogue/widgets/admin/status_switch.dart';
 
@@ -61,7 +62,9 @@ class _AdminOrderStatusState extends State<AdminHome> {
                           width: 14,
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => ShopKeeperDetails()));
+                          },
                           child: CircleAvatar(
                             radius: 20,
                             backgroundColor: Colors.black,

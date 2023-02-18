@@ -1,7 +1,6 @@
 
 import 'package:catalogue/widgets/customer/customer_card.dart';
 import 'package:flutter/material.dart';
-import '../../widgets/admin/menu_card.dart';
 
 class AdminHomeMenu extends StatefulWidget {
   const AdminHomeMenu({super.key});

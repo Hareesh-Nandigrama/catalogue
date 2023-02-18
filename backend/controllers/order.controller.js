@@ -103,6 +103,15 @@ const DeclineOrder = async (req, res, next) => {
     res.json({ complete: true, order: approvedOrder });
 };
 
+const DeliverOrder = async (req, res, next) => {
+    const { orderId } = req.params;
+    const approvedOrder = await OrderServices.DeliverOrder(orderId);
+
+    // req.io.to(approvedOrder.customerId.toString()).emit("accepted-order", approvedOrder._id);
+
+    res.json({ complete: true, order: approvedOrder });
+};
+
 const GetOrderDetails = async (req, res, next) => {
     const { orderId } = req.params;
     const order = await OrderModel.findById(orderId).populate("items.item");
@@ -121,4 +130,5 @@ module.exports = {
     DeclineOrder,
     GetOrderDetails,
     PaidOrder,
+    DeliverOrder,
 };

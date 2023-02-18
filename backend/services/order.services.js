@@ -103,6 +103,16 @@ const DeclineOrder = async (orderId) => {
     const order = await Orders.findByIdAndUpdate(orderId, { status: "declined" });
     return order;
 };
+
+const DeliverOrder = async (orderId) => {
+    const existingOrder = await Orders.findById(orderId);
+    if (!existingOrder) {
+        throw new AppError(404, "Order not found");
+        return;
+    }
+    const order = await Orders.findByIdAndUpdate(orderId, { status: "delivered" }, { new: true });
+    return order;
+};
 const CompleteOrder = async (orderId) => {
     const order = await Orders.findByIdAndUpdate(orderId, { status: "completed" });
     return order;
@@ -129,4 +139,5 @@ module.exports = {
     GetCancelledOrders,
     GetCompletedOrders,
     PaidOrder,
+    DeliverOrder,
 };

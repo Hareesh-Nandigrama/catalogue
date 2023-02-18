@@ -20,5 +20,6 @@ router.post("/accept/:orderId", isShopkeeper, catchAsync(OrderController.Approve
 router.post("/paid/:orderId", isShopkeeper, catchAsync(OrderController.PaidOrder));
 router.post("/complete/:orderId", isShopkeeper, catchAsync(OrderController.CompleteOrder));
 router.post("/decline/:orderId", isShopkeeper, catchAsync(OrderController.DeclineOrder));
+router.post("/deliver/:orderId", isShopkeeper, catchAsync(OrderController.DeliverOrder));
 
 module.exports = router;

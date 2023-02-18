@@ -1,6 +1,8 @@
+import 'package:catalogue/apis/seller.dart';
 import 'package:catalogue/widgets/admin/food_type_switch.dart';
 import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../login/button.dart';
 
 class EditMenu extends StatefulWidget {
@@ -11,16 +13,38 @@ class EditMenu extends StatefulWidget {
 }
 
 class _EditMenuState extends State<EditMenu> {
-  TextEditingController dishName = TextEditingController();
-  TextEditingController dishPrice = TextEditingController();
-  TextEditingController priceofDish = TextEditingController();
+  String dishName = '';
+
+  String priceofDish = '';
 
   String availableUntill = 'Untill';
   String availableFrom = 'From';
-  var food_type = 'Veg';
+  String food_type = 'Non Veg';
 
-  TextEditingController descriptionofDish = TextEditingController();
+  String descriptionofDish = '';
   bool _switchState = false;
+  bool _isDisabled = true;
+
+  void check() {
+    print('in check function');
+    print(dishName.isEmpty);
+    print(priceofDish.isEmpty);
+
+    if (dishName.isEmpty ||
+        priceofDish.isEmpty ||
+        descriptionofDish.isEmpty ||
+        availableUntill == 'Untill' ||
+        availableFrom == 'From') {
+      setState(() {
+        _isDisabled = true;
+      });
+    } else {
+      setState(() {
+        _isDisabled = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,26 +59,33 @@ class _EditMenuState extends State<EditMenu> {
       ),
       child: Column(
         children: [
-          const SizedBox(height: 16,),
+          const SizedBox(
+            height: 16,
+          ),
           const Center(
             child: Text(
               'Edit Menu',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
           ),
-          const SizedBox(height: 16,),
+          const SizedBox(
+            height: 16,
+          ),
           StreamBuilder<Object>(
               stream: null,
               builder: (context, snapshot) {
                 return Row(
                   children: [
                     SizedBox(
-                      width: MediaQuery.of(context).size.width -132,
+                      width: MediaQuery.of(context).size.width - 132,
                       height: 45,
                       child: TextFormField(
                         cursorColor: Colors.black,
                         keyboardType: TextInputType.name,
-                        controller: dishName,
+                        onChanged: (val) {
+                          dishName = val;
+                          check();
+                        },
                         decoration: InputDecoration(
                           // suffixIcon: const ImageIcon(
                           //     AssetImage('assets/tick_mark.png',),
@@ -83,11 +114,9 @@ class _EditMenuState extends State<EditMenu> {
                         ),
                       ),
                     ),
-
                   ],
                 );
-              }
-          ),
+              }),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,16 +124,14 @@ class _EditMenuState extends State<EditMenu> {
               Column(
                 children: [
                   const Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 8,vertical: 6),
-                    child:  Text(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                    child: Text(
                       'Availability time',
                       style: TextStyle(color: Colors.grey),
                     ),
                   ),
                   GestureDetector(
                     onTap: () {
-
-
                       Navigator.of(context).push(
                         showPicker(
                           accentColor: Colors.black,
@@ -113,8 +140,9 @@ class _EditMenuState extends State<EditMenu> {
                           context: context,
                           value: TimeOfDay.now(),
                           onChange: (value) {
+                            check();
                             setState(() {
-                              availableFrom=value.format(context);
+                              availableFrom = value.format(context);
                             });
                           },
                         ),
@@ -130,7 +158,7 @@ class _EditMenuState extends State<EditMenu> {
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children:  [
+                        children: [
                           Text(
                             availableFrom,
                             style: const TextStyle(
@@ -157,8 +185,9 @@ class _EditMenuState extends State<EditMenu> {
                           context: context,
                           value: TimeOfDay.now(),
                           onChange: (value) {
+                            check();
                             setState(() {
-                              availableUntill=value.format(context);
+                              availableUntill = value.format(context);
                             });
                           },
                         ),
@@ -174,7 +203,7 @@ class _EditMenuState extends State<EditMenu> {
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children:  [
+                        children: [
                           Text(
                             availableUntill,
                             style: const TextStyle(
@@ -193,8 +222,8 @@ class _EditMenuState extends State<EditMenu> {
               Column(
                 children: [
                   const Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 8,vertical: 6),
-                    child:  Text(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                    child: Text(
                       'Type',
                       style: TextStyle(color: Colors.grey),
                     ),
@@ -211,9 +240,12 @@ class _EditMenuState extends State<EditMenu> {
                     width: 132,
                     height: 45,
                     child: TextFormField(
+                      onChanged: (value) => {
+                        priceofDish = value,
+                        check(),
+                      },
                       cursorColor: Colors.black,
                       keyboardType: TextInputType.number,
-                      controller: priceofDish,
                       decoration: InputDecoration(
                         hintText: 'Price',
                         hintStyle: const TextStyle(
@@ -239,19 +271,23 @@ class _EditMenuState extends State<EditMenu> {
                       ),
                     ),
                   ),
-
                 ],
               )
             ],
           ),
-          const SizedBox(height: 16,),
+          const SizedBox(
+            height: 16,
+          ),
           SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 45,
             child: TextFormField(
+              onChanged: (value) => {
+                descriptionofDish = value,
+                check(),
+              },
               cursorColor: Colors.black,
               keyboardType: TextInputType.name,
-              controller: descriptionofDish,
               decoration: InputDecoration(
                 hintText: 'Description',
                 hintStyle: const TextStyle(
@@ -277,16 +313,26 @@ class _EditMenuState extends State<EditMenu> {
               ),
             ),
           ),
-          const SizedBox(height: 16,),
+          const SizedBox(
+            height: 16,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               GestureDetector(
-                onTap: () {
+                onTap: () async {
+                  if (_isDisabled) return;
+
+                  final prefs = await SharedPreferences.getInstance();
+                  final id = prefs.getString('_id') ?? '';
+                  await createMenu(dishName, priceofDish, food_type, id, ' ',
+                      descriptionofDish);
+
+                 
                 },
-                child: const CustomButton(
-                    isDisabled: false, buttonname: 'Save Changes'),
+                child: CustomButton(
+                    isDisabled: _isDisabled, buttonname: 'Save Changes'),
               )
             ],
           ),

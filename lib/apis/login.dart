@@ -35,7 +35,10 @@ Future<void> createShopkeeper(
   final prefs = await SharedPreferences.getInstance();
 
   await prefs.setString('access_token', uid);
+  print('in login THE KING');
+  final res_body = jsonDecode(response.body);
 
+  prefs.setString('_id', res_body['shopkeeper']['_id']);
   print(response.body);
 }
 

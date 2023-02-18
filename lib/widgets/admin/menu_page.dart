@@ -1,5 +1,7 @@
 import 'package:catalogue/widgets/admin/edit_menu.dart';
+import 'package:catalogue/widgets/login/button.dart';
 import 'package:flutter/material.dart';
+import '../../screens/customer/customer_profile.dart';
 import 'menu_card.dart';
 
 class MenuPage extends StatelessWidget {
@@ -63,3 +65,73 @@ class MenuPage extends StatelessWidget {
     );
   }
 }
+
+class NoMenu extends StatelessWidget {
+  const NoMenu({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          decoration: const BoxDecoration(
+            border: Border(
+              bottom:
+                  BorderSide(color: Color.fromRGBO(226, 226, 226, 1), width: 1),
+            ),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: Container(),
+              ),
+              const SizedBox(
+                width: 14,
+              ),
+              GestureDetector(
+                onTap: () => {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => CustomerProfile(),
+                  ))
+                },
+                child: CircleAvatar(
+                  radius: 25,
+                  backgroundColor: const Color.fromRGBO(226, 226, 226, 1),
+                  child: Image.asset(
+                    'assets/profile.png',
+                    height: 25,
+                    width: 25,
+                  ),
+                  // backgroundImage: AssetImage('assets/profile.png'),
+                ),
+              )
+            ],
+          ),
+        ),
+        const Spacer(),
+        Image.asset(
+          'assets/outlet.png',
+          height: 136,
+          width: 136,
+        ),
+        const Text(
+          'No Outlets Available',
+          style: TextStyle(fontSize: 20),
+        ),
+        const Text(
+          'We couldn\'t find any shops nearby!',
+          style:
+              TextStyle(fontSize: 14, color: Color.fromRGBO(117, 117, 117, 1)),
+        ),
+        const SizedBox(
+          height: 24,
+        ),
+        const CustomButton(isDisabled: false, buttonname: 'Try Again!'),
+        const Spacer(),
+      ],
+    );
+  }
+}
+

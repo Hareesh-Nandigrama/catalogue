@@ -4,7 +4,6 @@ import 'package:catalogue/models/menu.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 const baseUrl = 'https://kamengkriti.onrender.com/';
 
 Future<void> getShopkeeper() async {
@@ -58,7 +57,7 @@ Future<List<Menu>> getMenu(String shopkeeperId) async {
   return answer;
 }
 
-Future<Map<String, dynamic>> createMenu(String name, int price, String type,
+Future<Map<String, dynamic>> createMenu(String name, String price, String type,
     String shopkeeperId, String category, String description) async {
   final prefs = await SharedPreferences.getInstance();
 

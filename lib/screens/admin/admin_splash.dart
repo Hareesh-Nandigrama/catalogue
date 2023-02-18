@@ -34,24 +34,12 @@ class _AdminHomeState extends State<AdminSplash> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Hello!',
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.w400,
-                    color: const Color.fromRGBO(79, 79, 79, 1),
-                  ),
+                Container(
+                  height: 70,
                 ),
-                Text(
-                  '${widget.data['businessName']} ,',
-                  style: const TextStyle(
-                    height: 1,
-                    fontSize: 41,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black,
-                  ),
+                AdminCard(
+                  data: widget.data
                 ),
-                const AdminCard(),
                 const Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

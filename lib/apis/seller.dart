@@ -110,6 +110,50 @@ Future<Map<String, dynamic>> createMenu(
   return body;
 }
 
+Future<Map<String, dynamic>> editMenu(
+    String name,
+    String price,
+    String type,
+    String shopkeeperId,
+    String category,
+    String description,
+    String startTime,
+    String endTime,
+    String itemID) async {
+  final prefs = await SharedPreferences.getInstance();
+  final shopkeeperId = prefs.getString('_id');
+
+  var access_token = prefs.getString('access_token') ?? '';
+
+  final _type = type.toLowerCase();
+  print("TESTING");
+  print(price);
+  print(itemID);
+  final response = await http.put(Uri.parse('${baseUrl}api/item/:$itemID'),
+      headers: {
+        'content-type': 'application/json',
+        "Authorization": "Token $access_token"
+      },
+      body: jsonEncode({
+
+        "price": price,
+        "name": name,
+        "type": _type,
+        "shopkeeperId": shopkeeperId,
+        "startTime": startTime,
+        "endTime": endTime,
+        "category": 'juefjhjhkfdhkjsfjh',
+        "description": description
+      }));
+
+  final body = jsonDecode(response.body);
+  print(response.body);
+
+  showSnackBar('Menu Item added');
+
+  return body;
+}
+
 Future<Map<String, dynamic>> getCurrentShopDetails() async {
   final prefs = await SharedPreferences.getInstance();
 

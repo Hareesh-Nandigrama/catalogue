@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import 'edit_menu.dart';
+
 class MenuCard extends StatelessWidget {
   final data;
   const MenuCard({Key? key, required this.data}) : super(key: key);
@@ -41,12 +43,22 @@ class MenuCard extends StatelessWidget {
                       const SizedBox(
                         width: 8,
                       ),
+
+                      const SizedBox(
+                        width: 8,
+                      ),
                       GestureDetector(
                         child: Icon(Icons.edit, color: Colors.black, size: 18),
                         onTap: () {
-                          // showModalBottomSheet(context: context, builder: (context)=>{
-                          //   return Co
-                          // })
+                          showDialog(
+                            context: context,
+                            builder: (context) => Dialog(
+                                backgroundColor: Colors.transparent,
+                                insetPadding: EdgeInsets.all(10),
+                                child: EditMenu(
+                                  data: data,
+                                )),
+                          );
                         },
                       ),
                     ],

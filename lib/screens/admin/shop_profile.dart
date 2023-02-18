@@ -1,3 +1,4 @@
+import 'package:catalogue/apis/seller.dart';
 import 'package:catalogue/screens/login/first_screen.dart';
 import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -45,6 +46,7 @@ class _ShopKeeperDetailsState extends State<ShopKeeperDetails> {
 
   @override
   Widget build(BuildContext context) {
+    getShopkeeper();
     return Scaffold(
       resizeToAvoidBottomInset:false,
       appBar: AppBar(

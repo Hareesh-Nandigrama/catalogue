@@ -50,20 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAudmpo7iprXWSj5eXyLAUBJE6JX250t4I',
-    appId: '1:1033044083694:android:c2cfd13b393c2a011344ff',
-    messagingSenderId: '1033044083694',
-    projectId: 'kriti-1973c',
-    storageBucket: 'kriti-1973c.appspot.com',
+    apiKey: 'AIzaSyDJKWQ9IPJS1J9Aenqf7jgr0EkAZ1dUxC0',
+    appId: '1:357443788060:android:ed6b640a6da34db9cf6ed9',
+    messagingSenderId: '357443788060',
+    projectId: 'kriti-12c33',
+    storageBucket: 'kriti-12c33.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB4hf7AFpHekUe2ueFY0EDEIjyGprAcPQs',
-    appId: '1:1033044083694:ios:386b26bbf08b91941344ff',
-    messagingSenderId: '1033044083694',
-    projectId: 'kriti-1973c',
-    storageBucket: 'kriti-1973c.appspot.com',
-    iosClientId: '1033044083694-9p5gm44ec4l9iu29b6aeis5ovgagv1ne.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBjcG3-xzcYMcIojfIJHbRILmG82TOMkhA',
+    appId: '1:357443788060:ios:0e0d19bbb67e9643cf6ed9',
+    messagingSenderId: '357443788060',
+    projectId: 'kriti-12c33',
+    storageBucket: 'kriti-12c33.appspot.com',
+    androidClientId: '357443788060-nd98urvlhica4duv0go5gt0rjgvuhnt4.apps.googleusercontent.com',
+    iosClientId: '357443788060-ge2k65m8ts6bsg142ds51cf4tr1iri86.apps.googleusercontent.com',
     iosBundleId: 'com.example.catalogue',
   );
 }

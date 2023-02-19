@@ -200,3 +200,23 @@ Future<Map<String, dynamic>> getCurrentShopDetails() async {
   final body = jsonDecode(response.body);
   return body;
 }
+
+Future<void> getPendingPickup() async {
+
+  final prefs = await SharedPreferences.getInstance();
+
+  final access_token = prefs.getString('access_token') ?? '';
+
+  final response = await http.get(Uri.parse('${baseUrl}api/shopkeeper'),
+      headers: {
+        'content-type': 'application/json',
+        "Authorization": "Token $access_token"
+      });
+
+  final body = jsonDecode(response.body);
+  return body;
+
+
+
+
+}

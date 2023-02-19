@@ -1,3 +1,6 @@
+
+import 'package:catalogue/screens/customer/customer_orders/pending_payment.dart';
+import 'package:catalogue/screens/customer/customer_orders/preparing.dart';
 import 'package:catalogue/screens/login/first_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +13,8 @@ class CustomerProfile extends StatefulWidget {
   State<CustomerProfile> createState() => _CustomerProfileState();
 }
 
-class _CustomerProfileState extends State<CustomerProfile> with TickerProviderStateMixin {
+class _CustomerProfileState extends State<CustomerProfile>
+    with TickerProviderStateMixin {
   late TabController tabController;
 
   @override
@@ -22,6 +26,7 @@ class _CustomerProfileState extends State<CustomerProfile> with TickerProviderSt
       vsync: this,
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,6 +74,12 @@ class _CustomerProfileState extends State<CustomerProfile> with TickerProviderSt
                   )),
             ],
           ),
+          Expanded(
+            child: TabBarView(
+              children: [CustomerPreparing(), PendingPayment()],
+              controller: tabController,
+            ),
+          )
         ],
       ),
     );

@@ -43,13 +43,13 @@ class _ShopsScreenState extends State<ShopsScreen> {
                 List<dynamic> allShops = snapshot.data!;
                 if (widget.index == 0) {
                   allShops.retainWhere(
-                      (element) => element['businessType'] == 'foodOutlet');
+                          (element) => element['businessType'] == 'foodOutlet');
                 } else if (widget.index == 1) {
                   allShops.retainWhere(
-                      (element) => element['businessType'] == 'stationary');
+                          (element) => element['businessType'] == 'stationary');
                 } else {
                   allShops.retainWhere(
-                      (element) => element['businessType'] == 'other');
+                          (element) => element['businessType'] == 'other');
                 }
                 renderList = allShops;
 
@@ -57,9 +57,9 @@ class _ShopsScreenState extends State<ShopsScreen> {
                 return Expanded(
                   child: renderList.isNotEmpty
                       ? ShopItems(
-                          data: renderList,
-                          
-                        )
+                    data: renderList,
+
+                  )
                       : NoOutlets(),
                 );
               }
@@ -83,7 +83,7 @@ class NoOutlets extends StatelessWidget {
           decoration: const BoxDecoration(
             border: Border(
               bottom:
-                  BorderSide(color: Color.fromRGBO(226, 226, 226, 1), width: 1),
+              BorderSide(color: Color.fromRGBO(226, 226, 226, 1), width: 1),
             ),
           ),
           child: Row(
@@ -96,19 +96,24 @@ class NoOutlets extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () => {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => CustomerProfile(),
                   ))
                 },
-                child: CircleAvatar(
-                  radius: 25,
-                  backgroundColor: const Color.fromRGBO(226, 226, 226, 1),
-                  child: Image.asset(
-                    'assets/profile.png',
-                    height: 25,
-                    width: 25,
+                child: GestureDetector(
+                  onTap: (){
+
+                  },
+                  child: CircleAvatar(
+                    radius: 25,
+                    backgroundColor: const Color.fromRGBO(226, 226, 226, 1),
+                    child: Image.asset(
+                      'assets/profile.png',
+                      height: 25,
+                      width: 25,
+                    ),
+                    // backgroundImage: AssetImage('assets/profile.png'),
                   ),
-                  // backgroundImage: AssetImage('assets/profile.png'),
                 ),
               )
             ],
@@ -127,7 +132,7 @@ class NoOutlets extends StatelessWidget {
         const Text(
           'We couldn\'t find any shops nearby!',
           style:
-              TextStyle(fontSize: 14, color: Color.fromRGBO(117, 117, 117, 1)),
+          TextStyle(fontSize: 14, color: Color.fromRGBO(117, 117, 117, 1)),
         ),
         const SizedBox(
           height: 24,

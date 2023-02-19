@@ -243,3 +243,39 @@ Future<Map<String, dynamic>> getCancelledOrders2() async {
 
   return body;
 }
+
+Future<Map<String, dynamic>> getUnPaidOrdersCustomer() async {
+  final prefs = await SharedPreferences.getInstance();
+  final accessToken = prefs.getString('uid');
+  print(accessToken);
+
+  final response = await http
+      .get(Uri.parse('${baseUrl}api/customer/orders/unpaid'), headers: {
+    'content-type': 'application/json',
+    'Authorization': 'Token $accessToken'
+  });
+
+  final body = jsonDecode(response.body);
+  print('this is accepted orders');
+  print(body);
+
+  return body;
+}
+
+Future<Map<String, dynamic>> getPendOrdersCustomer() async {
+  final prefs = await SharedPreferences.getInstance();
+  final accessToken = prefs.getString('uid');
+  print(accessToken);
+
+  final response = await http
+      .get(Uri.parse('${baseUrl}orders/pickup'), headers: {
+    'content-type': 'application/json',
+    'Authorization': 'Token $accessToken'
+  });
+
+  final body = jsonDecode(response.body);
+  print('this is accepted orders');
+  print(body);
+
+  return body;
+}

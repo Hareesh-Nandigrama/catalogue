@@ -21,8 +21,6 @@ class _ShopItemsState extends State<ShopItems> {
   }
 
   Widget build(BuildContext context) {
-
-
     List<dynamic> renderList = widget.data;
     var filteredList = [];
 
@@ -34,7 +32,7 @@ class _ShopItemsState extends State<ShopItems> {
           decoration: const BoxDecoration(
             border: Border(
               bottom:
-                  BorderSide(color: Color.fromRGBO(226, 226, 226, 1), width: 1),
+              BorderSide(color: Color.fromRGBO(226, 226, 226, 1), width: 1),
             ),
           ),
           child: Row(
@@ -62,7 +60,7 @@ class _ShopItemsState extends State<ShopItems> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => CustomerProfile(),
                   ));
                 },

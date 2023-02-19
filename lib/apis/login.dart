@@ -59,3 +59,6 @@ Future<void> createCustomer(String phoneNumber, String name, String uid) async {
   prefs.setString('_id', res_body['customerData']['_id']);
   await prefs.setString('access_token', uid);
 }
+
+
+

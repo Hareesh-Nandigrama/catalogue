@@ -59,12 +59,7 @@ class _AdminOrderStatusState extends State<AdminHome> {
                             StatusSwitch(),
                             Row(
                               children: [
-                                const Text(
-                                  'Roasted Pot',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 18),
-                                ),
+                                
                                 const SizedBox(
                                   width: 14,
                                 ),

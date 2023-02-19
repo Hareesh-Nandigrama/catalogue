@@ -1,3 +1,4 @@
+import 'package:catalogue/screens/admin/admin_orders/cancelled.dart';
 import 'package:catalogue/screens/admin/admin_orders/delievered.dart';
 import 'package:catalogue/screens/admin/admin_orders/preparing.dart';
 import 'package:catalogue/screens/admin/admin_orders/requests.dart';
@@ -56,7 +57,7 @@ class _AdminHomeInsightsState extends State<AdminHomeInsights>
                 controller: tabController,
                 children: [
                   Delievered(),
-                  Preparing(),
+                  Cancelled(),
                 ],
               ))
         ],

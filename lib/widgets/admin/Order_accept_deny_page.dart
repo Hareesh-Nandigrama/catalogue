@@ -194,7 +194,7 @@ class _OrderCardAcceptorDenyState extends State<OrderCardAcceptorDeny> {
           )
               : widget.data['status'] == 'accepted'?GestureDetector(
             onTap: () async {
-              await orderReady(widget.data['_id']);
+              await orderReady2(widget.data['_id']);
             },
                 child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

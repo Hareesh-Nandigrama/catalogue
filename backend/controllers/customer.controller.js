@@ -83,6 +83,18 @@ const AcceptOrder = async (req, res, next) => {
     });
 };
 
+const PickUp = async (req, res, next) => {
+    // console.log(req.user._id);
+    // const { orderId } = req.params;
+    const accepted = await Order.find({ status: "accepted", customerId: req.user._id });
+    const completed = await Order.find({ status: "completed", customerId: req.user._id });
+
+    return res.json({
+        accepted: true,
+        orders: [...accepted, ...completed],
+    });
+};
+
 module.exports = {
     CreateNewCustomer,
     GetMyOrders,
@@ -91,4 +103,5 @@ module.exports = {
     GetMyUnpaidOrders,
     GetMyCompletedOrders,
     AcceptOrder,
+    PickUp,
 };

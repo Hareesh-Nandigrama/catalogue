@@ -11,26 +11,36 @@ const CreateNewCustomer = async (data) => {
 };
 
 const GetMyOrders = async (customerId) => {
-    const allOrders = await Orders.find({ customerId: customerId });
+    const allOrders = await Orders.find({ customerId: customerId })
+        .populate("items.item", ["name", "price", "type"])
+        .select("-__v -shopkeeperId");
     return allOrders;
 };
 
 const GetMyPendingOrders = async (customerId) => {
-    const allOrders = await Orders.find({ customerId: customerId, status: "pending" });
+    const allOrders = await Orders.find({ customerId: customerId, status: "pending" })
+        .populate("items.item", ["name", "price", "type"])
+        .select("-__v -shopkeeperId");
     return allOrders;
 };
 
 const GetMyUnpaidOrders = async (customerId) => {
-    const allOrders = await Orders.find({ customerId: customerId, status: "awaiting-payment" });
+    const allOrders = await Orders.find({ customerId: customerId, status: "awaiting-payment" })
+        .populate("items.item", ["name", "price", "type"])
+        .select("-__v -shopkeeperId");
     return allOrders;
 };
 
 const GetMyAcceptedOrders = async (customerId) => {
-    const allOrders = await Orders.find({ customerId: customerId, status: "accepted" });
+    const allOrders = await Orders.find({ customerId: customerId, status: "accepted" })
+        .populate("items.item", ["name", "price", "type"])
+        .select("-__v -shopkeeperId");
     return allOrders;
 };
 const GetMyCompletedOrders = async (customerId) => {
-    const allOrders = await Orders.find({ customerId: customerId, status: "completed" });
+    const allOrders = await Orders.find({ customerId: customerId, status: "completed" })
+        .populate("items.item", ["name", "price", "type"])
+        .select("-__v -shopkeeperId");
     return allOrders;
 };
 

@@ -22,7 +22,7 @@
     <!--#docregion android-queries-->
   </queries>
    <application
-        android:label="catalogue"
+        android:label="Catalogue"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

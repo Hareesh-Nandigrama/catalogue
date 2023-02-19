@@ -109,4 +109,4 @@ git push --set-upstream origin <your-branch-name>
 **Contributions of any kind welcome!**
 
 
-# Latest apk version can be accessed from Buildrelease
+# Latest apk version can be accessed from Releases section of the Repository.

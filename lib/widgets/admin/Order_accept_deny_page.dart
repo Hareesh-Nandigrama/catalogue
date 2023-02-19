@@ -213,7 +213,10 @@ class _OrderCardAcceptorDenyState extends State<OrderCardAcceptorDeny> {
                 CustomButton(isDisabled: false, buttonname: 'Delievered'),
               ],
             ),
-          ):widget.data['status'] == 'delivered'?Container():Padding(
+          ):widget.data['status'] == 'delivered'?Container():widget.data['status'] == 'declined'?Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(child: Text('Cancelled', style: TextStyle(color: Colors.red),),),
+          ):Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4,vertical: 8),
             child: Column(
               children: [

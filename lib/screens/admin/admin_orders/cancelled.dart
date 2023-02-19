@@ -10,7 +10,7 @@ class Cancelled extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, dynamic>>(
-        future: getCancelledOrders(),
+        future: getCancelledOrders2(),
         builder: (context,snapshot){
           if(snapshot.hasData)
           {

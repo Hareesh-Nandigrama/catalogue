@@ -223,7 +223,7 @@ Future<Map<String, dynamic>> declinePendingOrder(String orderId) async {
   return body;
 }
 
-Future<Map<String, dynamic>> getCancelledOrders() async {
+Future<Map<String, dynamic>> getCancelledOrders2() async {
   final prefs = await SharedPreferences.getInstance();
   final accessToken = prefs.getString('access_token');
   print(accessToken);

@@ -107,3 +107,6 @@ git push --set-upstream origin <your-branch-name>
 8. Create a pull request from GitHub and wait for the review!
 
 **Contributions of any kind welcome!**
+
+
+# Latest apk version can be accessed from Buildrelease

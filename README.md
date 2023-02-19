@@ -31,6 +31,7 @@ Catalogue enables the user to create and manage their online outlets as well as 
 - Suppose I am a Buisnessman, So i will get an option to create a buisness account, Proceeding further i will have the ability to add menu and accept or decline orders   from users.I can choose type of my outlets and services which i can provide based upon the earlier choice of outlet type
 - Upon accepting order I can get payments and can always view insights of orders to view cancelled and completed orders
 - Customer can view a shop and based upon their necessities they can order things as well as make payment
+- Here is a video for reference and simple understanding of the app <a href="https://drive.google.com/folderview?id=12hpeHXeIdUFKfI7b1-rSJ0McE01-_9Xm"></a>
 
 ## Setting up the project in your local environment💻
 

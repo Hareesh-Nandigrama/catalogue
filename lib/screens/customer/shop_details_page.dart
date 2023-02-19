@@ -305,22 +305,6 @@ class _ShopDetailsPageState extends State<ShopDetailsPage> {
               label: 'Cart'),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.black,
-          child: Text(
-            'Pay',
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () {
-            var options = {
-              'key': 'rzp_test_lH1Cp1gS0WSphU',
-              'amount': 10000,
-              'name': 'Kameng Corp.',
-              'description': 'Fine T-Shirt',
-              'prefill': {'contact': '8888888888', 'email': 'test@razorpay.com'}
-            };
-            _razorpay.open(options);
-          }),
     );
   }
 }
